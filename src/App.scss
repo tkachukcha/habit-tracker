@@ -1,4 +1,17 @@
+// $primary: blue;
+// $secondary: black;
+// $info: lightblue;
+// $warning: orange;
+// $danger: red;
+// $light: white;
+// $dark: indigo;
+
+@import '~bootstrap/scss/_functions';
+@import '~bootstrap/scss/_variables';
+
+$custom-theme-colors: ("altlight": #555555,
+  "altdark": #111111); 
+  
+$theme-colors: map-merge($custom-theme-colors, $theme-colors);
 
 @import '~bootstrap/scss/bootstrap.scss';
-
-// @import "custom";

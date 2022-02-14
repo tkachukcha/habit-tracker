@@ -1,35 +1,22 @@
 import React, { useState } from 'react';
 import OffCanvasMenu from './offCanvasMenu';
-import PropTypes from 'prop-types';
+import Logo from '../common/logo';
 
-const TopBar = ({ title, height }) => {
+const TopBar = () => {
   const [show, setShow] = useState(false);
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
 
   return (
-    <>
-      <div
-        style={{ height: height }}
-        className="navbar navbar-dark bg-dark fixed-top py-2 px-3 d-flex flex-row"
-      >
-        <h1 className="text-light">{title}</h1>
-        <button
-          className="navbar-toggler btn"
-          type="button"
-          onClick={handleShow}
-        >
-          <span className="navbar-toggler-icon"></span>
-        </button>
-        <OffCanvasMenu show={show} onHide={handleClose} topBarHeight={height} />
-      </div>
-    </>
+    <div className="navbar navbar-dark bg-dark d-flex flex-row d-lg-none border-bottom border-altdark p-3 shadow-sm">
+      <Logo />
+      <button className="navbar-toggler btn" type="button" onClick={handleShow}>
+        <span className="navbar-toggler-icon"></span>
+      </button>
+      <OffCanvasMenu show={show} onHide={handleClose} />
+    </div>
   );
-};
-TopBar.propTypes = {
-  title: PropTypes.string,
-  height: PropTypes.string
 };
 
 export default TopBar;
