@@ -2,17 +2,17 @@ import React from 'react';
 import { Card } from 'react-bootstrap';
 import HabitName from './habitName';
 import PropTypes from 'prop-types';
+import Icon from './icon';
 import { icons } from '../../utils/icons';
 
-const Habit = ({ title, icon, streak, finished }) => {
-  console.log(icons);
+const Habit = ({ title, icon, streak, finished, color }) => {
   return (
-    <Card className="my-3">
-      <Card.Body className="d-flex bg-dark">
-        <div>{icons.meditate.component}</div>
-        <div>
-          <HabitName />
-          <div>5-day streak</div>
+    <Card>
+      <Card.Body className="d-flex align-items-center bg-dark p-2">
+        <div>{icon && <Icon icon={icon} color={color} />}</div>
+        <div className="p-2">
+          <HabitName title={title} />
+          <div>{streak}-day streak</div>
         </div>
       </Card.Body>
     </Card>
@@ -20,7 +20,8 @@ const Habit = ({ title, icon, streak, finished }) => {
 };
 Habit.propTypes = {
   title: PropTypes.string,
-  icon: PropTypes.string,
+  color: PropTypes.color,
+  icon: PropTypes.object,
   streak: PropTypes.oneOf([PropTypes.string, PropTypes.number]),
   finished: PropTypes.bool
 };

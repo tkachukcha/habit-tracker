@@ -1,7 +1,8 @@
 import React from 'react';
 import { Card } from 'react-bootstrap';
-import Habit from '../components/common/habit';
+import HabitList from '../components/ui/habitList';
 import PageTitle from '../components/common/pageTitle';
+import IconsList from '../components/ui/iconsList';
 
 const Today = () => {
   return (
@@ -13,18 +14,15 @@ const Today = () => {
         <div className="p-2 w-50">
           <Card className="">
             <Card.Body className="bg-dark">
-              <Habit />
-              <Habit />
-              <Habit />
-              <Habit />
-              <Habit />
-              <Habit />
+              <HabitList />
             </Card.Body>
           </Card>
         </div>
         <div className="p-2 w-50">
           <Card className="">
-            <Card.Body className="bg-dark"></Card.Body>
+            <Card.Body className="bg-dark">
+              <IconsList />
+            </Card.Body>
           </Card>
         </div>
       </div>

@@ -13,7 +13,7 @@ import { IconContext } from 'react-icons';
 function App() {
   return (
     <>
-      <IconContext.Provider value={{ size: '2rem' }}>
+      <IconContext.Provider value={{ size: '3rem', color: 'white' }}>
         <TopBar className="d-lg-none" />
         <Container fluid className="bg-dark min-vh-100 text-light">
           <Row>
