@@ -7,8 +7,8 @@ const MenuLink = ({ children, path, onHide, exact }) => {
   return (
     <NavLink
       exact={exact}
-      className="btn btn-outline-secondary"
-      activeClassName="btn btn-secondary text-dark"
+      className="btn btn-outline-light"
+      activeClassName="btn btn-light text-dark"
       to={path}
       onClick={onHide}
     >

@@ -20,7 +20,7 @@ const Habit = ({ title, icon, streak, finished, color }) => {
 };
 Habit.propTypes = {
   title: PropTypes.string,
-  color: PropTypes.color,
+  color: PropTypes.string,
   icon: PropTypes.object,
   streak: PropTypes.oneOf([PropTypes.string, PropTypes.number]),
   finished: PropTypes.bool

@@ -193,7 +193,7 @@ export const icons = {
     component: <Icon width={size} icon="charm:plant-pot" />
   },
   cardio: {
-    name: 'plant',
+    name: 'cardio',
     component: <Icon width={size} icon="ion:fitness-outline" />
   },
   breath: {
