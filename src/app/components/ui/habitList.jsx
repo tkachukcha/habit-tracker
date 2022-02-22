@@ -1,25 +1,84 @@
 import React from 'react';
 import Habit from '../common/habit';
 import { icons } from '../../utils/icons';
+import Card from '@mui/material/Card';
 
 const HabitList = () => {
+  const habits = [
+    {
+      title: 'Медитация',
+      icon: icons.meditation,
+      streak: 2,
+      color: 'black'
+    },
+    {
+      title: 'Зарядка',
+      icon: icons.running,
+      streak: 2,
+      color: 'black'
+    },
+    {
+      title: 'Визуализация',
+      icon: icons.think,
+      streak: 2,
+      color: 'black'
+    },
+    {
+      title: 'Здоровье',
+      icon: icons.health,
+      streak: 2,
+      color: 'black'
+    },
+    {
+      title: 'Испанский',
+      icon: icons.language,
+      streak: 2,
+      color: 'black'
+    },
+    {
+      title: 'Финансы',
+      icon: icons.dollar,
+      streak: 2,
+      color: 'black'
+    },
+    {
+      title: 'Чтение',
+      icon: icons.reading,
+      streak: 2,
+      color: 'black'
+    },
+    {
+      title: 'Дневник',
+      icon: icons.diary,
+      streak: 2,
+      color: 'black'
+    },
+    {
+      title: 'Растяжка',
+      icon: icons.stretch,
+      streak: 2,
+      color: 'black'
+    },
+    {
+      title: 'Медитация',
+      icon: icons.meditation,
+      streak: 2,
+      color: 'black'
+    }
+  ];
   return (
     <>
-      <Habit
-        title="Meditation"
-        icon={icons.meditation}
-        streak="5"
-        color="violet"
-      />
-      <Habit title="Зарядка" icon={icons.running} streak="2" />
-      <Habit title="Визуализация" icon={icons.think} streak="5" />
-      <Habit title="Здоровье" icon={icons.health} streak="5" color="#3332ff" />
-      <Habit title="Испанский" icon={icons.language} streak="5" />
-      <Habit title="Финансы" icon={icons.dollar} streak="5" />
-      <Habit title="Чтение" icon={icons.reading} streak="5" />
-      <Habit title="Дневник" icon={icons.diary} streak="5" />
-      <Habit title="Растяжка" icon={icons.stretch} streak="5" />
-      <Habit title="Meditation" icon={icons.meditation} streak="5" />
+      <Card sx={{ p: 2 }}>
+        {habits.map((h, i) => (
+          <Habit
+            key={i}
+            title={h.title}
+            icon={h.icon}
+            color={h.color}
+            streak={h.streak}
+          />
+        ))}
+      </Card>
     </>
   );
 };

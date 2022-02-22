@@ -1,20 +1,17 @@
 import React from 'react';
-import { Card } from 'react-bootstrap';
+import Card from '@mui/material/Card';
 import HabitName from './habitName';
 import PropTypes from 'prop-types';
-import Icon from './icon';
-import { icons } from '../../utils/icons';
+import Box from '@mui/material/Box';
 
 const Habit = ({ title, icon, streak, finished, color }) => {
   return (
-    <Card>
-      <Card.Body className="d-flex align-items-center bg-dark p-2">
-        <div>{icon && <Icon icon={icon} color={color} />}</div>
-        <div className="p-2">
-          <HabitName title={title} />
-          <div>{streak}-day streak</div>
-        </div>
-      </Card.Body>
+    <Card sx={{ display: 'flex', alignItems: 'center', mb: 2, p: 1 }}>
+      <Box sx={{ color, mr: 1 }}>{icon.component}</Box>
+      <div>
+        <HabitName title={title} />
+        <div>{streak}-day streak</div>
+      </div>
     </Card>
   );
 };
