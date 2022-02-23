@@ -33,7 +33,7 @@ const HabitList = () => {
       title: 'Испанский',
       icon: icons.language,
       streak: 2,
-      color: 'black'
+      color: 'red'
     },
     {
       title: 'Финансы',

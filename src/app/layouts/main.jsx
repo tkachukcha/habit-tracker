@@ -14,6 +14,10 @@ import { Route, Switch } from 'react-router-dom';
 
 import Menu from '../components/ui/menu';
 import Sidebar from '../components/ui/sideBar';
+import { useTheme } from '@mui/material/styles';
+import { useColorMode } from '../hooks/useColorMode';
+import Brightness4Icon from '@mui/icons-material/Brightness4';
+import Brightness7Icon from '@mui/icons-material/Brightness7';
 
 const drawerWidth = 280;
 
@@ -24,9 +28,20 @@ function Main() {
     setMobileOpen(!mobileOpen);
   };
 
+  const theme = useTheme();
+  const { toggleColorMode } = useColorMode();
+
   const drawer = (
     <div>
-      <Toolbar />
+      <Toolbar>
+        <IconButton sx={{ ml: 1 }} onClick={toggleColorMode} color="inherit">
+          {theme.palette.mode === 'dark' ? (
+            <Brightness7Icon />
+          ) : (
+            <Brightness4Icon />
+          )}
+        </IconButton>
+      </Toolbar>
       <Divider />
       <Menu onHide={handleDrawerToggle} />
     </div>
@@ -52,7 +67,7 @@ function Main() {
             <MenuIcon />
           </IconButton>
           <Typography variant="h6" noWrap component="div">
-            Responsive drawer
+            Habit Tracker
           </Typography>
         </Toolbar>
       </AppBar>

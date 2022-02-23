@@ -19,7 +19,7 @@ Habit.propTypes = {
   title: PropTypes.string,
   color: PropTypes.string,
   icon: PropTypes.object,
-  streak: PropTypes.oneOf([PropTypes.string, PropTypes.number]),
+  streak: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   finished: PropTypes.bool
 };
 

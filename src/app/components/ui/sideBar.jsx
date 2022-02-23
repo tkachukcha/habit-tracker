@@ -46,7 +46,7 @@ const SideBar = ({ drawerWidth, mobileOpen, drawer, onClose }) => {
   );
 };
 SideBar.propTypes = {
-  drawerWidth: PropTypes.string,
+  drawerWidth: PropTypes.number,
   mobileOpen: PropTypes.bool,
   drawer: PropTypes.element,
   onClose: PropTypes.func

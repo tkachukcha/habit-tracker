@@ -20,7 +20,6 @@ const Menu = ({ onHide }) => {
           exact={link.exact}
           to={link.path}
           onClick={onHide}
-          fullwidth={true}
           size="large"
           variant="contained"
           sx={{ mb: 1 }}
