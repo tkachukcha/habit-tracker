@@ -10,15 +10,17 @@ import Today from '../pages/today';
 import Login from '../pages/login';
 import Habits from '../pages/habits';
 import Profile from '../pages/profile';
-import { Route, Switch } from 'react-router-dom';
+import { Route, Switch, useHistory } from 'react-router-dom';
 
 import Sidebar from '../components/ui/sideBar';
 
 const drawerWidth = 280;
 
-function Main() {
+const Main = () => {
   const [mobileOpen, setMobileOpen] = React.useState(false);
   const topBarHeight = '4rem';
+  const history = useHistory();
+  console.log(history);
 
   const handleDrawerToggle = () => {
     setMobileOpen(!mobileOpen);
@@ -59,7 +61,7 @@ function Main() {
         component="main"
         sx={{
           flexGrow: 1,
-          p: 3,
+          p: 1,
           width: { md: `calc(100% - ${drawerWidth}px)` },
           mt: topBarHeight
         }}
@@ -73,6 +75,6 @@ function Main() {
       </Box>
     </>
   );
-}
+};
 
 export default Main;

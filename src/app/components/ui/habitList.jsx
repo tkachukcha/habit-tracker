@@ -1,7 +1,7 @@
 import React from 'react';
 import Habit from '../common/habit';
+import Box from '@mui/material/Box';
 import { icons } from '../../utils/icons';
-import Card from '@mui/material/Card';
 
 const HabitList = () => {
   const habits = [
@@ -68,7 +68,7 @@ const HabitList = () => {
   ];
   return (
     <>
-      <Card sx={{ p: 2 }}>
+      <Box sx={{ p: 2, width: { lg: '30%' } }}>
         {habits.map((h, i) => (
           <Habit
             key={i}
@@ -78,7 +78,7 @@ const HabitList = () => {
             streak={h.streak}
           />
         ))}
-      </Card>
+      </Box>
     </>
   );
 };

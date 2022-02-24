@@ -1,6 +1,7 @@
 import React, { useContext, useState, useMemo, useEffect } from 'react';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
 import PropTypes from 'prop-types';
+import { purple, amber, grey, deepOrange } from '@mui/material/colors';
 
 const ColorModeContext = React.createContext({ toggleColorMode: () => {} });
 
@@ -18,7 +19,28 @@ export default function ColorModeProvider({ children }) {
     () =>
       createTheme({
         palette: {
-          mode
+          mode,
+          ...(mode === 'light'
+            ? {
+                // palette values for light mode
+                primary: amber,
+                text: {
+                  primary: grey[900],
+                  secondary: grey[800]
+                }
+              }
+            : {
+                // palette values for dark mode
+                primary: purple,
+                background: {
+                  default: '#17121b',
+                  paper: '#1c1b25'
+                },
+                text: {
+                  primary: '#fff',
+                  secondary: grey[500]
+                }
+              })
         }
       }),
     [mode]
