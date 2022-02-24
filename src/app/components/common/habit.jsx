@@ -3,15 +3,19 @@ import Card from '@mui/material/Card';
 import HabitName from './habitName';
 import PropTypes from 'prop-types';
 import Box from '@mui/material/Box';
+import withIcon from './withIcon';
 
 const Habit = ({ title, icon, streak, finished, color }) => {
+  const IconWithProps = withIcon(icon.component);
   return (
     <Card sx={{ display: 'flex', alignItems: 'center', mb: 2, p: 1 }}>
-      <Box sx={{ color, mr: 1 }}>{icon.component}</Box>
-      <div>
+      <Box sx={{ mr: 1, p: 2 }}>
+        <IconWithProps fontSize="large" sx={{ color }} />
+      </Box>
+      <Box>
         <HabitName title={title} />
-        <div>{streak}-day streak</div>
-      </div>
+        <Box>{streak}-day streak</Box>
+      </Box>
     </Card>
   );
 };

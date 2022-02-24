@@ -3,11 +3,11 @@ import PropTypes from 'prop-types';
 import Box from '@mui/material/Box';
 
 const Icon = ({ icon, color }) => {
-  return <Box sx={{ color, mr: 1 }}>{icon.component}</Box>;
+  return <Box sx={{ size: '2rem', mr: 1 }}>{icon.component}</Box>;
 };
-Icon.defaultProps = {
-  color: 'white'
-};
+// Icon.defaultProps = {
+//   color: 'white'
+// };
 
 Icon.propTypes = {
   icon: PropTypes.object,

@@ -12,51 +12,29 @@ import Habits from '../pages/habits';
 import Profile from '../pages/profile';
 import { Route, Switch } from 'react-router-dom';
 
-import Menu from '../components/ui/menu';
 import Sidebar from '../components/ui/sideBar';
-import { useTheme } from '@mui/material/styles';
-import { useColorMode } from '../hooks/useColorMode';
-import Brightness4Icon from '@mui/icons-material/Brightness4';
-import Brightness7Icon from '@mui/icons-material/Brightness7';
 
 const drawerWidth = 280;
 
 function Main() {
   const [mobileOpen, setMobileOpen] = React.useState(false);
+  const topBarHeight = '4rem';
 
   const handleDrawerToggle = () => {
     setMobileOpen(!mobileOpen);
   };
-
-  const theme = useTheme();
-  const { toggleColorMode } = useColorMode();
-
-  const drawer = (
-    <div>
-      <Toolbar>
-        <IconButton sx={{ ml: 1 }} onClick={toggleColorMode} color="inherit">
-          {theme.palette.mode === 'dark' ? (
-            <Brightness7Icon />
-          ) : (
-            <Brightness4Icon />
-          )}
-        </IconButton>
-      </Toolbar>
-      <Divider />
-      <Menu onHide={handleDrawerToggle} />
-    </div>
-  );
 
   return (
     <>
       <AppBar
         position="fixed"
         sx={{
+          height: topBarHeight,
           width: { md: `calc(100% - ${drawerWidth}px)` },
           ml: { md: `${drawerWidth}px` }
         }}
       >
-        <Toolbar>
+        <Toolbar sx={{ height: topBarHeight, p: 2 }}>
           <IconButton
             color="inherit"
             aria-label="open drawer"
@@ -72,8 +50,8 @@ function Main() {
         </Toolbar>
       </AppBar>
       <Sidebar
-        drawer={drawer}
         drawerWidth={drawerWidth}
+        topBarHeight={topBarHeight}
         mobileOpen={mobileOpen}
         onClose={handleDrawerToggle}
       />
@@ -82,10 +60,10 @@ function Main() {
         sx={{
           flexGrow: 1,
           p: 3,
-          width: { md: `calc(100% - ${drawerWidth}px)` }
+          width: { md: `calc(100% - ${drawerWidth}px)` },
+          mt: topBarHeight
         }}
       >
-        <Toolbar />
         <Switch>
           <Route path="/login/:type?" component={Login} />
           <Route path="/profile" component={Profile} />

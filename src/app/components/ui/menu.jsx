@@ -23,6 +23,7 @@ const Menu = ({ onHide }) => {
           size="large"
           variant="contained"
           sx={{ mb: 1 }}
+          color="secondary"
         >
           {link.title}
         </Button>

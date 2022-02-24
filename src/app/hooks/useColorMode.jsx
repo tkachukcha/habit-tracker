@@ -1,5 +1,5 @@
 import React, { useContext, useState, useMemo, useEffect } from 'react';
-import { useTheme, ThemeProvider, createTheme } from '@mui/material/styles';
+import { ThemeProvider, createTheme } from '@mui/material/styles';
 import PropTypes from 'prop-types';
 
 const ColorModeContext = React.createContext({ toggleColorMode: () => {} });

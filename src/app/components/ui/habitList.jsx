@@ -7,7 +7,7 @@ const HabitList = () => {
   const habits = [
     {
       title: 'Медитация',
-      icon: icons.meditation,
+      icon: icons.love,
       streak: 2,
       color: 'black'
     },
@@ -19,7 +19,7 @@ const HabitList = () => {
     },
     {
       title: 'Визуализация',
-      icon: icons.think,
+      icon: icons.eye,
       streak: 2,
       color: 'black'
     },
@@ -55,13 +55,13 @@ const HabitList = () => {
     },
     {
       title: 'Растяжка',
-      icon: icons.stretch,
+      icon: icons.meditation,
       streak: 2,
       color: 'black'
     },
     {
       title: 'Медитация',
-      icon: icons.meditation,
+      icon: icons.love,
       streak: 2,
       color: 'black'
     }

@@ -2,8 +2,9 @@ import React from 'react';
 import Box from '@mui/material/Box';
 import Drawer from '@mui/material/Drawer';
 import PropTypes from 'prop-types';
+import SideBarContent from './sideBarContent';
 
-const SideBar = ({ drawerWidth, mobileOpen, drawer, onClose }) => {
+const SideBar = ({ topBarHeight, drawerWidth, mobileOpen, onClose }) => {
   return (
     <Box
       component="nav"
@@ -26,7 +27,7 @@ const SideBar = ({ drawerWidth, mobileOpen, drawer, onClose }) => {
           }
         }}
       >
-        {drawer}
+        <SideBarContent onHide={onClose} topBarHeight={topBarHeight} />
       </Drawer>
       <Drawer
         variant="permanent"
@@ -35,20 +36,20 @@ const SideBar = ({ drawerWidth, mobileOpen, drawer, onClose }) => {
           '& .MuiDrawer-paper': {
             boxSizing: 'border-box',
             width: drawerWidth,
-            p: 2
+            px: 2
           }
         }}
         open
       >
-        {drawer}
+        <SideBarContent onHide={onClose} topBarHeight={topBarHeight} />
       </Drawer>
     </Box>
   );
 };
 SideBar.propTypes = {
+  topBarHeight: PropTypes.oneOfType([PropTypes.object, PropTypes.string]),
   drawerWidth: PropTypes.number,
   mobileOpen: PropTypes.bool,
-  drawer: PropTypes.element,
   onClose: PropTypes.func
 };
 

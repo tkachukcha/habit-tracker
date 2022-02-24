@@ -1,203 +1,204 @@
 import React from 'react';
-import { Icon } from '@iconify/react';
-
-const size = '3rem';
+import SelfImprovementIcon from '@mui/icons-material/SelfImprovement';
+import FavoriteIcon from '@mui/icons-material/Favorite';
+import DirectionsRunIcon from '@mui/icons-material/DirectionsRun';
+import FitnessCenterIcon from '@mui/icons-material/FitnessCenter';
+import LocalLibraryIcon from '@mui/icons-material/LocalLibrary';
+import CodeIcon from '@mui/icons-material/Code';
+import LocalDrinkIcon from '@mui/icons-material/LocalDrink';
+import HealthAndSafetyIcon from '@mui/icons-material/HealthAndSafety';
+import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
+import AirlineSeatIndividualSuiteIcon from '@mui/icons-material/AirlineSeatIndividualSuite';
+import CleaningServicesIcon from '@mui/icons-material/CleaningServices';
+import TwoWheelerIcon from '@mui/icons-material/TwoWheeler';
+import MusicNoteIcon from '@mui/icons-material/MusicNote';
+import SportsTennisIcon from '@mui/icons-material/SportsTennis';
+import LightbulbIcon from '@mui/icons-material/Lightbulb';
+import BathtubIcon from '@mui/icons-material/Bathtub';
+import CoffeeIcon from '@mui/icons-material/Coffee';
+import RemoveRedEyeIcon from '@mui/icons-material/RemoveRedEye';
+import LiquorIcon from '@mui/icons-material/Liquor';
+import LaptopIcon from '@mui/icons-material/Laptop';
+import CreditCardIcon from '@mui/icons-material/CreditCard';
+import AttachMoneyIcon from '@mui/icons-material/AttachMoney';
+import SchoolIcon from '@mui/icons-material/School';
+import DirectionsWalkIcon from '@mui/icons-material/DirectionsWalk';
+import WbSunnyIcon from '@mui/icons-material/WbSunny';
+import PetsIcon from '@mui/icons-material/Pets';
+import PsychologyIcon from '@mui/icons-material/Psychology';
+import PoolIcon from '@mui/icons-material/Pool';
+import DescriptionIcon from '@mui/icons-material/Description';
+import ModeNightIcon from '@mui/icons-material/ModeNight';
+import ListAltIcon from '@mui/icons-material/ListAlt';
+import PhonelinkEraseIcon from '@mui/icons-material/PhonelinkErase';
+import RecordVoiceOverIcon from '@mui/icons-material/RecordVoiceOver';
+import TranslateIcon from '@mui/icons-material/Translate';
+import FiberNewIcon from '@mui/icons-material/FiberNew';
+import GroupIcon from '@mui/icons-material/Group';
+import CreateIcon from '@mui/icons-material/Create';
+import IcecreamIcon from '@mui/icons-material/Icecream';
+import SpaIcon from '@mui/icons-material/Spa';
+import MonitorHeartIcon from '@mui/icons-material/MonitorHeart';
 
 export const icons = {
   meditation: {
     name: 'meditation',
-    component: <Icon width={size} icon="mdi:meditation" />
+    component: SelfImprovementIcon
+  },
+  love: {
+    name: 'love',
+    component: FavoriteIcon
   },
   running: {
     name: 'running',
-    component: <Icon width={size} icon="ic:round-directions-run" />
+    component: DirectionsRunIcon
   },
   fitness: {
     name: 'fitness',
-    component: <Icon width={size} icon="ic:baseline-fitness-center" />
-  },
-  yoga: {
-    name: 'yoga',
-    component: <Icon width={size} icon="mdi:yoga" />
+    component: FitnessCenterIcon
   },
   reading: {
     name: 'reading',
-    component: <Icon width={size} icon="bx:book-reader" />
+    component: LocalLibraryIcon
   },
   coding: {
     name: 'coding',
-    component: <Icon width={size} icon="bx:code-alt" />
+    component: CodeIcon
   },
   water: {
     name: 'water',
-    component: <Icon width={size} icon="akar-icons:water" />
-  },
-  water2: {
-    name: 'water2',
-    component: <Icon width={size} icon="ic:outline-local-drink" />
-  },
-  sunrise: {
-    name: 'sunrise',
-    component: <Icon width={size} icon="bi:sunrise" />
-  },
-  sunset: {
-    name: 'sunset',
-    component: <Icon width={size} icon="ep:sunrise" />
+    component: LocalDrinkIcon
   },
   health: {
     name: 'health',
-    component: <Icon width={size} icon="carbon:health-cross" />
+    component: HealthAndSafetyIcon
   },
   gratitude: {
     name: 'gratitude',
-    component: <Icon width={size} icon="bi:person-heart" />
+    component: FavoriteBorderIcon
   },
   bed: {
     name: 'bed',
-    component: <Icon width={size} icon="mdi:bed" />
+    component: AirlineSeatIndividualSuiteIcon
   },
   cleaning: {
     name: 'cleaning',
-    component: <Icon width={size} icon="carbon:clean" />
+    component: CleaningServicesIcon
   },
   moto: {
     name: 'moto',
-    component: <Icon width={size} icon="tabler:motorbike" />
+    component: TwoWheelerIcon
   },
   music: {
     name: 'music',
-    component: <Icon width={size} icon="bi:music-note-beamed" />
+    component: MusicNoteIcon
   },
   tennis: {
     name: 'tennis',
-    component: <Icon width={size} icon="ic:baseline-sports-tennis" />
+    component: SportsTennisIcon
   },
   idea: {
     name: 'idea',
-    component: <Icon width={size} icon="icons8:idea" />
+    component: LightbulbIcon
   },
   bath: {
     name: 'bath',
-    component: <Icon width={size} icon="majesticons:bath-shower-line" />
+    component: BathtubIcon
   },
   coffee: {
     name: 'coffee',
-    component: <Icon width={size} icon="bx:coffee-togo" />
-  },
-  coffee2: {
-    name: 'coffee2',
-    component: <Icon width={size} icon="bxs:coffee" />
+    component: CoffeeIcon
   },
   eye: {
     name: 'eye',
-    component: <Icon width={size} icon="el:eye-open" />
+    component: RemoveRedEyeIcon
   },
   alco: {
     name: 'alco',
-    component: <Icon width={size} icon="cil:drink-alcohol" />
+    component: LiquorIcon
   },
   laptop: {
     name: 'laptop',
-    component: <Icon width={size} icon="fa:laptop" />
+    component: LaptopIcon
+  },
+  finance: {
+    name: 'finance',
+    component: CreditCardIcon
   },
   dollar: {
     name: 'dollar',
-    component: <Icon width={size} icon="bx:dollar" />
+    component: AttachMoneyIcon
   },
   learn: {
     name: 'learn',
-    component: <Icon width={size} icon="dashicons:welcome-learn-more" />
+    component: SchoolIcon
   },
   walk: {
     name: 'walk',
-    component: <Icon width={size} icon="ri:walk-fill" />
+    component: DirectionsWalkIcon
   },
   sun: {
     name: 'sun',
-    component: <Icon width={size} icon="carbon:awake" />
+    component: WbSunnyIcon
   },
   pet: {
     name: 'pet',
-    component: <Icon width={size} icon="dashicons:pets" />
-  },
-  pet2: {
-    name: 'pet2',
-    component: <Icon width={size} icon="fluent:animal-dog-24-regular" />
-  },
-  guitar: {
-    name: 'guitar',
-    component: <Icon width={size} icon="fa6-solid:guitar" />
+    component: PetsIcon
   },
   think: {
     name: 'think',
-    component: <Icon width={size} icon="icon-park-outline:thinking-problem" />
+    component: PsychologyIcon
   },
-  stretch: {
-    name: 'stretch',
-    component: <Icon width={size} icon="iconoir:stretching" />
+  pool: {
+    name: 'pool',
+    component: PoolIcon
   },
   diary: {
     name: 'diary',
-    component: <Icon width={size} icon="uil:diary" />
+    component: DescriptionIcon
   },
   sleep: {
     name: 'sleep',
-    component: <Icon width={size} icon="mdi:sleep" />
+    component: ModeNightIcon
   },
   plan: {
     name: 'plan',
-    component: <Icon width={size} icon="icon-park-outline:plan" />
+    component: ListAltIcon
   },
   nophone: {
     name: 'nophone',
-    component: <Icon width={size} icon="emojione-monotone:no-mobile-phones" />
+    component: PhonelinkEraseIcon
   },
   talk: {
     name: 'talk',
-    component: <Icon width={size} icon="ps:google-talk" />
-  },
-  talk2: {
-    name: 'talk2',
-    component: <Icon width={size} icon="healthicons:speech-language-therapy" />
+    component: RecordVoiceOverIcon
   },
   language: {
     name: 'language',
-    component: <Icon width={size} icon="clarity:language-solid" />
+    component: TranslateIcon
   },
   new: {
     name: 'new',
-    component: <Icon width={size} icon="emojione-monotone:new-button" />
+    component: FiberNewIcon
   },
   social: {
     name: 'social',
-    component: <Icon width={size} icon="fa-solid:user-friends" />
+    component: GroupIcon
   },
   write: {
     name: 'write',
-    component: <Icon width={size} icon="dashicons:welcome-write-blog" />
-  },
-  write2: {
-    name: 'write2',
-    component: <Icon width={size} icon="jam:write" />
+    component: CreateIcon
   },
   sugar: {
     name: 'sugar',
-    component: <Icon width={size} icon="ep:sugar" />
-  },
-  healthy: {
-    name: 'healthy',
-    component: <Icon width={size} icon="fluent:food-apple-20-regular" />
+    component: IcecreamIcon
   },
   plant: {
     name: 'plant',
-    component: <Icon width={size} icon="charm:plant-pot" />
+    component: SpaIcon
   },
   cardio: {
     name: 'cardio',
-    component: <Icon width={size} icon="ion:fitness-outline" />
-  },
-  breath: {
-    name: 'breath',
-    component: <Icon width={size} icon="iconoir:yoga" />
+    component: MonitorHeartIcon
   }
 };

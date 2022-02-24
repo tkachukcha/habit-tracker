@@ -25,6 +25,7 @@ module.exports = {
       'error',
       { anonymous: 'always', named: 'never' }
     ],
-    'multiline-ternary': ['off']
+    'multiline-ternary': ['off'],
+    'react/display-name': ['off']
   }
 };
