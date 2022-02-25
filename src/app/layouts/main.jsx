@@ -1,24 +1,21 @@
 import React from 'react';
-import AppBar from '@mui/material/AppBar';
+import { Route, Switch, useHistory } from 'react-router-dom';
 import Box from '@mui/material/Box';
-import Divider from '@mui/material/Divider';
-import IconButton from '@mui/material/IconButton';
-import MenuIcon from '@mui/icons-material/Menu';
-import Toolbar from '@mui/material/Toolbar';
-import Typography from '@mui/material/Typography';
+
 import Today from '../pages/today';
 import Login from '../pages/login';
 import Habits from '../pages/habits';
 import Profile from '../pages/profile';
-import { Route, Switch, useHistory } from 'react-router-dom';
-
 import Sidebar from '../components/ui/sideBar';
+import TopBar from '../components/ui/topBar';
 
 const drawerWidth = 280;
 
 const Main = () => {
   const [mobileOpen, setMobileOpen] = React.useState(false);
+
   const topBarHeight = '4rem';
+
   const history = useHistory();
   console.log(history);
 
@@ -28,29 +25,11 @@ const Main = () => {
 
   return (
     <>
-      <AppBar
-        position="fixed"
-        sx={{
-          height: topBarHeight,
-          width: { md: `calc(100% - ${drawerWidth}px)` },
-          ml: { md: `${drawerWidth}px` }
-        }}
-      >
-        <Toolbar sx={{ height: topBarHeight, p: 2 }}>
-          <IconButton
-            color="inherit"
-            aria-label="open drawer"
-            edge="start"
-            onClick={handleDrawerToggle}
-            sx={{ mr: 2, display: { md: 'none' } }}
-          >
-            <MenuIcon />
-          </IconButton>
-          <Typography variant="h6" noWrap component="div">
-            Habit Tracker
-          </Typography>
-        </Toolbar>
-      </AppBar>
+      <TopBar
+        height={topBarHeight}
+        drawerWidth={drawerWidth}
+        onOpen={handleDrawerToggle}
+      />
       <Sidebar
         drawerWidth={drawerWidth}
         topBarHeight={topBarHeight}
