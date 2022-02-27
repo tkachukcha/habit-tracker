@@ -1,31 +1,19 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { useTheme } from '@mui/material/styles';
-import { useColorMode } from '../../hooks/useColorMode';
-import IconButton from '@mui/material/IconButton';
+
 import Toolbar from '@mui/material/Toolbar';
-import Brightness4Icon from '@mui/icons-material/Brightness4';
-import Brightness7Icon from '@mui/icons-material/Brightness7';
-import Menu from './menu';
 import Divider from '@mui/material/Divider';
 
+import Menu from './menu';
+import { Typography } from '@mui/material';
+
 const SideBarContent = ({ onHide, topBarHeight }) => {
-  const theme = useTheme();
-  const { toggleColorMode } = useColorMode();
   return (
     <div>
       <Toolbar>
-        <IconButton
-          sx={{ ml: 1, height: topBarHeight }}
-          onClick={toggleColorMode}
-          color="inherit"
-        >
-          {theme.palette.mode === 'dark' ? (
-            <Brightness7Icon />
-          ) : (
-            <Brightness4Icon />
-          )}
-        </IconButton>
+        <Typography variant="h6" noWrap component="div">
+          Habit Tracker
+        </Typography>
       </Toolbar>
       <Divider />
       <Menu onHide={onHide} />

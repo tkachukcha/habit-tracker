@@ -68,13 +68,13 @@ const HabitList = () => {
   ];
   return (
     <>
-      <Box sx={{ p: 2, width: { lg: '30%' } }}>
+      <Box sx={{ width: { lg: '30%' } }}>
         {habits.map((h, i) => (
           <Habit
             key={i}
             title={h.title}
             icon={h.icon}
-            color={h.color}
+            // color={h.color}
             streak={h.streak}
           />
         ))}

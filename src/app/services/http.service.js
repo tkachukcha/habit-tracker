@@ -1,10 +1,13 @@
 import axios from 'axios';
 import { toast } from 'react-toastify';
-import configFile from '../config.json';
+import configFile from '../../config.json';
 import { httpAuth } from '../hooks/useAuth';
 import localStorageService from './localStorage.service.js';
 
-const http = axios.create({ baseURL: configFile.fireBaseEndPoint });
+const http = axios.create({
+  baseURL:
+    'https://habit-tracker-cb7ea-default-rtdb.europe-west1.firebasedatabase.app/'
+});
 
 http.interceptors.request.use(
   async function (config) {

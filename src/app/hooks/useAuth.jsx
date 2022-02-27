@@ -7,6 +7,8 @@ import localStorageService, {
 import { useHistory } from 'react-router-dom';
 import usersService from '../services/users.service';
 import { toast } from 'react-toastify';
+import CircularProgress from '@mui/material/CircularProgress';
+import Box from '@mui/material/Box';
 
 export const httpAuth = axios.create({
   baseURL: 'https://identitytoolkit.googleapis.com/v1/',
@@ -14,6 +16,7 @@ export const httpAuth = axios.create({
     key: process.env.REACT_APP_FIREBASE_KEY
   }
 });
+
 const AuthContext = React.createContext();
 
 export const useAuth = () => {
@@ -27,8 +30,9 @@ const AuthProvider = ({ children }) => {
   const history = useHistory();
 
   const errorCatcher = (error) => {
-    const { message } = error.response.data.error;
+    const { message } = error;
     setErrors(error);
+    toast.error(message);
   };
 
   function errorThrower(name, displayMessage) {
@@ -41,8 +45,8 @@ const AuthProvider = ({ children }) => {
 
   async function getUserData() {
     try {
-      const { content } = await usersService.getCurrentUser();
-      setUser(content);
+      const data = await usersService.getCurrentUser();
+      setUser(data);
     } catch (error) {
       errorCatcher(error);
     } finally {
@@ -59,23 +63,13 @@ const AuthProvider = ({ children }) => {
     }
   }
 
-  // async function updateUser(data) {
-  //   try {
-  //     const { content } = await usersService.updateUser(data);
-  //     console.log(content);
-  //     toast.success('Y');
-  //   } catch (error) {
-  //     errorCatcher(error);
-  //   }
-  // }
-
   useEffect(() => {
     if (localStorageService.getAccessToken()) {
       getUserData();
     } else {
       setLoading(false);
     }
-  });
+  }, []);
 
   useEffect(() => {
     if (errors !== null) {
@@ -86,7 +80,7 @@ const AuthProvider = ({ children }) => {
 
   async function signUp({ email, password, ...rest }) {
     try {
-      const { data } = await httpAuth.post('accounts:signup', {
+      const { data } = await httpAuth.post('accounts:signUp', {
         email,
         password,
         returnSecureToken: true
@@ -154,7 +148,13 @@ const AuthProvider = ({ children }) => {
 
   return (
     <AuthContext.Provider value={{ signUp, signIn, currentUser, logOut }}>
-      {!isLoading ? children : <h1>Loading...</h1>}
+      {!isLoading ? (
+        children
+      ) : (
+        <Box sx={{ display: 'grid', placeItems: 'center', height: '60vh' }}>
+          <CircularProgress />
+        </Box>
+      )}
     </AuthContext.Provider>
   );
 };

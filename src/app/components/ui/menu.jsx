@@ -1,7 +1,7 @@
-import React, { useState } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import Box from '@mui/material/Box';
-import { NavLink } from 'react-router-dom';
+import { NavLink, useHistory } from 'react-router-dom';
 import List from '@mui/material/List';
 import ListItemButton from '@mui/material/ListItemButton';
 import ListItemIcon from '@mui/material/ListItemIcon';
@@ -12,7 +12,7 @@ import LoginIcon from '@mui/icons-material/Login';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 
 const Menu = ({ onHide }) => {
-  const [selectedIndex, setSelectedIndex] = useState(1);
+  const location = useHistory().location.pathname;
 
   const links = [
     { path: '/', exact: true, title: 'Today', icon: <TodayIcon /> },
@@ -27,12 +27,10 @@ const Menu = ({ onHide }) => {
       exact: true,
       title: 'Profile',
       icon: <AccountCircleIcon />
-    },
-    { path: '/login', exact: true, title: 'Login', icon: <LoginIcon /> }
+    }
   ];
 
   const handleListItemClick = (event, index) => {
-    setSelectedIndex(index);
     onHide();
   };
   return (
@@ -43,9 +41,8 @@ const Menu = ({ onHide }) => {
             component={NavLink}
             exact={link.exact}
             to={link.path}
-            // onClick={onHide}
             key={link.title + ind}
-            selected={selectedIndex === ind}
+            selected={link.path === location}
             onClick={(event) => {
               handleListItemClick(event, ind);
             }}

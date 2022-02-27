@@ -1,25 +1,14 @@
-$primary: #7900f2;
-$secondary: #ae00ec;
-$info: #5595ff;
-$warning: #b2b281;
-$danger: #d3330d;
-$light: #aee0cc;
-$dark: #17121b;
+// $primary: #7900f2;
+// $secondary: #ae00ec;
+// $info: #5595ff;
+// $warning: #b2b281;
+// $danger: #d3330d;
+// $light: #aee0cc;
+// $dark: #17121b;
 
-@import '~bootstrap/scss/_functions';
-@import '~bootstrap/scss/_variables';
-
-$custom-theme-colors: (
-  "green-light": #00e58f,
-  "green-dark": #00d049,
-  "gray": #5b7e83,
-  "light-blue": #77e7fc,
-  "brightdark": #1c1b25);
-
-$theme-colors: map-merge($custom-theme-colors, $theme-colors);
-
-@import '~bootstrap/scss/bootstrap.scss';
-
-.bg-brightdark {
-  background-color: #1c1b25;
-}
+// $custom-theme-colors: (
+//   "green-light": #00e58f,
+//   "green-dark": #00d049,
+//   "gray": #5b7e83,
+//   "light-blue": #77e7fc,
+//   "brightdark": #1c1b25);
