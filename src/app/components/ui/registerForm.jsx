@@ -9,10 +9,11 @@ import Typography from '@mui/material/Typography';
 import { useFormik } from 'formik';
 import * as yup from 'yup';
 import { useAuth } from '../../hooks/useAuth';
+import { useHistory } from 'react-router-dom';
 
 export default function RegisterForm() {
   const { signUp } = useAuth();
-
+  const history = useHistory();
   const formik = useFormik({
     initialValues: {
       name: '',
@@ -32,6 +33,7 @@ export default function RegisterForm() {
     onSubmit: async (values) => {
       try {
         await signUp(values);
+        history.push('/');
       } catch (error) {
         console.log(error);
       }

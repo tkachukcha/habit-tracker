@@ -3,7 +3,8 @@ import { Route, Switch, useHistory } from 'react-router-dom';
 import Box from '@mui/material/Box';
 
 import Today from '../pages/today';
-import Login from '../pages/login';
+import Login from '../layouts/login';
+import Logout from '../layouts/logout';
 import Habits from '../pages/habits';
 import Profile from '../pages/profile';
 import Sidebar from '../components/ui/sideBar';
@@ -46,7 +47,7 @@ const Main = () => {
             }}
           >
             <Switch>
-              <Route path="/login/:type?" component={Login} />
+              <Route path="/logout" component={Logout} />
               <Route path="/profile" component={Profile} />
               <Route path="/habits/:habitID?/:edit?" component={Habits} />
               <Route path="/" exact component={Today} />
@@ -54,7 +55,7 @@ const Main = () => {
           </Box>
         </>
       ) : (
-        <Login />
+        <Route path="/login/:type?" component={Login} />
       )}
     </>
   );

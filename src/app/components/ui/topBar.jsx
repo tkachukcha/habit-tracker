@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useHistory, NavLink } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import AppBar from '@mui/material/AppBar';
@@ -7,22 +7,19 @@ import MenuIcon from '@mui/icons-material/Menu';
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
-import Avatar from '@mui/material/Avatar';
-import { useAuth } from '../../hooks/useAuth';
+
+import TopBarProfile from './topBarProfile';
 
 const TopBar = ({ height, drawerWidth, onOpen }) => {
-  const { currentUser } = useAuth();
   const location = useHistory().location.pathname;
   let title = '';
+
   switch (location) {
     case '/':
       title = 'Today';
       break;
     case '/habits':
       title = 'Habits';
-      break;
-    case '/login':
-      title = '';
       break;
     case '/profile':
       title = 'Profile';
@@ -46,7 +43,7 @@ const TopBar = ({ height, drawerWidth, onOpen }) => {
           <IconButton
             color="inherit"
             aria-label="open drawer"
-            edge="start"
+            edge="end"
             onClick={onOpen}
             sx={{ mr: 2, display: { md: 'none' } }}
           >
@@ -61,15 +58,7 @@ const TopBar = ({ height, drawerWidth, onOpen }) => {
             {title}
           </Typography>
         </Box>
-        {/* <Box> */}
-        {currentUser ? (
-          <Avatar sx={{ bgcolor: 'primary.main' }}>
-            {currentUser.name[0]}
-          </Avatar>
-        ) : (
-          'Login'
-        )}
-        {/* </Box> */}
+        <TopBarProfile />
       </Toolbar>
     </AppBar>
   );
