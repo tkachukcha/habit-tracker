@@ -7,18 +7,30 @@ import Checkbox from '@mui/material/Checkbox';
 import Box from '@mui/material/Box';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
-import { createTheme, ThemeProvider } from '@mui/material/styles';
+import { useAuth } from '../../hooks/useAuth';
+import { useFormik } from 'formik';
+import * as yup from 'yup';
 
 export default function SignIn() {
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    const data = new FormData(event.currentTarget);
-    // eslint-disable-next-line no-console
-    console.log({
-      email: data.get('email'),
-      password: data.get('password')
-    });
-  };
+  const { signIn } = useAuth();
+
+  const formik = useFormik({
+    initialValues: {
+      email: '',
+      password: ''
+    },
+    validationSchema: yup.object({
+      email: yup.string().email('Invalid email address').required('Required'),
+      password: yup.string().required('Required')
+    }),
+    onSubmit: async (values) => {
+      try {
+        await signIn(values);
+      } catch (error) {
+        console.log(error);
+      }
+    }
+  });
 
   return (
     <>
@@ -36,7 +48,12 @@ export default function SignIn() {
         <Typography component="h1" variant="h5">
           Log in
         </Typography>
-        <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
+        <Box
+          component="form"
+          onSubmit={formik.handleSubmit}
+          noValidate
+          sx={{ mt: 1 }}
+        >
           <TextField
             margin="normal"
             required
@@ -46,6 +63,10 @@ export default function SignIn() {
             name="email"
             autoComplete="email"
             autoFocus
+            onChange={formik.handleChange}
+            value={formik.values.email}
+            error={formik.touched.email && Boolean(formik.errors.email)}
+            helperText={formik.touched.email && formik.errors.email}
           />
           <TextField
             margin="normal"
@@ -56,11 +77,15 @@ export default function SignIn() {
             type="password"
             id="password"
             autoComplete="current-password"
+            onChange={formik.handleChange}
+            value={formik.values.password}
+            error={formik.touched.password && Boolean(formik.errors.password)}
+            helperText={formik.touched.password && formik.errors.password}
           />
-          <FormControlLabel
+          {/* <FormControlLabel
             control={<Checkbox value="remember" color="primary" />}
             label="Remember me"
-          />
+          /> */}
           <Button
             type="submit"
             fullWidth

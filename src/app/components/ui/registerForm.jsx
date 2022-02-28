@@ -32,7 +32,6 @@ export default function RegisterForm() {
     onSubmit: async (values) => {
       try {
         await signUp(values);
-        console.log(values);
       } catch (error) {
         console.log(error);
       }

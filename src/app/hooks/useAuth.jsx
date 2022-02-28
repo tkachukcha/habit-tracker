@@ -32,7 +32,6 @@ const AuthProvider = ({ children }) => {
   const errorCatcher = (error) => {
     const { message } = error;
     setErrors(error);
-    toast.error(message);
   };
 
   function errorThrower(name, displayMessage) {
@@ -115,7 +114,7 @@ const AuthProvider = ({ children }) => {
       });
       setTokens(data);
       await getUserData();
-      toast.success(`Welcome back, ${currentUser.name}`);
+      toast.success(`Welcome back!`);
     } catch (error) {
       errorCatcher(error);
       const { code, message } = error.response.data.error;
