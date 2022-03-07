@@ -10,6 +10,7 @@ import Profile from '../pages/profile';
 import Sidebar from '../components/ui/sideBar';
 import TopBar from '../components/ui/topBar';
 import { useAuth } from '../hooks/useAuth';
+import ProtectedRoute from '../components/common/protectedRoute';
 
 const drawerWidth = 280;
 
@@ -24,7 +25,7 @@ const Main = () => {
 
   return (
     <>
-      {currentUser ? (
+      {currentUser && (
         <>
           <TopBar
             height={topBarHeight}
@@ -37,26 +38,25 @@ const Main = () => {
             mobileOpen={mobileOpen}
             onClose={handleDrawerToggle}
           />
-          <Box
-            component="main"
-            sx={{
-              flexGrow: 1,
-              p: 2,
-              width: { md: `calc(100% - ${drawerWidth}px)` },
-              mt: topBarHeight
-            }}
-          >
-            <Switch>
-              <Route path="/logout" component={Logout} />
-              <Route path="/profile" component={Profile} />
-              <Route path="/habits/:habitID?/:edit?" component={Habits} />
-              <Route path="/" exact component={Today} />
-            </Switch>
-          </Box>
         </>
-      ) : (
-        <Route path="/login/:type?" component={Login} />
       )}
+      <Box
+        component="main"
+        sx={{
+          flexGrow: 1,
+          p: 2,
+          width: { md: `calc(100% - ${drawerWidth}px)` },
+          mt: topBarHeight
+        }}
+      >
+        <Switch>
+          <ProtectedRoute path="/" exact component={Today} />
+          <Route path="/logout" component={Logout} />
+          <Route path="/profile" component={Profile} />
+          <Route path="/habits/:habitID?/:edit?" component={Habits} />
+          <Route path="/login/:type?" component={Login} />
+        </Switch>
+      </Box>
     </>
   );
 };

@@ -93,12 +93,17 @@ const AuthProvider = ({ children }) => {
         ...rest
       });
       toast.success('Successfully registered');
+      await getUserData();
     } catch (error) {
       errorCatcher(error);
       const { code, message } = error.response.data.error;
       if (code === 400) {
         if (message === 'EMAIL_EXISTS') {
           const displayMessage = 'Пользователь с такой почтой уже существует';
+          errorThrower('email', displayMessage);
+        }
+        if (message === 'INVALID_EMAIL') {
+          const displayMessage = 'Неправильный емэйл';
           errorThrower('email', displayMessage);
         }
       }

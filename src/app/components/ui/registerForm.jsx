@@ -33,7 +33,7 @@ export default function RegisterForm() {
     onSubmit: async (values) => {
       try {
         await signUp(values);
-        history.push('/');
+        history.replace('/');
       } catch (error) {
         console.log(error);
       }
