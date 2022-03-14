@@ -1,10 +1,14 @@
 import React, { useEffect } from 'react';
-import { useAuth } from '../hooks/useAuth';
+import { useDispatch } from 'react-redux';
+import { useHistory } from 'react-router-dom';
+import { logout } from '../store/users';
 
 const Logout = () => {
-  const { logOut } = useAuth();
+  const dispatch = useDispatch();
+  const history = useHistory();
   useEffect(() => {
-    logOut();
+    dispatch(logout());
+    history.push('/');
   }, []);
   return <h1>Loading...</h1>;
 };

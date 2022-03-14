@@ -15,7 +15,7 @@ const Menu = ({ onHide }) => {
   const location = useHistory().location.pathname;
 
   const links = [
-    { path: '/', exact: true, title: 'Today', icon: <TodayIcon /> },
+    { path: '/today', exact: true, title: 'Today', icon: <TodayIcon /> },
     {
       path: '/habits',
       exact: true,

@@ -31,7 +31,7 @@ const TopBarProfile = () => {
         aria-expanded={open ? 'true' : undefined}
       >
         <Avatar sx={{ bgcolor: 'primary.main', cursor: 'pointer' }}>
-          {currentUser.name[0]}
+          {currentUser?.name[0]}
         </Avatar>
       </IconButton>
       <Menu

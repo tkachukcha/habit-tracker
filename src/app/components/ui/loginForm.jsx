@@ -2,8 +2,6 @@ import * as React from 'react';
 import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
-import FormControlLabel from '@mui/material/FormControlLabel';
-import Checkbox from '@mui/material/Checkbox';
 import Box from '@mui/material/Box';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
@@ -11,10 +9,16 @@ import { useAuth } from '../../hooks/useAuth';
 import { useFormik } from 'formik';
 import * as yup from 'yup';
 import { useHistory } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { login } from '../../store/users';
 
 export default function SignIn() {
-  const { signIn } = useAuth();
+  const dispatch = useDispatch();
+  // const { signIn } = useAuth();
   const history = useHistory();
+  const redirect = history.location.state
+    ? history.location.state.from.pathname
+    : '/';
 
   const formik = useFormik({
     initialValues: {
@@ -25,13 +29,8 @@ export default function SignIn() {
       email: yup.string().email('Invalid email address').required('Required'),
       password: yup.string().required('Required')
     }),
-    onSubmit: async (values) => {
-      try {
-        await signIn(values);
-        history.push('/');
-      } catch (error) {
-        console.log(error);
-      }
+    onSubmit: (values) => {
+      dispatch(login({ payload: values, redirect }));
     }
   });
 
