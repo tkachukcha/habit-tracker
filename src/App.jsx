@@ -12,6 +12,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { getIsLoggedIn, getUserData } from './app/store/users';
 import { Switch, Route } from 'react-router-dom';
 import ProtectedRoute from './app/components/common/protectedRoute';
+import AppLoader from './app/components/ui/hoc/appLoader';
 
 function App() {
   return (
@@ -19,14 +20,16 @@ function App() {
       <ColorModeProvider>
         <CssBaseline enableColorScheme />
         <Box sx={{ display: 'flex' }}>
-          <Switch>
-            <Route path="/login">
-              <Login />
-            </Route>
-            <ProtectedRoute path="/">
-              <Main />
-            </ProtectedRoute>
-          </Switch>
+          <AppLoader>
+            <Switch>
+              <Route path="/login">
+                <Login />
+              </Route>
+              <ProtectedRoute path="/">
+                <Main />
+              </ProtectedRoute>
+            </Switch>
+          </AppLoader>
         </Box>
       </ColorModeProvider>
 

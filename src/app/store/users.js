@@ -40,6 +40,7 @@ const usersSlice = createSlice({
       state.entities = null;
       state.auth = null;
       state.isLoggedIn = false;
+      state.dataLoaded = false;
     },
     userRequested: (state) => {
       state.isLoading = true;
@@ -55,9 +56,12 @@ const usersSlice = createSlice({
     },
     userCreated: (state, action) => {
       state.entities = action.payload;
+      state.isLoading = false;
+      state.dataLoaded = true;
     },
     userCreationFailed: (state, action) => {
       state.error = action.payload;
+      state.isLoading = false;
     }
   }
 });
@@ -142,6 +146,8 @@ export const getIsLoggedIn = () => (state) => state.users.isLoggedIn;
 
 export const getUser = () => (state) => state.users.entities;
 
-export const getDataLoaded = () => (state) => state.users.dataLoaded;
+export const getIsLoading = () => (state) => state.users.isLoading;
+
+export const getDataStatus = () => (state) => state.users.dataLoaded;
 
 export default usersReducer;

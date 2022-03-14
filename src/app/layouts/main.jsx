@@ -11,28 +11,18 @@ import Sidebar from '../components/ui/sideBar';
 import TopBar from '../components/ui/topBar';
 import ProtectedRoute from '../components/common/protectedRoute';
 import { useDispatch, useSelector } from 'react-redux';
-import {
-  getIsLoggedIn,
-  getDataLoaded,
-  getUserData,
-  getUser
-} from '../store/users';
+import { getUserData, getIsLoading } from '../store/users';
 
 const drawerWidth = 280;
 
 const Main = () => {
   const [mobileOpen, setMobileOpen] = React.useState(false);
-  const isLoggedIn = useSelector(getIsLoggedIn());
+  const isLoading = useSelector(getIsLoading);
   const dispatch = useDispatch();
   const topBarHeight = '4rem';
   const handleDrawerToggle = () => {
     setMobileOpen(!mobileOpen);
   };
-
-  // useEffect(() => {
-  //   dispatch(getUserData());
-  // }, []);
-  // const user = useSelector(getUser());
 
   return (
     <>
@@ -49,7 +39,6 @@ const Main = () => {
       />
 
       <Box
-        // component="main"
         sx={{
           flexGrow: 1,
           p: 2,
