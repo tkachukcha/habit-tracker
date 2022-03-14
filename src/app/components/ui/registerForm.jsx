@@ -8,12 +8,11 @@ import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import { useFormik } from 'formik';
 import * as yup from 'yup';
-import { useAuth } from '../../hooks/useAuth';
-import { useHistory } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { register } from '../../store/users';
 
 export default function RegisterForm() {
-  const { signUp } = useAuth();
-  const history = useHistory();
+  const dispatch = useDispatch();
   const formik = useFormik({
     initialValues: {
       name: '',
@@ -31,12 +30,7 @@ export default function RegisterForm() {
         .matches(/(?=.{8,})/, 'Must be at least 8 symbols long')
     }),
     onSubmit: async (values) => {
-      try {
-        await signUp(values);
-        history.replace('/');
-      } catch (error) {
-        console.log(error);
-      }
+      dispatch(register(values));
     }
   });
 

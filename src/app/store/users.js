@@ -52,6 +52,12 @@ const usersSlice = createSlice({
     userRequestFailed: (state, action) => {
       state.error = action.payload;
       state.isLoading = false;
+    },
+    userCreated: (state, action) => {
+      state.entities = action.payload;
+    },
+    userCreationFailed: (state, action) => {
+      state.error = action.payload;
     }
   }
 });
@@ -64,8 +70,12 @@ const {
   userLoggedOut,
   userRequested,
   userRequestSuccess,
-  userRequestFailed
+  userRequestFailed,
+  userCreated,
+  userCreationFailed
 } = actions;
+
+const userCreationRequested = createAction('users/userCreationRequested');
 
 export const getUserData = () => async (dispatch) => {
   dispatch(userRequested());
@@ -74,6 +84,36 @@ export const getUserData = () => async (dispatch) => {
     dispatch(userRequestSuccess(data));
   } catch (error) {
     dispatch(userRequestFailed(error.message));
+  }
+};
+
+export const register = (payload) => async (dispatch) => {
+  dispatch(authRequested());
+  try {
+    const data = await authService.register(payload);
+    dispatch(authRequestSuccess({ userId: data.localId }));
+    localStorageService.setTokens(data);
+    dispatch(
+      createUser({
+        _id: data.localId,
+        email: payload.email,
+        name: payload.name,
+        habits: []
+      })
+    );
+    history.push('/');
+  } catch (error) {
+    dispatch(authRequestFail(error.message));
+  }
+};
+
+export const createUser = (payload) => async (dispatch) => {
+  dispatch(userCreationRequested());
+  try {
+    const data = await usersService.create(payload);
+    dispatch(userCreated(data));
+  } catch (error) {
+    dispatch(userCreationFailed(error.message));
   }
 };
 
@@ -95,7 +135,6 @@ export const login =
 export const logout = () => (dispatch) => {
   dispatch(userLoggedOut());
   localStorageService.removeAuthData();
-  console.log('gg');
   history.push('/');
 };
 

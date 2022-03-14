@@ -14,7 +14,6 @@ import { login } from '../../store/users';
 
 export default function SignIn() {
   const dispatch = useDispatch();
-  // const { signIn } = useAuth();
   const history = useHistory();
   const redirect = history.location.state
     ? history.location.state.from.pathname
