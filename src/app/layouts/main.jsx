@@ -17,8 +17,6 @@ const drawerWidth = 280;
 
 const Main = () => {
   const [mobileOpen, setMobileOpen] = React.useState(false);
-  const isLoading = useSelector(getIsLoading);
-  const dispatch = useDispatch();
   const topBarHeight = '4rem';
   const handleDrawerToggle = () => {
     setMobileOpen(!mobileOpen);

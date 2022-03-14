@@ -8,8 +8,6 @@ import Box from '@mui/material/Box';
 import Main from './app/layouts/main';
 import Login from './app/layouts/login';
 import ColorModeProvider from './app/hooks/useColorMode';
-import { useDispatch, useSelector } from 'react-redux';
-import { getIsLoggedIn, getUserData } from './app/store/users';
 import { Switch, Route } from 'react-router-dom';
 import ProtectedRoute from './app/components/common/protectedRoute';
 import AppLoader from './app/components/ui/hoc/appLoader';
