@@ -6,7 +6,6 @@ import Typography from '@mui/material/Typography';
 import Link from '@mui/material/Link';
 import Grid from '@mui/material/Grid';
 import Container from '@mui/material/Container';
-import { useAuth } from '../hooks/useAuth';
 
 function Copyright(props) {
   return (

@@ -1,6 +1,5 @@
 import React from 'react';
 import Avatar from '@mui/material/Avatar';
-import { useAuth } from '../../hooks/useAuth';
 import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
 import ListItemIcon from '@mui/material/ListItemIcon';
@@ -9,9 +8,11 @@ import IconButton from '@mui/material/IconButton';
 import Logout from '@mui/icons-material/Logout';
 import Box from '@mui/material/Box';
 import { NavLink } from 'react-router-dom';
+import { useSelector } from 'react-redux';
+import { getUser } from '../../store/users';
 
 const TopBarProfile = () => {
-  const { currentUser } = useAuth();
+  const currentUser = useSelector(getUser());
   const [anchorEl, setAnchorEl] = React.useState(null);
   const open = Boolean(anchorEl);
   const handleClick = (event) => {
