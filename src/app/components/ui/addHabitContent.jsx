@@ -10,12 +10,13 @@ import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
+import ColorSelect from './colorSelect';
 
 const AddHabitContent = () => {
   const formik = useFormik({
     initialValues: {
       habitName: '',
-      color: 'white',
+      color: '#fff',
       time: 'anytime',
       icon: ''
     },
@@ -46,7 +47,6 @@ const AddHabitContent = () => {
           id="habitName"
           label="Habit name"
           name="habitName"
-          autoFocus
           onChange={formik.handleChange}
           value={formik.values.habitName}
           error={formik.touched.habitName && Boolean(formik.errors.habitName)}
@@ -62,6 +62,7 @@ const AddHabitContent = () => {
           onChange={formik.handleChange}
           value={formik.values.color}
         />
+        <ColorSelect color={formik.values.color} />
         <FormControl sx={{ mt: 2, minWidth: '100%' }}>
           <InputLabel id="time">Time of the day</InputLabel>
           <Select

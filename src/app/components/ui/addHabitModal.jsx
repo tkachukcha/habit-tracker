@@ -34,8 +34,6 @@ const AddHabitModal = ({ onClose, open }) => {
     <Modal
       open={open}
       onClose={onClose}
-      aria-labelledby="modal-modal-title"
-      aria-describedby="modal-modal-description"
       closeAfterTransition
       BackdropComponent={Backdrop}
       BackdropProps={{
