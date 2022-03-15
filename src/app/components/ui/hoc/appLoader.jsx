@@ -6,6 +6,8 @@ import {
   getDataStatus,
   getUserData
 } from '../../../store/users';
+import CircularProgress from '@mui/material/CircularProgress';
+import Box from '@mui/material/Box';
 
 const AppLoader = ({ children }) => {
   const isLoggedIn = useSelector(getIsLoggedIn());
@@ -17,7 +19,11 @@ const AppLoader = ({ children }) => {
     }
   }, []);
   if (isLoggedIn && !dataStatus) {
-    return <h1>Loading...</h1>;
+    return (
+      <Box sx={{ margin: '40vh auto' }}>
+        <CircularProgress color="primary" />
+      </Box>
+    );
   }
   return children;
 };
