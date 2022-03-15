@@ -34,7 +34,7 @@ const Menu = ({ onHide }) => {
     onHide();
   };
   return (
-    <Box sx={{ display: 'flex', mt: 2, flexDirection: 'column' }}>
+    <Box sx={{ mt: 2 }}>
       <List component="nav" aria-label="main mailbox folders">
         {links.map((link, ind) => (
           <ListItemButton
