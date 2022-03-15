@@ -5,7 +5,7 @@ import Modal from '@mui/material/Modal';
 import Typography from '@mui/material/Typography';
 import Backdrop from '@mui/material/Backdrop';
 import Fade from '@mui/material/Fade';
-import Button from '@mui/material/Button';
+import IconButton from '@mui/material/IconButton';
 import CloseIcon from '@mui/icons-material/Close';
 
 const modalStyle = {
@@ -23,14 +23,11 @@ const modalStyle = {
   borderRadius: 3
 };
 
-const roundStyle = {
-  borderRadius: '50%',
-  padding: 0,
-  minWidth: '28px',
-  height: '28px',
+const closeBtnStyle = {
   position: 'absolute',
-  top: '0.75rem',
-  right: '0.57rem'
+  top: '0.3rem',
+  right: '0.3rem',
+  p: 1
 };
 
 const AddHabitModal = ({ onClose, open }) => {
@@ -48,15 +45,9 @@ const AddHabitModal = ({ onClose, open }) => {
     >
       <Fade in={open}>
         <Box sx={modalStyle}>
-          <Button
-            variant="contained"
-            size="small"
-            color="primary"
-            onClick={onClose}
-            sx={roundStyle}
-          >
-            <CloseIcon fontSize="small" />
-          </Button>
+          <IconButton sx={closeBtnStyle} onClick={onClose} color="primary">
+            <CloseIcon sx={{ fontSize: '1.7rem' }} />
+          </IconButton>
         </Box>
       </Fade>
     </Modal>
