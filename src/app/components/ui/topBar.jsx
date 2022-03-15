@@ -15,7 +15,7 @@ const TopBar = ({ height, drawerWidth, onOpen }) => {
   let title = '';
 
   switch (location) {
-    case '/today':
+    case '/':
       title = 'Today';
       break;
     case '/habits':
