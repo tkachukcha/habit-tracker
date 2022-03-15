@@ -3,15 +3,11 @@ import { Route, Switch, useHistory } from 'react-router-dom';
 import Box from '@mui/material/Box';
 
 import Today from '../pages/today';
-import Login from '../layouts/login';
 import Logout from '../layouts/logout';
 import Habits from '../pages/habits';
 import Profile from '../pages/profile';
 import Sidebar from '../components/ui/sideBar';
 import TopBar from '../components/ui/topBar';
-import ProtectedRoute from '../components/common/protectedRoute';
-import { useDispatch, useSelector } from 'react-redux';
-import { getUserData, getIsLoading } from '../store/users';
 
 const drawerWidth = 280;
 
