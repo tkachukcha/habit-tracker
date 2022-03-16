@@ -1,8 +1,8 @@
 import React from 'react';
 import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
-import { Divider } from '@mui/material';
-import { useFormik } from 'formik';
+import Divider from '@mui/material/Divider';
+import { useFormik, Field } from 'formik';
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 import * as yup from 'yup';
@@ -40,45 +40,50 @@ const AddHabitContent = () => {
         noValidate
         sx={{ mt: 1 }}
       >
-        <TextField
-          margin="normal"
-          required
-          fullWidth
-          id="habitName"
-          label="Habit name"
-          name="habitName"
-          onChange={formik.handleChange}
-          value={formik.values.habitName}
-          error={formik.touched.habitName && Boolean(formik.errors.habitName)}
-          helperText={formik.touched.habitName && formik.errors.habitName}
-        />
-        <TextField
-          margin="normal"
-          required
-          fullWidth
-          name="color"
-          label="Color"
-          id="color"
-          onChange={formik.handleChange}
-          value={formik.values.color}
-        />
-        <ColorSelect color={formik.values.color} />
-        <FormControl sx={{ mt: 2, minWidth: '100%' }}>
-          <InputLabel id="time">Time of the day</InputLabel>
-          <Select
-            labelId="time"
-            id="time"
-            name="time"
-            value={formik.values.time}
-            label="Time of the day"
+        <Box
+          sx={{
+            display: 'flex',
+            flexDirection: { xs: 'column', sm: 'row' },
+            justifyContent: 'space-between'
+          }}
+        >
+          <TextField
+            sx={{ width: { xs: '100%', sm: '49%' } }}
+            margin="normal"
+            required
+            id="habitName"
+            label="Habit name"
+            name="habitName"
             onChange={formik.handleChange}
-          >
-            <MenuItem value={'anytime'}>Any</MenuItem>
-            <MenuItem value={'morning'}>Morning</MenuItem>
-            <MenuItem value={'afternoon'}>Afternoon</MenuItem>
-            <MenuItem value={'evening'}>Evening</MenuItem>
-          </Select>
-        </FormControl>
+            value={formik.values.habitName}
+            error={formik.touched.habitName && Boolean(formik.errors.habitName)}
+            helperText={formik.touched.habitName && formik.errors.habitName}
+          />
+          <FormControl sx={{ width: { xs: '100%', sm: '49%' }, mt: 2, mb: 1 }}>
+            <InputLabel id="time">Time of the day</InputLabel>
+            <Select
+              labelId="time"
+              id="time"
+              name="time"
+              value={formik.values.time}
+              label="Time of the day"
+              onChange={formik.handleChange}
+            >
+              <MenuItem value={'anytime'}>Anytime</MenuItem>
+              <MenuItem value={'morning'}>Morning</MenuItem>
+              <MenuItem value={'afternoon'}>Afternoon</MenuItem>
+              <MenuItem value={'evening'}>Evening</MenuItem>
+            </Select>
+          </FormControl>
+        </Box>
+
+        <ColorSelect
+          color={formik.values.color}
+          onChange={(value) => {
+            formik.setFieldValue('color', value);
+          }}
+        />
+
         <Button
           type="submit"
           variant="contained"
@@ -88,7 +93,7 @@ const AddHabitContent = () => {
             position: 'absolute',
             bottom: '0',
             left: '1rem',
-            width: '90%'
+            right: '1rem'
           }}
         >
           Add new habit

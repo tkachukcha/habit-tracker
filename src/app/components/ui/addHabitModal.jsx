@@ -17,16 +17,19 @@ const closeBtnStyle = {
 
 const modalStyle = {
   position: 'absolute',
-  top: '1rem',
-  left: '5%',
-  right: '5%',
-  bottom: '1rem',
+  width: { xs: '90vw', sm: '400px' },
+  height: '90vh',
+  top: 0,
+  left: 0,
+  right: 0,
+  bottom: 0,
   bgcolor: 'background.paper',
   border: '2px solid #000',
   boxShadow: 24,
   p: 2,
   outline: 0,
-  borderRadius: 3
+  borderRadius: 3,
+  m: 'auto'
 };
 
 const AddHabitModal = ({ onClose, open }) => {

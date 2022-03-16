@@ -9,7 +9,8 @@ const ColoredCircle = ({ color, size }) => {
         backgroundColor: color,
         width: size,
         height: size,
-        borderRadius: '50%'
+        borderRadius: '50%',
+        boxShadow: 2
       }}
     ></Box>
   );
