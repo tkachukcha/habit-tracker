@@ -20,12 +20,12 @@ const closeBtnStyle = {
 
 const modalStyle = {
   position: 'absolute',
-  width: { xs: '80vw', sm: '50vw', md: '300px' },
-  height: '50vh',
-  top: 0,
+  width: { xs: '250px', md: '300px' },
+  height: 'max-content',
+  top: { xs: 0, md: '30vh' },
   left: 0,
   right: 0,
-  bottom: 0,
+  bottom: { xs: 0, md: 'auto' },
   bgcolor: 'background.paper',
   border: '2px solid #000',
   boxShadow: 24,
@@ -60,7 +60,7 @@ const ColorSelectModal = ({ onClose, open, onChange }) => {
               mt: 1,
               display: 'flex',
               flexWrap: 'wrap',
-              justifyContent: 'space-between'
+              justifyContent: 'center'
             }}
           >
             {colors.map((color, ind) => (
@@ -71,7 +71,8 @@ const ColorSelectModal = ({ onClose, open, onChange }) => {
                   onChange(color);
                   onClose();
                 }}
-                size="40px"
+                size={{ xs: '40px', md: '45px' }}
+                margin={{ xs: 0.8, md: 1 }}
               />
             ))}
           </Box>
