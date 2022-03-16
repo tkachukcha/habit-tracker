@@ -11,6 +11,7 @@ import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
 import ColorSelect from './colorSelect';
+import IconSelect from './iconSelect';
 
 const AddHabitContent = () => {
   const formik = useFormik({
@@ -81,6 +82,13 @@ const AddHabitContent = () => {
           color={formik.values.color}
           onChange={(value) => {
             formik.setFieldValue('color', value);
+          }}
+        />
+
+        <IconSelect
+          icon={formik.values.icon}
+          onChange={(value) => {
+            formik.setFieldValue('icon', value);
           }}
         />
 
