@@ -34,7 +34,13 @@ const ColorSelect = ({ color, onChange }) => {
           width: '25%'
         }}
       >
-        <ColoredCircle color={color} size="50px" onClick={handleOpen} />
+        <ColoredCircle
+          color={color}
+          size="50px"
+          onClick={() => {
+            handleOpen();
+          }}
+        />
       </Box>
       <ColorSelectModal onClose={handleClose} open={open} onChange={onChange} />
     </Box>

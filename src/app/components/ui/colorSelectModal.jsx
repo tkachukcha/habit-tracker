@@ -6,7 +6,7 @@ import Backdrop from '@mui/material/Backdrop';
 import Fade from '@mui/material/Fade';
 import IconButton from '@mui/material/IconButton';
 import CloseIcon from '@mui/icons-material/Close';
-import ColoredCircleBtn from '../common/coloredCircleBtn';
+import ColoredCircle from '../common/coloredCircle';
 import Divider from '@mui/material/Divider';
 import Typography from '@mui/material/Typography';
 import colors from '../../utils/colors';
@@ -36,9 +36,6 @@ const modalStyle = {
 };
 
 const ColorSelectModal = ({ onClose, open, onChange }) => {
-  const handleColorChange = (color) => {
-    onChange(color);
-  };
   return (
     <Modal
       open={open}
@@ -67,11 +64,14 @@ const ColorSelectModal = ({ onClose, open, onChange }) => {
             }}
           >
             {colors.map((color, ind) => (
-              <ColoredCircleBtn
+              <ColoredCircle
                 key={`color-${ind}`}
                 color={color}
-                onColorChoice={handleColorChange}
-                onClose={onClose}
+                onClick={() => {
+                  onChange(color);
+                  onClose();
+                }}
+                size="40px"
               />
             ))}
           </Box>
