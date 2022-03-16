@@ -1,11 +1,11 @@
 import React from 'react';
 import Box from '@mui/material/Box';
 import PropTypes from 'prop-types';
-
+import ButtonBase from '@mui/material/ButtonBase';
 const ColoredCircle = ({ color, size, onClick, margin }) => {
   return (
     <Box
-      component="buttonbase"
+      component={ButtonBase}
       sx={{
         backgroundColor: color,
         width: size,
