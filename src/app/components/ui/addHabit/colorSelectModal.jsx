@@ -6,10 +6,10 @@ import Backdrop from '@mui/material/Backdrop';
 import Fade from '@mui/material/Fade';
 import IconButton from '@mui/material/IconButton';
 import CloseIcon from '@mui/icons-material/Close';
-import ColoredCircle from '../common/coloredCircle';
+import ColoredCircle from '../../common/coloredCircle';
 import Divider from '@mui/material/Divider';
 import Typography from '@mui/material/Typography';
-import colors from '../../utils/colors';
+import colors from '../../../utils/colors';
 
 const closeBtnStyle = {
   position: 'absolute',

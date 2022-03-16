@@ -1,11 +1,10 @@
 import React from 'react';
 import Button from '@mui/material/Button';
-import ColoredCircle from '../common/coloredCircle';
 import Box from '@mui/material/Box';
 import PropTypes from 'prop-types';
-import ColorSelectModal from './colorSelectModal';
+import IconSelectModal from './iconSelectModal';
 
-const ColorSelect = ({ color, onChange }) => {
+const IconSelect = ({ icon, onChange }) => {
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
@@ -24,7 +23,7 @@ const ColorSelect = ({ color, onChange }) => {
         variant="outlined"
         sx={{ width: '70%', p: 1.5, color: 'white', borderColor: 'gray' }}
       >
-        Choose color...
+        Choose icon...
       </Button>
       <Box
         sx={{
@@ -34,21 +33,15 @@ const ColorSelect = ({ color, onChange }) => {
           width: '25%'
         }}
       >
-        <ColoredCircle
-          color={color}
-          size="50px"
-          onClick={() => {
-            handleOpen();
-          }}
-        />
+        {/* <ColoredCircle color={color} size="50px" onClick={handleOpen} /> */}
       </Box>
-      <ColorSelectModal onClose={handleClose} open={open} onChange={onChange} />
+      <IconSelectModal onClose={handleClose} open={open} onChange={onChange} />
     </Box>
   );
 };
-ColorSelect.propTypes = {
-  color: PropTypes.string,
+IconSelect.propTypes = {
+  icon: PropTypes.string,
   onChange: PropTypes.func
 };
 
-export default ColorSelect;
+export default IconSelect;
