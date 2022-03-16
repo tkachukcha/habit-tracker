@@ -1,7 +1,7 @@
 import React from 'react';
 import Habit from '../common/habit';
 import Box from '@mui/material/Box';
-import { icons } from '../../utils/icons';
+import icons from '../../utils/icons';
 
 const HabitList = () => {
   const habits = [

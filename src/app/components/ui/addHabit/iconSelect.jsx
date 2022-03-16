@@ -3,11 +3,14 @@ import Button from '@mui/material/Button';
 import Box from '@mui/material/Box';
 import PropTypes from 'prop-types';
 import IconSelectModal from './iconSelectModal';
+import withIcon from '../../common/withIcon';
+import icons from '../../../utils/icons';
 
-const IconSelect = ({ icon, onChange }) => {
+const IconSelect = ({ icon, color, onChange }) => {
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
+  const IconWithProps = icon ? withIcon(icons[icon].component) : null;
   return (
     <Box
       sx={{
@@ -33,7 +36,7 @@ const IconSelect = ({ icon, onChange }) => {
           width: '25%'
         }}
       >
-        {/* <ColoredCircle color={color} size="50px" onClick={handleOpen} /> */}
+        {icon && <IconWithProps fontSize="large" sx={{ color }} />}
       </Box>
       <IconSelectModal onClose={handleClose} open={open} onChange={onChange} />
     </Box>
@@ -41,6 +44,7 @@ const IconSelect = ({ icon, onChange }) => {
 };
 IconSelect.propTypes = {
   icon: PropTypes.string,
+  color: PropTypes.string,
   onChange: PropTypes.func
 };
 

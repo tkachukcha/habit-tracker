@@ -87,6 +87,7 @@ const AddHabitContent = () => {
 
         <IconSelect
           icon={formik.values.icon}
+          color={formik.values.color}
           onChange={(value) => {
             formik.setFieldValue('icon', value);
           }}

@@ -8,6 +8,8 @@ import IconButton from '@mui/material/IconButton';
 import CloseIcon from '@mui/icons-material/Close';
 import Divider from '@mui/material/Divider';
 import Typography from '@mui/material/Typography';
+import icons from '../../../utils/icons';
+import withIcon from '../../common/withIcon';
 
 const closeBtnStyle = {
   position: 'absolute',
@@ -19,7 +21,7 @@ const closeBtnStyle = {
 const modalStyle = {
   position: 'absolute',
   width: { xs: '80vw', sm: '50vw', md: '300px' },
-  height: '50vh',
+  height: 'min-content',
   top: 0,
   left: 0,
   right: 0,
@@ -34,9 +36,6 @@ const modalStyle = {
 };
 
 const IconSelectModal = ({ onClose, open, onChange }) => {
-  const handleColorChange = (color) => {
-    onChange(color);
-  };
   return (
     <Modal
       open={open}
@@ -64,14 +63,24 @@ const IconSelectModal = ({ onClose, open, onChange }) => {
               justifyContent: 'space-between'
             }}
           >
-            {/* {colors.map((color, ind) => (
-              <ColoredCircleBtn
-                key={`color-${ind}`}
-                color={color}
-                onColorChoice={handleColorChange}
-                onClose={onClose}
-              />
-            ))} */}
+            {/* {Object.keys(icons).map((icon, ind) => {
+              return <p key={ind}>{icons[icon].name}</p>;
+            })} */}
+            {Object.keys(icons).map((icon, ind) => {
+              const IconWithProps = withIcon(icons[icon].component);
+
+              return (
+                <IconButton
+                  key={`icon-${ind}`}
+                  onClick={() => {
+                    onChange(icons[icon].name);
+                    onClose();
+                  }}
+                >
+                  <IconWithProps fontSize="large" color="white" sx={{}} />
+                </IconButton>
+              );
+            })}
           </Box>
         </Box>
       </Fade>
@@ -79,7 +88,7 @@ const IconSelectModal = ({ onClose, open, onChange }) => {
   );
 };
 IconSelectModal.propTypes = {
-  color: PropTypes.string,
+  icon: PropTypes.object,
   onClose: PropTypes.func.isRequired,
   onChange: PropTypes.func.isRequired,
   open: PropTypes.bool.isRequired

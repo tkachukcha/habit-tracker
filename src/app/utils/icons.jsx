@@ -40,7 +40,7 @@ import IcecreamIcon from '@mui/icons-material/Icecream';
 import SpaIcon from '@mui/icons-material/Spa';
 import MonitorHeartIcon from '@mui/icons-material/MonitorHeart';
 
-export const icons = {
+const icons = {
   meditation: {
     name: 'meditation',
     component: SelfImprovementIcon
@@ -202,3 +202,5 @@ export const icons = {
     component: MonitorHeartIcon
   }
 };
+
+export default icons;
