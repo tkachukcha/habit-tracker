@@ -12,3 +12,10 @@
 //   "gray": #5b7e83,
 //   "light-blue": #77e7fc,
 //   "brightdark": #1c1b25);
+
+
+// Remove blue autofill in textfield
+.css-p51h6s-MuiInputBase-input-MuiOutlinedInput-input:-webkit-autofill {
+  -webkit-box-shadow: none !important;
+  box-shadow: none !important;
+}

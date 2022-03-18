@@ -36,7 +36,7 @@ const ColorSelect = ({ color, onChange }) => {
       >
         <ColoredCircle
           color={color}
-          size="50px"
+          size="40px"
           onClick={() => {
             handleOpen();
           }}

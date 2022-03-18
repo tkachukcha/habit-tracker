@@ -42,14 +42,14 @@ const AddHabitContent = () => {
         sx={{ mt: 1 }}
       >
         <Box
-          sx={{
-            display: 'flex',
-            flexDirection: { xs: 'column', sm: 'row' },
-            justifyContent: 'space-between'
-          }}
+        // sx={{
+        //   display: 'flex',
+        //   flexDirection: { xs: 'column', sm: 'row' },
+        //   justifyContent: 'space-between'
+        // }}
         >
           <TextField
-            sx={{ width: { xs: '100%', sm: '49%' } }}
+            sx={{ width: '100%' }}
             margin="normal"
             required
             id="habitName"
@@ -60,7 +60,7 @@ const AddHabitContent = () => {
             error={formik.touched.habitName && Boolean(formik.errors.habitName)}
             helperText={formik.touched.habitName && formik.errors.habitName}
           />
-          <FormControl sx={{ width: { xs: '100%', sm: '49%' }, mt: 2, mb: 1 }}>
+          <FormControl sx={{ width: '100%', mt: 2, mb: 1 }}>
             <InputLabel id="time">Time of the day</InputLabel>
             <Select
               labelId="time"
@@ -96,13 +96,15 @@ const AddHabitContent = () => {
         <Button
           type="submit"
           variant="contained"
+          size="large"
           sx={{
             mt: 3,
-            mb: 2,
-            position: 'absolute',
-            bottom: '0',
-            left: '1rem',
-            right: '1rem'
+            mb: 1,
+            width: '100%'
+            // position: 'absolute',
+            // bottom: '0',
+            // left: '1rem',
+            // right: '1rem'
           }}
         >
           Add new habit

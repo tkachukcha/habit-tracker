@@ -36,7 +36,7 @@ const IconSelect = ({ icon, color, onChange }) => {
           width: '25%'
         }}
       >
-        {icon && <IconWithProps fontSize="large" sx={{ color }} />}
+        {icon && <IconWithProps sx={{ color, fontSize: '45px' }} />}
       </Box>
       <IconSelectModal onClose={handleClose} open={open} onChange={onChange} />
     </Box>

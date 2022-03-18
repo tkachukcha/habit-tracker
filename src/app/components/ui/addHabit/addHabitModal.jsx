@@ -17,8 +17,8 @@ const closeBtnStyle = {
 
 const modalStyle = {
   position: 'absolute',
-  width: { xs: '90vw', sm: '400px' },
-  height: '90vh',
+  width: { xs: '300px', sm: '400px' },
+  height: 'max-content',
   top: 0,
   left: 0,
   right: 0,
