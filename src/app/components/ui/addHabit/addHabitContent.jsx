@@ -12,8 +12,11 @@ import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
 import ColorSelect from './colorSelect';
 import IconSelect from './iconSelect';
+import { useDispatch } from 'react-redux';
+import { createHabit } from '../../../store/habits';
 
 const AddHabitContent = () => {
+  const dispatch = useDispatch();
   const formik = useFormik({
     initialValues: {
       habitName: '',
@@ -26,6 +29,7 @@ const AddHabitContent = () => {
     }),
     onSubmit: (values) => {
       console.log(values);
+      dispatch(createHabit(values));
     }
   });
 

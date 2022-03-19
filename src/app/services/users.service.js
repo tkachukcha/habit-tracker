@@ -11,13 +11,13 @@ const usersService = {
     );
     return data;
   },
-  getUser: async () => {
+  get: async () => {
     const { data } = await httpService.get(
       usersEndPoint + localStorageService.getUserIdToken()
     );
     return data;
   },
-  updateUser: async (payload) => {
+  update: async (payload) => {
     const { data } = await httpService.patch(
       usersEndPoint + payload._id,
       payload

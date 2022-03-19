@@ -44,6 +44,7 @@ const usersSlice = createSlice({
     },
     userRequested: (state) => {
       state.isLoading = true;
+      state.error = null;
     },
     userRequestSuccess: (state, action) => {
       state.entities = action.payload;
@@ -54,13 +55,20 @@ const usersSlice = createSlice({
       state.error = action.payload;
       state.isLoading = false;
     },
-    userCreated: (state, action) => {
+    userCreationSuccess: (state, action) => {
       state.entities = action.payload;
       state.isLoading = false;
       state.dataLoaded = true;
     },
-    userCreationFailed: (state, action) => {
-      state.error = action.payload;
+    userUpdateRequested: (state) => {
+      state.error = null;
+      state.isLoading = true;
+      if (!state.entities.habits) {
+        state.entities.habits = [];
+      }
+    },
+    userUpdateSuccess: (state, action) => {
+      state.entities.habits = action.payload;
       state.isLoading = false;
     }
   }
@@ -75,16 +83,15 @@ const {
   userRequested,
   userRequestSuccess,
   userRequestFailed,
-  userCreated,
-  userCreationFailed
+  userCreationSuccess,
+  userUpdateRequested,
+  userUpdateSuccess
 } = actions;
-
-const userCreationRequested = createAction('users/userCreationRequested');
 
 export const getUserData = () => async (dispatch) => {
   dispatch(userRequested());
   try {
-    const data = await usersService.getUser();
+    const data = await usersService.get();
     dispatch(userRequestSuccess(data));
   } catch (error) {
     dispatch(userRequestFailed(error.message));
@@ -111,16 +118,6 @@ export const register = (payload) => async (dispatch) => {
   }
 };
 
-export const createUser = (payload) => async (dispatch) => {
-  dispatch(userCreationRequested());
-  try {
-    const data = await usersService.create(payload);
-    dispatch(userCreated(data));
-  } catch (error) {
-    dispatch(userCreationFailed(error.message));
-  }
-};
-
 export const login =
   ({ payload, redirect }) =>
   async (dispatch) => {
@@ -140,6 +137,28 @@ export const logout = () => (dispatch) => {
   dispatch(userLoggedOut());
   localStorageService.removeAuthData();
   history.push('/');
+};
+
+export const createUser = (payload) => async (dispatch) => {
+  dispatch(userRequested());
+  try {
+    const data = await usersService.create(payload);
+    dispatch(userCreationSuccess(data));
+  } catch (error) {
+    dispatch(userRequestFailed(error.message));
+  }
+};
+
+export const updateUser = (payload) => async (state, dispatch) => {
+  dispatch(userUpdateRequested());
+  try {
+    const newHabits = state.entities.habits;
+    newHabits.push(payload);
+    const { habits } = await usersService.update({ habits: newHabits });
+    dispatch(userUpdateSuccess(habits));
+  } catch (error) {
+    dispatch(userRequestFailed(error.message));
+  }
 };
 
 export const getIsLoggedIn = () => (state) => state.users.isLoggedIn;
