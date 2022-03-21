@@ -1,14 +1,14 @@
 import { createAction, createSlice, nanoid } from '@reduxjs/toolkit';
 import habitService from '../services/habit.service';
 import localStorageService from '../services/localStorage.service';
-import { updateUserHabits } from './users';
 
 const habitsSlice = createSlice({
   name: 'habits',
   initialState: {
     entities: [],
     isLoading: false,
-    error: null
+    error: null,
+    dataLoaded: false
   },
   reducers: {
     habitsRequested: (state) => {
@@ -18,6 +18,7 @@ const habitsSlice = createSlice({
     habitsRequestSuccess: (state, action) => {
       state.entities = action.payload;
       state.isLoading = false;
+      state.dataLoaded = true;
     },
     habitsRequestFailed: (state, action) => {
       state.error = action.payload;
@@ -58,13 +59,12 @@ export const createHabit = (payload) => async (dispatch) => {
     };
     const data = await habitService.create(habit);
     dispatch(habitCreationSuccess(habit));
-    dispatch(updateUserHabits(habit._id));
   } catch (error) {
     dispatch(habitCreationFailed(error.message));
   }
 };
 
-export const getUserHabits = () => async (dispatch, getState) => {
+export const getUserHabits = () => async (dispatch) => {
   dispatch(habitsRequested);
   const userId = localStorageService.getUserIdToken();
   try {
@@ -77,5 +77,7 @@ export const getUserHabits = () => async (dispatch, getState) => {
     dispatch(habitsRequestFailed(error.message));
   }
 };
+
+export const getHabitDataStatus = () => (state) => state.habits.dataLoaded;
 
 export default habitsReducer;

@@ -60,17 +60,6 @@ const usersSlice = createSlice({
       state.entities = action.payload;
       state.isLoading = false;
       state.dataLoaded = true;
-    },
-    userHabitUpdateRequested: (state) => {
-      state.error = null;
-      state.isLoading = true;
-      if (!state.entities.habits) {
-        state.entities.habits = [];
-      }
-    },
-    userHabitUpdateSuccess: (state, action) => {
-      state.entities.habits = action.payload;
-      state.isLoading = false;
     }
   }
 });
@@ -84,9 +73,7 @@ const {
   userRequested,
   userRequestSuccess,
   userRequestFailed,
-  userCreationSuccess,
-  userHabitUpdateRequested,
-  userHabitUpdateSuccess
+  userCreationSuccess
 } = actions;
 
 export const getUserData = () => async (dispatch) => {
@@ -151,29 +138,12 @@ export const createUser = (payload) => async (dispatch) => {
   }
 };
 
-export const updateUserHabits = (payload) => async (dispatch, getState) => {
-  dispatch(userHabitUpdateRequested());
-  const { users } = getState();
-  try {
-    const newHabits = [...users.entities.habits];
-    newHabits.push(payload);
-    const data = await usersService.update({
-      _id: localStorageService.getUserIdToken(),
-      habits: { habits: newHabits }
-    });
-    console.log(data, newHabits);
-    dispatch(userHabitUpdateSuccess(newHabits));
-  } catch (error) {
-    dispatch(userRequestFailed(error.message));
-  }
-};
-
 export const getIsLoggedIn = () => (state) => state.users.isLoggedIn;
 
 export const getUser = () => (state) => state.users.entities;
 
 export const getIsLoading = () => (state) => state.users.isLoading;
 
-export const getDataStatus = () => (state) => state.users.dataLoaded;
+export const getUserDataStatus = () => (state) => state.users.dataLoaded;
 
 export default usersReducer;

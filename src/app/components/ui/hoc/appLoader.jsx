@@ -3,28 +3,35 @@ import PropTypes from 'prop-types';
 import { useSelector, useDispatch } from 'react-redux';
 import {
   getIsLoggedIn,
-  getDataStatus,
+  getUserDataStatus,
   getUserData
 } from '../../../store/users';
 import CircularProgress from '@mui/material/CircularProgress';
 import Box from '@mui/material/Box';
-import { getUserHabits } from '../../../store/habits';
+import { getHabitDataStatus } from '../../../store/habits';
 
 const AppLoader = ({ children }) => {
   const isLoggedIn = useSelector(getIsLoggedIn());
-  const dataStatus = useSelector(getDataStatus());
+  const userDataStatus = useSelector(getUserDataStatus());
+  const habitDataStatus = useSelector(getHabitDataStatus());
+
+  console.log(isLoggedIn, habitDataStatus, userDataStatus);
+  console.log(isLoggedIn && !habitDataStatus && !userDataStatus);
+
   const dispatch = useDispatch();
   useEffect(() => {
     if (isLoggedIn) {
       dispatch(getUserData());
     }
   }, []);
-  if (isLoggedIn && !dataStatus) {
+  if ((isLoggedIn && !habitDataStatus) || !userDataStatus) {
+    // if (!habitDataStatus || !userDataStatus) {
     return (
       <Box sx={{ margin: '40vh auto' }}>
         <CircularProgress color="primary" />
       </Box>
     );
+    // }
   }
   return children;
 };
