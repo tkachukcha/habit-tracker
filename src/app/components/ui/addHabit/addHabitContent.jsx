@@ -28,7 +28,6 @@ const AddHabitContent = () => {
       habitName: yup.string().required('Required')
     }),
     onSubmit: (values) => {
-      console.log(values);
       dispatch(createHabit(values));
     }
   });

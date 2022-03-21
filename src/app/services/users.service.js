@@ -20,7 +20,7 @@ const usersService = {
   update: async (payload) => {
     const { data } = await httpService.patch(
       usersEndPoint + payload._id,
-      payload
+      payload.habits
     );
     return data;
   }

@@ -60,14 +60,14 @@ const usersSlice = createSlice({
       state.isLoading = false;
       state.dataLoaded = true;
     },
-    userUpdateRequested: (state) => {
+    userHabitUpdateRequested: (state) => {
       state.error = null;
       state.isLoading = true;
       if (!state.entities.habits) {
         state.entities.habits = [];
       }
     },
-    userUpdateSuccess: (state, action) => {
+    userHabitUpdateSuccess: (state, action) => {
       state.entities.habits = action.payload;
       state.isLoading = false;
     }
@@ -84,8 +84,8 @@ const {
   userRequestSuccess,
   userRequestFailed,
   userCreationSuccess,
-  userUpdateRequested,
-  userUpdateSuccess
+  userHabitUpdateRequested,
+  userHabitUpdateSuccess
 } = actions;
 
 export const getUserData = () => async (dispatch) => {
@@ -149,13 +149,18 @@ export const createUser = (payload) => async (dispatch) => {
   }
 };
 
-export const updateUser = (payload) => async (state, dispatch) => {
-  dispatch(userUpdateRequested());
+export const updateUserHabits = (payload) => async (dispatch, getState) => {
+  dispatch(userHabitUpdateRequested());
+  const { users } = getState();
   try {
-    const newHabits = state.entities.habits;
+    const newHabits = [...users.entities.habits];
     newHabits.push(payload);
-    const { habits } = await usersService.update({ habits: newHabits });
-    dispatch(userUpdateSuccess(habits));
+    const data = await usersService.update({
+      _id: localStorageService.getUserIdToken(),
+      habits: { habits: newHabits }
+    });
+    console.log(data, newHabits);
+    dispatch(userHabitUpdateSuccess(newHabits));
   } catch (error) {
     dispatch(userRequestFailed(error.message));
   }

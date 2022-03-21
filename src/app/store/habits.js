@@ -1,7 +1,7 @@
 import { createAction, createSlice, nanoid } from '@reduxjs/toolkit';
 import habitService from '../services/habit.service';
 import localStorageService from '../services/localStorage.service';
-import { updateUser } from './users';
+import { updateUserHabits } from './users';
 
 const habitsSlice = createSlice({
   name: 'habits',
@@ -24,7 +24,9 @@ const habitsSlice = createSlice({
       state.isLoading = false;
     },
     habitCreationSuccess: (state, action) => {
-      state.entities.push(action.payload);
+      const newEntities = [...state.entities];
+      newEntities.push(action.payload);
+      state.entities = [...newEntities];
     },
     habitCreationFailed: (state, action) => {
       state.error = action.payload;
@@ -56,7 +58,7 @@ export const createHabit = (payload) => async (dispatch) => {
     };
     const data = await habitService.create(habit);
     dispatch(habitCreationSuccess(habit));
-    dispatch(updateUser(habit._id));
+    dispatch(updateUserHabits(habit._id));
   } catch (error) {
     dispatch(habitCreationFailed(error.message));
   }
