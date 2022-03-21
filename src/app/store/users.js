@@ -3,6 +3,7 @@ import localStorageService from '../services/localStorage.service';
 import authService from '../services/auth.service';
 import history from '../utils/history';
 import usersService from '../services/users.service';
+import { getUserHabits } from './habits';
 
 const initialState = localStorageService.getAccessToken()
   ? {
@@ -93,6 +94,7 @@ export const getUserData = () => async (dispatch) => {
   try {
     const data = await usersService.get();
     dispatch(userRequestSuccess(data));
+    dispatch(getUserHabits());
   } catch (error) {
     dispatch(userRequestFailed(error.message));
   }

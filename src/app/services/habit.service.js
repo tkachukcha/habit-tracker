@@ -3,6 +3,10 @@ import httpService from './http.service';
 const habitEndPoint = 'habit/';
 
 const habitService = {
+  fetchAll: async () => {
+    const { data } = await httpService.get(habitEndPoint);
+    return data;
+  },
   create: async (payload) => {
     const { data } = await httpService.put(
       habitEndPoint + payload._id,

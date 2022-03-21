@@ -64,4 +64,18 @@ export const createHabit = (payload) => async (dispatch) => {
   }
 };
 
+export const getUserHabits = () => async (dispatch, getState) => {
+  dispatch(habitsRequested);
+  const userId = localStorageService.getUserIdToken();
+  try {
+    const data = await habitService.fetchAll();
+    const userHabits = Object.values(data).filter(
+      (habit) => habit.userId === userId && habit.isActive
+    );
+    dispatch(habitsRequestSuccess(userHabits));
+  } catch (error) {
+    dispatch(habitsRequestFailed(error.message));
+  }
+};
+
 export default habitsReducer;

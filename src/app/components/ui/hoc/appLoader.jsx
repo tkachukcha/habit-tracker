@@ -8,6 +8,7 @@ import {
 } from '../../../store/users';
 import CircularProgress from '@mui/material/CircularProgress';
 import Box from '@mui/material/Box';
+import { getUserHabits } from '../../../store/habits';
 
 const AppLoader = ({ children }) => {
   const isLoggedIn = useSelector(getIsLoggedIn());
