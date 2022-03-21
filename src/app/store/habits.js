@@ -56,7 +56,7 @@ export const createHabit = (payload) => async (dispatch) => {
     };
     const data = await habitService.create(habit);
     dispatch(habitCreationSuccess(habit));
-    // dispatch(updateUser(habit._id));
+    dispatch(updateUser(habit._id));
   } catch (error) {
     dispatch(habitCreationFailed(error.message));
   }
