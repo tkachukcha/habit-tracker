@@ -15,9 +15,6 @@ const AppLoader = ({ children }) => {
   const userDataStatus = useSelector(getUserDataStatus());
   const habitDataStatus = useSelector(getHabitDataStatus());
 
-  console.log(isLoggedIn, habitDataStatus, userDataStatus);
-  console.log(isLoggedIn && !habitDataStatus && !userDataStatus);
-
   const dispatch = useDispatch();
   useEffect(() => {
     if (isLoggedIn) {
@@ -25,13 +22,11 @@ const AppLoader = ({ children }) => {
     }
   }, []);
   if ((isLoggedIn && !habitDataStatus) || !userDataStatus) {
-    // if (!habitDataStatus || !userDataStatus) {
     return (
       <Box sx={{ margin: '40vh auto' }}>
         <CircularProgress color="primary" />
       </Box>
     );
-    // }
   }
   return children;
 };
