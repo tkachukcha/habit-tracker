@@ -1,6 +1,7 @@
 import React from 'react';
 import Button from '@mui/material/Button';
 import Box from '@mui/material/Box';
+import IconButton from '@mui/material/IconButton';
 import PropTypes from 'prop-types';
 import IconSelectModal from './iconSelectModal';
 import withIcon from '../../common/withIcon';
@@ -38,7 +39,11 @@ const IconSelect = ({ icon, color, onChange }) => {
           width: '25%'
         }}
       >
-        {icon && <IconWithProps sx={{ color, fontSize: '45px' }} />}
+        {icon && (
+          <IconButton onClick={handleOpen}>
+            <IconWithProps sx={{ color, fontSize: '45px' }} />
+          </IconButton>
+        )}
       </Box>
       <IconSelectModal onClose={handleClose} open={open} onChange={onChange} />
     </Box>
