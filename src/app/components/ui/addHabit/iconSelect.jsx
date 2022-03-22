@@ -10,7 +10,9 @@ const IconSelect = ({ icon, color, onChange }) => {
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
-  const IconWithProps = icon ? withIcon(icons[icon].component) : null;
+  const IconWithProps = icon
+    ? withIcon(icons.find((i) => i.name === icon).component)
+    : null;
   return (
     <Box
       sx={{

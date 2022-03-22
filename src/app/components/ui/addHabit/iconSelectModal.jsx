@@ -63,17 +63,14 @@ const IconSelectModal = ({ onClose, open, onChange }) => {
               justifyContent: 'space-between'
             }}
           >
-            {/* {Object.keys(icons).map((icon, ind) => {
-              return <p key={ind}>{icons[icon].name}</p>;
-            })} */}
-            {Object.keys(icons).map((icon, ind) => {
-              const IconWithProps = withIcon(icons[icon].component);
+            {icons.map((icon) => {
+              const IconWithProps = withIcon(icon.component);
 
               return (
                 <IconButton
-                  key={`icon-${ind}`}
+                  key={`icon-${icon.name}`}
                   onClick={() => {
-                    onChange(icons[icon].name);
+                    onChange(icon.name);
                     onClose();
                   }}
                 >
