@@ -48,7 +48,7 @@ const AddHabitModal = ({ onClose, open }) => {
           <IconButton sx={closeBtnStyle} onClick={onClose} color="primary">
             <CloseIcon sx={{ fontSize: '1.7rem' }} />
           </IconButton>
-          <AddHabitContent />
+          <AddHabitContent onClose={onClose} />
         </Box>
       </Fade>
     </Modal>

@@ -14,8 +14,9 @@ import ColorSelect from './colorSelect';
 import IconSelect from './iconSelect';
 import { useDispatch } from 'react-redux';
 import { createHabit } from '../../../store/habits';
+import PropTypes from 'prop-types';
 
-const AddHabitContent = () => {
+const AddHabitContent = ({ onClose }) => {
   const dispatch = useDispatch();
   const formik = useFormik({
     initialValues: {
@@ -30,6 +31,7 @@ const AddHabitContent = () => {
     }),
     onSubmit: (values) => {
       dispatch(createHabit(values));
+      onClose();
     }
   });
 
@@ -112,6 +114,9 @@ const AddHabitContent = () => {
       </Box>
     </>
   );
+};
+AddHabitContent.propTypes = {
+  onClose: PropTypes.func.isRequired
 };
 
 export default AddHabitContent;
