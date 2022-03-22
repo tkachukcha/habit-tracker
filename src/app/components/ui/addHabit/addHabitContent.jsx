@@ -19,13 +19,14 @@ const AddHabitContent = () => {
   const dispatch = useDispatch();
   const formik = useFormik({
     initialValues: {
-      habitName: '',
+      name: '',
       color: '#fff',
       time: 'anytime',
       icon: ''
     },
     validationSchema: yup.object({
-      habitName: yup.string().required('Required')
+      name: yup.string().required('Required'),
+      icon: yup.string().required('Required')
     }),
     onSubmit: (values) => {
       dispatch(createHabit(values));
@@ -55,13 +56,13 @@ const AddHabitContent = () => {
             sx={{ width: '100%' }}
             margin="normal"
             required
-            id="habitName"
+            id="name"
             label="Habit name"
-            name="habitName"
+            name="name"
             onChange={formik.handleChange}
-            value={formik.values.habitName}
-            error={formik.touched.habitName && Boolean(formik.errors.habitName)}
-            helperText={formik.touched.habitName && formik.errors.habitName}
+            value={formik.values.name}
+            error={formik.touched.name && Boolean(formik.errors.name)}
+            helperText={formik.touched.name && formik.errors.name}
           />
           <FormControl sx={{ width: '100%', mt: 2, mb: 1 }}>
             <InputLabel id="time">Time of the day</InputLabel>
@@ -104,10 +105,6 @@ const AddHabitContent = () => {
             mt: 3,
             mb: 1,
             width: '100%'
-            // position: 'absolute',
-            // bottom: '0',
-            // left: '1rem',
-            // right: '1rem'
           }}
         >
           Add new habit
