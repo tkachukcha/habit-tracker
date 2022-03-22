@@ -80,4 +80,6 @@ export const getUserHabits = () => async (dispatch) => {
 
 export const getHabitDataStatus = () => (state) => state.habits.dataLoaded;
 
+export const getHabits = () => (state) => state.habits.entities;
+
 export default habitsReducer;
