@@ -40,167 +40,167 @@ import IcecreamIcon from '@mui/icons-material/Icecream';
 import SpaIcon from '@mui/icons-material/Spa';
 import MonitorHeartIcon from '@mui/icons-material/MonitorHeart';
 
-const icons = {
-  meditation: {
+const icons = [
+  {
     name: 'meditation',
     component: SelfImprovementIcon
   },
-  love: {
+  {
     name: 'love',
     component: FavoriteIcon
   },
-  running: {
+  {
     name: 'running',
     component: DirectionsRunIcon
   },
-  fitness: {
+  {
     name: 'fitness',
     component: FitnessCenterIcon
   },
-  reading: {
+  {
     name: 'reading',
     component: LocalLibraryIcon
   },
-  coding: {
+  {
     name: 'coding',
     component: CodeIcon
   },
-  water: {
+  {
     name: 'water',
     component: LocalDrinkIcon
   },
-  health: {
+  {
     name: 'health',
     component: HealthAndSafetyIcon
   },
-  gratitude: {
+  {
     name: 'gratitude',
     component: FavoriteBorderIcon
   },
-  bed: {
+  {
     name: 'bed',
     component: AirlineSeatIndividualSuiteIcon
   },
-  cleaning: {
+  {
     name: 'cleaning',
     component: CleaningServicesIcon
   },
-  moto: {
+  {
     name: 'moto',
     component: TwoWheelerIcon
   },
-  music: {
+  {
     name: 'music',
     component: MusicNoteIcon
   },
-  tennis: {
+  {
     name: 'tennis',
     component: SportsTennisIcon
   },
-  idea: {
+  {
     name: 'idea',
     component: LightbulbIcon
   },
-  bath: {
+  {
     name: 'bath',
     component: BathtubIcon
   },
-  coffee: {
+  {
     name: 'coffee',
     component: CoffeeIcon
   },
-  eye: {
+  {
     name: 'eye',
     component: RemoveRedEyeIcon
   },
-  alco: {
+  {
     name: 'alco',
     component: LiquorIcon
   },
-  laptop: {
+  {
     name: 'laptop',
     component: LaptopIcon
   },
-  finance: {
+  {
     name: 'finance',
     component: CreditCardIcon
   },
-  dollar: {
+  {
     name: 'dollar',
     component: AttachMoneyIcon
   },
-  learn: {
+  {
     name: 'learn',
     component: SchoolIcon
   },
-  walk: {
+  {
     name: 'walk',
     component: DirectionsWalkIcon
   },
-  sun: {
+  {
     name: 'sun',
     component: WbSunnyIcon
   },
-  pet: {
+  {
     name: 'pet',
     component: PetsIcon
   },
-  think: {
+  {
     name: 'think',
     component: PsychologyIcon
   },
-  pool: {
+  {
     name: 'pool',
     component: PoolIcon
   },
-  diary: {
+  {
     name: 'diary',
     component: DescriptionIcon
   },
-  sleep: {
+  {
     name: 'sleep',
     component: ModeNightIcon
   },
-  plan: {
+  {
     name: 'plan',
     component: ListAltIcon
   },
-  nophone: {
+  {
     name: 'nophone',
     component: PhonelinkEraseIcon
   },
-  talk: {
+  {
     name: 'talk',
     component: RecordVoiceOverIcon
   },
-  language: {
+  {
     name: 'language',
     component: TranslateIcon
   },
-  new: {
+  {
     name: 'new',
     component: FiberNewIcon
   },
-  social: {
+  {
     name: 'social',
     component: GroupIcon
   },
-  write: {
+  {
     name: 'write',
     component: CreateIcon
   },
-  sugar: {
+  {
     name: 'sugar',
     component: IcecreamIcon
   },
-  plant: {
+  {
     name: 'plant',
     component: SpaIcon
   },
-  cardio: {
+  {
     name: 'cardio',
     component: MonitorHeartIcon
   }
-};
+];
 
 export default icons;
