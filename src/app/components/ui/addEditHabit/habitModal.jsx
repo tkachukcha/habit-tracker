@@ -32,7 +32,7 @@ const modalStyle = {
   m: 'auto'
 };
 
-const HabitModal = ({ onClose, open }) => {
+const HabitModal = ({ type, onClose, open, initialValues }) => {
   return (
     <Modal
       open={open}
@@ -49,14 +49,9 @@ const HabitModal = ({ onClose, open }) => {
             <CloseIcon sx={{ fontSize: '1.7rem' }} />
           </IconButton>
           <HabitContent
-            title="Add Habit"
+            type={type}
             onClose={onClose}
-            initialValues={{
-              name: '',
-              color: '#fff',
-              time: 'anytime',
-              icon: ''
-            }}
+            initialValues={initialValues}
           />
         </Box>
       </Fade>
@@ -64,6 +59,8 @@ const HabitModal = ({ onClose, open }) => {
   );
 };
 HabitModal.propTypes = {
+  type: PropTypes.string.isRequired,
+  initialValues: PropTypes.object.isRequired,
   onClose: PropTypes.func.isRequired,
   open: PropTypes.bool.isRequired
 };

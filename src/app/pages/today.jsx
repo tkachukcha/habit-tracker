@@ -11,7 +11,17 @@ const Today = () => {
     <>
       <HabitList />
       <AddButton onOpen={handleOpen} />
-      <HabitModal onClose={handleClose} open={open} />
+      <HabitModal
+        type="add"
+        onClose={handleClose}
+        open={open}
+        initialValues={{
+          name: '',
+          color: '#fff',
+          time: 'anytime',
+          icon: ''
+        }}
+      />
     </>
   );
 };

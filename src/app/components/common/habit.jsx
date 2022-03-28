@@ -8,8 +8,12 @@ import icons from '../../utils/icons';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
 import IconButton from '@mui/material/IconButton';
 import Tooltip from '@mui/material/Tooltip';
+import HabitModal from '../ui/addEditHabit/habitModal';
 
 const Habit = ({ title, icon, streak, finished, color, daytime }) => {
+  const [open, setOpen] = React.useState(false);
+  const handleOpen = () => setOpen(true);
+  const handleClose = () => setOpen(false);
   const iconObj = icons.find((i) => i.name === icon);
   const IconWithProps = withIcon(iconObj.component);
   return (
@@ -40,10 +44,21 @@ const Habit = ({ title, icon, streak, finished, color, daytime }) => {
         </div>
       </Box>
       <Tooltip title="Edit">
-        <IconButton>
+        <IconButton onClick={handleOpen}>
           <MoreVertIcon />
         </IconButton>
       </Tooltip>
+      <HabitModal
+        type="edit"
+        open={open}
+        onClose={handleClose}
+        initialValues={{
+          name: title,
+          color: color,
+          time: daytime,
+          icon: icon
+        }}
+      />
     </Card>
   );
 };
