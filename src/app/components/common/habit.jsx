@@ -9,7 +9,7 @@ import MoreVertIcon from '@mui/icons-material/MoreVert';
 import IconButton from '@mui/material/IconButton';
 import Tooltip from '@mui/material/Tooltip';
 
-const Habit = ({ title, icon, streak, finished, color }) => {
+const Habit = ({ title, icon, streak, finished, color, daytime }) => {
   const iconObj = icons.find((i) => i.name === icon);
   const IconWithProps = withIcon(iconObj.component);
   return (
@@ -51,6 +51,7 @@ Habit.propTypes = {
   title: PropTypes.string,
   color: PropTypes.string,
   icon: PropTypes.string,
+  daytime: PropTypes.string,
   streak: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   finished: PropTypes.bool
 };

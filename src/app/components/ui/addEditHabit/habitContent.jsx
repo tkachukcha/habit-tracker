@@ -16,15 +16,10 @@ import { useDispatch } from 'react-redux';
 import { createHabit } from '../../../store/habits';
 import PropTypes from 'prop-types';
 
-const AddHabitContent = ({ onClose }) => {
+const HabitContent = ({ title, initialValues, onClose }) => {
   const dispatch = useDispatch();
   const formik = useFormik({
-    initialValues: {
-      name: '',
-      color: '#fff',
-      time: 'anytime',
-      icon: ''
-    },
+    initialValues: initialValues,
     validationSchema: yup.object({
       name: yup.string().required('Required'),
       icon: yup.string().required('Required')
@@ -38,7 +33,7 @@ const AddHabitContent = ({ onClose }) => {
   return (
     <>
       <Typography variant="h5" gutterBottom>
-        Add Habit
+        {title}
       </Typography>
       <Divider />
       <Box
@@ -47,13 +42,7 @@ const AddHabitContent = ({ onClose }) => {
         noValidate
         sx={{ mt: 1 }}
       >
-        <Box
-        // sx={{
-        //   display: 'flex',
-        //   flexDirection: { xs: 'column', sm: 'row' },
-        //   justifyContent: 'space-between'
-        // }}
-        >
+        <Box>
           <TextField
             sx={{ width: '100%' }}
             margin="normal"
@@ -115,8 +104,10 @@ const AddHabitContent = ({ onClose }) => {
     </>
   );
 };
-AddHabitContent.propTypes = {
-  onClose: PropTypes.func.isRequired
+HabitContent.propTypes = {
+  title: PropTypes.string.isRequired,
+  onClose: PropTypes.func.isRequired,
+  initialValues: PropTypes.object.isRequired
 };
 
-export default AddHabitContent;
+export default HabitContent;

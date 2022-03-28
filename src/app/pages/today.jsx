@@ -1,7 +1,7 @@
 import React from 'react';
 import AddButton from '../components/common/addButton';
 import HabitList from '../components/ui/habitList';
-import AddHabitModal from '../components/ui/addHabit/addHabitModal';
+import HabitModal from '../components/ui/addEditHabit/habitModal';
 
 const Today = () => {
   const [open, setOpen] = React.useState(false);
@@ -11,7 +11,7 @@ const Today = () => {
     <>
       <HabitList />
       <AddButton onOpen={handleOpen} />
-      <AddHabitModal onClose={handleClose} open={open} />
+      <HabitModal onClose={handleClose} open={open} />
     </>
   );
 };

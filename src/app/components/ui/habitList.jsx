@@ -16,6 +16,7 @@ const HabitList = () => {
             icon={habit.icon}
             color={habit.color}
             // streak={h.streak}
+            daytime={habit.time}
           />
         ))}
       </Box>

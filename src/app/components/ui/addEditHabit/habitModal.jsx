@@ -6,7 +6,7 @@ import Backdrop from '@mui/material/Backdrop';
 import Fade from '@mui/material/Fade';
 import IconButton from '@mui/material/IconButton';
 import CloseIcon from '@mui/icons-material/Close';
-import AddHabitContent from './addHabitContent';
+import HabitContent from './habitContent';
 
 const closeBtnStyle = {
   position: 'absolute',
@@ -32,7 +32,7 @@ const modalStyle = {
   m: 'auto'
 };
 
-const AddHabitModal = ({ onClose, open }) => {
+const HabitModal = ({ onClose, open }) => {
   return (
     <Modal
       open={open}
@@ -48,15 +48,24 @@ const AddHabitModal = ({ onClose, open }) => {
           <IconButton sx={closeBtnStyle} onClick={onClose} color="primary">
             <CloseIcon sx={{ fontSize: '1.7rem' }} />
           </IconButton>
-          <AddHabitContent onClose={onClose} />
+          <HabitContent
+            title="Add Habit"
+            onClose={onClose}
+            initialValues={{
+              name: '',
+              color: '#fff',
+              time: 'anytime',
+              icon: ''
+            }}
+          />
         </Box>
       </Fade>
     </Modal>
   );
 };
-AddHabitModal.propTypes = {
+HabitModal.propTypes = {
   onClose: PropTypes.func.isRequired,
   open: PropTypes.bool.isRequired
 };
 
-export default AddHabitModal;
+export default HabitModal;
