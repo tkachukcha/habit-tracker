@@ -4,7 +4,10 @@ import Typography from '@mui/material/Typography';
 
 const HabitName = ({ title }) => {
   return (
-    <Typography variant="h6" sx={{ fontWeight: 'bold' }}>
+    <Typography
+      variant="h6"
+      sx={{ fontWeight: 'bold', fontSize: { xs: '1.1rem', sm: '1.2rem' } }}
+    >
       {title}
     </Typography>
   );
