@@ -12,6 +12,7 @@ const HabitList = () => {
         {habits.map((habit) => (
           <Habit
             key={habit._id}
+            id={habit._id}
             title={habit.name}
             icon={habit.icon}
             color={habit.color}

@@ -10,7 +10,7 @@ import IconButton from '@mui/material/IconButton';
 import Tooltip from '@mui/material/Tooltip';
 import HabitModal from '../ui/addEditHabit/habitModal';
 
-const Habit = ({ title, icon, streak, finished, color, daytime }) => {
+const Habit = ({ id, title, icon, streak, finished, color, daytime }) => {
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
@@ -52,6 +52,7 @@ const Habit = ({ title, icon, streak, finished, color, daytime }) => {
         type="edit"
         open={open}
         onClose={handleClose}
+        id={id}
         initialValues={{
           name: title,
           color: color,
@@ -63,6 +64,7 @@ const Habit = ({ title, icon, streak, finished, color, daytime }) => {
   );
 };
 Habit.propTypes = {
+  id: PropTypes.string,
   title: PropTypes.string,
   color: PropTypes.string,
   icon: PropTypes.string,

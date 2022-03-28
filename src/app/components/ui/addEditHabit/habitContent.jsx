@@ -16,7 +16,7 @@ import { useDispatch } from 'react-redux';
 import { createHabit } from '../../../store/habits';
 import PropTypes from 'prop-types';
 
-const HabitContent = ({ type, initialValues, onClose }) => {
+const HabitContent = ({ id, type, initialValues, onClose }) => {
   const dispatch = useDispatch();
   const formik = useFormik({
     initialValues: initialValues,
@@ -28,7 +28,7 @@ const HabitContent = ({ type, initialValues, onClose }) => {
       if (type === 'add') {
         dispatch(createHabit(values));
       } else if (type === 'edit') {
-        console.log(values);
+        console.log({ id, values });
       }
       onClose();
     }
@@ -109,6 +109,7 @@ const HabitContent = ({ type, initialValues, onClose }) => {
   );
 };
 HabitContent.propTypes = {
+  id: PropTypes.string,
   type: PropTypes.string.isRequired,
   onClose: PropTypes.func.isRequired,
   initialValues: PropTypes.object.isRequired

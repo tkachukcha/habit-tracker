@@ -31,6 +31,15 @@ const habitsSlice = createSlice({
     },
     habitCreationFailed: (state, action) => {
       state.error = action.payload;
+    },
+    habitUpdateSuccess: (state, action) => {
+      const newEntities = [...state.entities];
+      const index = newEntities.findIndex((i) => i._id === action.payload._id);
+      newEntities[index] = { ...state.entities, ...action.payload.values };
+      state.entities = [...newEntities];
+    },
+    habitUpdateFailed: (state, action) => {
+      state.error = action.payload;
     }
   }
 });
@@ -38,13 +47,16 @@ const habitsSlice = createSlice({
 const { reducer: habitsReducer, actions } = habitsSlice;
 
 const habitCreationRequested = createAction('habits/habitCreationRequested');
+const habitUpdateRequested = createAction('habits/habitUpdateRequested');
 
 const {
   habitsRequested,
   habitsRequestSuccess,
   habitsRequestFailed,
   habitCreationSuccess,
-  habitCreationFailed
+  habitCreationFailed,
+  habitUpdateSuccess,
+  habitUpdateFailed
 } = actions;
 
 export const createHabit = (payload) => async (dispatch) => {

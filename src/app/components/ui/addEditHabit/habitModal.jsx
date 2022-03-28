@@ -32,7 +32,7 @@ const modalStyle = {
   m: 'auto'
 };
 
-const HabitModal = ({ type, onClose, open, initialValues }) => {
+const HabitModal = ({ id, type, onClose, open, initialValues }) => {
   return (
     <Modal
       open={open}
@@ -49,6 +49,7 @@ const HabitModal = ({ type, onClose, open, initialValues }) => {
             <CloseIcon sx={{ fontSize: '1.7rem' }} />
           </IconButton>
           <HabitContent
+            id={id}
             type={type}
             onClose={onClose}
             initialValues={initialValues}
@@ -59,6 +60,7 @@ const HabitModal = ({ type, onClose, open, initialValues }) => {
   );
 };
 HabitModal.propTypes = {
+  id: PropTypes.string,
   type: PropTypes.string.isRequired,
   initialValues: PropTypes.object.isRequired,
   onClose: PropTypes.func.isRequired,
