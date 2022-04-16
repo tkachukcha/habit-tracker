@@ -25,8 +25,8 @@ http.interceptors.request.use(
     }
     const accessToken = localStorageService.getAccessToken();
     if (accessToken) {
-      config.params = {
-        ...config.params,
+      config.headers = {
+        ...config.headers,
         Authorization: `bearer ${accessToken}`
       };
     }

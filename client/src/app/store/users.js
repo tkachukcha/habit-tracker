@@ -90,9 +90,11 @@ export const getUserData = () => async (dispatch) => {
 export const register = (payload) => async (dispatch) => {
   dispatch(authRequested());
   try {
+    console.log(payload);
     const data = await authService.register(payload);
     dispatch(authRequestSuccess({ userId: data.userId }));
     localStorageService.setTokens(data);
+    dispatch(getUserData());
     history.push('/');
   } catch (error) {
     dispatch(authRequestFail(error.message));
