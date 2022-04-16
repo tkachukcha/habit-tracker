@@ -32,9 +32,6 @@ const AppLoader = ({ children }) => {
       );
     }
   }
-  // if ((isLoggedIn && !habitDataStatus) || !userDataStatus) {
-
-  // }
   return children;
 };
 AppLoader.propTypes = {

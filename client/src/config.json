@@ -1,3 +1,4 @@
 {
-  "fireBaseEndpoint": "https://habit-tracker-cb7ea-default-rtdb.europe-west1.firebasedatabase.app/"
+  "fireBaseEndpoint": "https://habit-tracker-cb7ea-default-rtdb.europe-west1.firebasedatabase.app/",
+  "mongoEndpoint": "http://localhost:8080/api/"
 }

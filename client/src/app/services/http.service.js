@@ -2,26 +2,25 @@ import axios from 'axios';
 import { toast } from 'react-toastify';
 import authService from './auth.service';
 import localStorageService from './localStorage.service.js';
+import config from '../../config.json';
 
 const http = axios.create({
-  baseURL:
-    'https://habit-tracker-cb7ea-default-rtdb.europe-west1.firebasedatabase.app/'
+  // baseURL:
+  //   'https://habit-tracker-cb7ea-default-rtdb.europe-west1.firebasedatabase.app/'
+  baseURL: config.mongoEndpoint
 });
 
 http.interceptors.request.use(
   async function (config) {
-    const containSlash = /\/$/gi.test(config.url);
-    config.url =
-      (containSlash ? config.url.slice(0, -1) : config.url) + '.json';
     const expiresDate = localStorageService.getExpiresToken();
     const refreshToken = localStorageService.getRefreshToken();
     if (refreshToken && expiresDate < Date.now()) {
       const data = await authService.refresh();
       localStorageService.setTokens({
-        refreshToken: data.refresh_token,
-        idToken: data.id_token,
-        expiresDate: data.expires_in,
-        localId: data.user_id
+        refreshToken: data.refreshToken,
+        accessToken: data.accessToken,
+        expiresIn: data.expiresIn,
+        userId: data.userId
       });
     }
     const accessToken = localStorageService.getAccessToken();
