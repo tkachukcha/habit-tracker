@@ -76,6 +76,16 @@ export const createHabit = (payload) => async (dispatch) => {
   }
 };
 
+export const updateHabit = (payload) => async (dispatch) => {
+  dispatch(habitUpdateRequested());
+  try {
+    await habitService.update(payload);
+    dispatch(habitUpdateSuccess(payload));
+  } catch (error) {
+    dispatch(habitUpdateFailed(error.message));
+  }
+};
+
 export const getUserHabits = () => async (dispatch) => {
   dispatch(habitsRequested);
   const userId = localStorageService.getUserIdToken();

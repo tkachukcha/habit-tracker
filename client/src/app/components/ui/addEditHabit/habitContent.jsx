@@ -13,7 +13,7 @@ import Select from '@mui/material/Select';
 import ColorSelect from './colorSelect';
 import IconSelect from './iconSelect';
 import { useDispatch } from 'react-redux';
-import { createHabit } from '../../../store/habits';
+import { createHabit, updateHabit } from '../../../store/habits';
 import PropTypes from 'prop-types';
 
 const HabitContent = ({ id, type, initialValues, onClose }) => {
@@ -28,7 +28,7 @@ const HabitContent = ({ id, type, initialValues, onClose }) => {
       if (type === 'add') {
         dispatch(createHabit(values));
       } else if (type === 'edit') {
-        console.log({ id, values });
+        dispatch(updateHabit({ _id: id, values }));
       }
       onClose();
     }

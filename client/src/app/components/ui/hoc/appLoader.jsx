@@ -21,13 +21,20 @@ const AppLoader = ({ children }) => {
       dispatch(getUserData());
     }
   }, []);
-  if ((isLoggedIn && !habitDataStatus) || !userDataStatus) {
-    return (
-      <Box sx={{ margin: '40vh auto' }}>
-        <CircularProgress color="primary" />
-      </Box>
-    );
+  if (!isLoggedIn) {
+    return children;
+  } else {
+    if (!habitDataStatus && !userDataStatus) {
+      return (
+        <Box sx={{ margin: '40vh auto' }}>
+          <CircularProgress color="primary" />
+        </Box>
+      );
+    }
   }
+  // if ((isLoggedIn && !habitDataStatus) || !userDataStatus) {
+
+  // }
   return children;
 };
 AppLoader.propTypes = {
