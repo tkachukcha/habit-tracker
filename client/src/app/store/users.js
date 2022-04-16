@@ -93,14 +93,6 @@ export const register = (payload) => async (dispatch) => {
     const data = await authService.register(payload);
     dispatch(authRequestSuccess({ userId: data.userId }));
     localStorageService.setTokens(data);
-    dispatch(
-      createUser({
-        _id: data.userId,
-        email: payload.email,
-        name: payload.name,
-        habits: []
-      })
-    );
     history.push('/');
   } catch (error) {
     dispatch(authRequestFail(error.message));
@@ -126,16 +118,6 @@ export const logout = () => (dispatch) => {
   dispatch(userLoggedOut());
   localStorageService.removeAuthData();
   history.push('/');
-};
-
-export const createUser = (payload) => async (dispatch) => {
-  dispatch(userRequested());
-  try {
-    const data = await usersService.create(payload);
-    dispatch(userCreationSuccess(data));
-  } catch (error) {
-    dispatch(userRequestFailed(error.message));
-  }
 };
 
 export const getIsLoggedIn = () => (state) => state.users.isLoggedIn;
