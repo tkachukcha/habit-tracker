@@ -91,11 +91,11 @@ export const register = (payload) => async (dispatch) => {
   dispatch(authRequested());
   try {
     const data = await authService.register(payload);
-    dispatch(authRequestSuccess({ userId: data.localId }));
+    dispatch(authRequestSuccess({ userId: data.userId }));
     localStorageService.setTokens(data);
     dispatch(
       createUser({
-        _id: data.localId,
+        _id: data.userId,
         email: payload.email,
         name: payload.name,
         habits: []

@@ -27,7 +27,7 @@ http.interceptors.request.use(
     if (accessToken) {
       config.params = {
         ...config.params,
-        auth: accessToken
+        Authorization: `bearer ${accessToken}`
       };
     }
     return config;
