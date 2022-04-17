@@ -14,7 +14,7 @@ const habitService = {
   update: async (payload) => {
     const { data } = await httpService.patch(
       habitEndPoint + payload._id,
-      payload.values
+      payload
     );
     return data;
   },

@@ -33,9 +33,14 @@ const habitsSlice = createSlice({
       state.error = action.payload;
     },
     habitUpdateSuccess: (state, action) => {
+      const index = state.entities.findIndex(
+        (i) => i._id === action.payload._id
+      );
       const newEntities = [...state.entities];
-      const index = newEntities.findIndex((i) => i._id === action.payload._id);
-      newEntities[index] = { ...state.entities, ...action.payload.values };
+      newEntities[index] = {
+        ...state.entities[index],
+        ...action.payload.values
+      };
       state.entities = [...newEntities];
     },
     habitUpdateFailed: (state, action) => {
@@ -75,9 +80,11 @@ export const createHabit = (payload) => async (dispatch) => {
 };
 
 export const updateHabit = (payload) => async (dispatch) => {
+  console.log(payload);
   dispatch(habitUpdateRequested());
   try {
-    await habitService.update(payload);
+    payload.userId = localStorageService.getUserIdToken();
+    const data = await habitService.update(payload);
     dispatch(habitUpdateSuccess(payload));
   } catch (error) {
     dispatch(habitUpdateFailed(error.message));
