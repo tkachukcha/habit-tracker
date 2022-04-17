@@ -47,7 +47,10 @@ const habitsSlice = createSlice({
       state.error = action.payload;
     },
     habitDeleteSuccess: (state, action) => {
-      state.entities.filter((habit) => habit._id !== action.payload);
+      const newEntities = state.entities.filter(
+        (habit) => habit._id !== action.payload
+      );
+      state.entities = [...newEntities];
     },
     habitDeleteFailed: (state, action) => {
       state.error = action.payload;
@@ -93,7 +96,7 @@ export const updateHabit = (payload) => async (dispatch) => {
   dispatch(habitUpdateRequested());
   try {
     payload.userId = localStorageService.getUserIdToken();
-    const data = await habitService.update(payload);
+    await habitService.update(payload);
     dispatch(habitUpdateSuccess(payload));
   } catch (error) {
     dispatch(habitUpdateFailed(error.message));

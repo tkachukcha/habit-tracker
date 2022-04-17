@@ -1,20 +1,25 @@
 import React, { useState } from 'react';
-import Card from '@mui/material/Card';
 import HabitName from './habitName';
 import PropTypes from 'prop-types';
+import { useDispatch } from 'react-redux';
+
+import Card from '@mui/material/Card';
 import Box from '@mui/material/Box';
-import withIcon from './withIcon';
-import icons from '../../utils/icons';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
 import IconButton from '@mui/material/IconButton';
 import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
 import ListItemIcon from '@mui/material/ListItemIcon';
-import Logout from '@mui/icons-material/Logout';
 import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from '@mui/icons-material/Delete';
+import Typography from '@mui/material/Typography';
+import Button from '@mui/material/Button';
 
 import HabitModal from '../ui/addEditHabit/habitModal';
+import ModalWindow from '../common/modalWindow';
+import withIcon from './withIcon';
+import icons from '../../utils/icons';
+import { deleteHabit } from '../../store/habits';
 
 const paperProps = {
   elevation: 0,
@@ -44,12 +49,7 @@ const paperProps = {
 };
 
 const Habit = ({ id, title, icon, streak, finished, color, daytime }) => {
-  const [modalOpen, setModalOpen] = useState(false);
-  const handleModalToggle = () => setModalOpen((prevState) => !prevState);
-
-  const iconObj = icons.find((i) => i.name === icon);
-  const IconWithProps = withIcon(iconObj.component);
-
+  // Dropdown menu
   const [anchorEl, setAnchorEl] = useState(null);
   const open = Boolean(anchorEl);
   const handleClick = (event) => {
@@ -57,6 +57,24 @@ const Habit = ({ id, title, icon, streak, finished, color, daytime }) => {
   };
   const handleClose = () => {
     setAnchorEl(null);
+  };
+
+  // Habit options modals
+  const [editOpen, setEditOpen] = useState(false);
+  const handleEditToggle = () => setEditOpen((prevState) => !prevState);
+
+  const [deleteOpen, setDeleteOpen] = useState(false);
+  const handleDeleteToggle = () => setDeleteOpen((prevState) => !prevState);
+
+  // Find and show icon
+  const iconObj = icons.find((i) => i.name === icon);
+  const IconWithProps = withIcon(iconObj.component);
+
+  // Handle delete
+  const dispatch = useDispatch();
+  const handleDelete = () => {
+    dispatch(deleteHabit(id));
+    handleDeleteToggle();
   };
 
   return (
@@ -100,13 +118,13 @@ const Habit = ({ id, title, icon, streak, finished, color, daytime }) => {
         transformOrigin={{ horizontal: 'right', vertical: 'top' }}
         anchorOrigin={{ horizontal: 'right', vertical: 'bottom' }}
       >
-        <MenuItem onClick={handleModalToggle}>
+        <MenuItem onClick={handleEditToggle}>
           <ListItemIcon>
             <EditIcon fontSize="small" />
           </ListItemIcon>
           Edit
         </MenuItem>
-        <MenuItem>
+        <MenuItem onClick={handleDeleteToggle}>
           <ListItemIcon>
             <DeleteIcon fontSize="small" />
           </ListItemIcon>
@@ -116,8 +134,8 @@ const Habit = ({ id, title, icon, streak, finished, color, daytime }) => {
 
       <HabitModal
         type="edit"
-        open={modalOpen}
-        onClose={handleModalToggle}
+        open={editOpen}
+        onClose={handleEditToggle}
         id={id}
         initialValues={{
           name: title,
@@ -126,6 +144,26 @@ const Habit = ({ id, title, icon, streak, finished, color, daytime }) => {
           icon: icon
         }}
       />
+      <ModalWindow onClose={handleDeleteToggle} open={deleteOpen} width="350px">
+        <Typography
+          variant="h6"
+          gutterBottom
+          sx={{ textAlign: 'center', marginBottom: 2 }}
+        >
+          {`Delete habit "${title}"?`}
+        </Typography>
+        <Box sx={{ textAlign: 'center' }}>
+          <Button
+            size="larger"
+            variant="outlined"
+            startIcon={<DeleteIcon />}
+            color="error"
+            onClick={handleDelete}
+          >
+            Delete
+          </Button>
+        </Box>
+      </ModalWindow>
     </Card>
   );
 };
