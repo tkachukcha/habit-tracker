@@ -3,8 +3,8 @@ import httpService from './http.service';
 const habitEndPoint = 'habit/';
 
 const habitService = {
-  fetchAll: async (userId) => {
-    const { data } = await httpService.get(habitEndPoint + userId);
+  fetchAll: async (payload) => {
+    const { data } = await httpService.get(habitEndPoint + payload);
     return data;
   },
   create: async (payload) => {
@@ -19,7 +19,7 @@ const habitService = {
     return data;
   },
   delete: async (payload) => {
-    const { data } = await httpService.delete(habitEndPoint + payload._id);
+    const { data } = await httpService.delete(habitEndPoint + payload);
     return data;
   }
 };
