@@ -45,6 +45,12 @@ const habitsSlice = createSlice({
     },
     habitUpdateFailed: (state, action) => {
       state.error = action.payload;
+    },
+    habitDeleteSuccess: (state, action) => {
+      state.entities.filter((habit) => habit._id !== action.payload);
+    },
+    habitDeleteFailed: (state, action) => {
+      state.error = action.payload;
     }
   }
 });
@@ -53,6 +59,7 @@ const { reducer: habitsReducer, actions } = habitsSlice;
 
 const habitCreationRequested = createAction('habits/habitCreationRequested');
 const habitUpdateRequested = createAction('habits/habitUpdateRequested');
+const habitDeleteRequested = createAction('habits/habitDeleteRequested');
 
 const {
   habitsRequested,
@@ -61,7 +68,9 @@ const {
   habitCreationSuccess,
   habitCreationFailed,
   habitUpdateSuccess,
-  habitUpdateFailed
+  habitUpdateFailed,
+  habitDeleteSuccess,
+  habitDeleteFailed
 } = actions;
 
 export const createHabit = (payload) => async (dispatch) => {
@@ -92,13 +101,23 @@ export const updateHabit = (payload) => async (dispatch) => {
 };
 
 export const getUserHabits = () => async (dispatch) => {
-  dispatch(habitsRequested);
+  dispatch(habitsRequested());
   const userId = localStorageService.getUserIdToken();
   try {
     const data = await habitService.fetchAll(userId);
     dispatch(habitsRequestSuccess(data));
   } catch (error) {
     dispatch(habitsRequestFailed(error.message));
+  }
+};
+
+export const deleteHabit = (id) => async (dispatch) => {
+  dispatch(habitDeleteRequested());
+  try {
+    await habitService.delete(id);
+    dispatch(habitDeleteSuccess(id));
+  } catch (error) {
+    dispatch(habitDeleteFailed(error.message));
   }
 };
 
