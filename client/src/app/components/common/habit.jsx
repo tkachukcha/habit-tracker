@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Card from '@mui/material/Card';
 import HabitName from './habitName';
 import PropTypes from 'prop-types';
@@ -17,14 +17,13 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import HabitModal from '../ui/addEditHabit/habitModal';
 
 const Habit = ({ id, title, icon, streak, finished, color, daytime }) => {
-  const [modalOpen, setModalOpen] = React.useState(false);
-  const handleModalOpen = () => setModalOpen(true);
-  const handleModalClose = () => setModalOpen(false);
+  const [modalOpen, setModalOpen] = useState(false);
+  const handleModalToggle = () => setModalOpen((prevState) => !prevState);
 
   const iconObj = icons.find((i) => i.name === icon);
   const IconWithProps = withIcon(iconObj.component);
 
-  const [anchorEl, setAnchorEl] = React.useState(null);
+  const [anchorEl, setAnchorEl] = useState(null);
   const open = Boolean(anchorEl);
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
@@ -99,7 +98,7 @@ const Habit = ({ id, title, icon, streak, finished, color, daytime }) => {
         transformOrigin={{ horizontal: 'right', vertical: 'top' }}
         anchorOrigin={{ horizontal: 'right', vertical: 'bottom' }}
       >
-        <MenuItem onClick={handleModalOpen}>
+        <MenuItem onClick={handleModalToggle}>
           <ListItemIcon>
             <EditIcon fontSize="small" />
           </ListItemIcon>
@@ -116,7 +115,7 @@ const Habit = ({ id, title, icon, streak, finished, color, daytime }) => {
       <HabitModal
         type="edit"
         open={modalOpen}
-        onClose={handleModalClose}
+        onClose={handleModalToggle}
         id={id}
         initialValues={{
           name: title,
