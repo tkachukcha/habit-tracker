@@ -63,14 +63,12 @@ export const createHabit = (payload) => async (dispatch) => {
   dispatch(habitCreationRequested());
   try {
     const habit = {
-      _id: nanoid(),
       userId: localStorageService.getUserIdToken(),
-      createdAt: Date.now(),
       isActive: true,
       ...payload
     };
     const data = await habitService.create(habit);
-    dispatch(habitCreationSuccess(habit));
+    dispatch(habitCreationSuccess(data));
   } catch (error) {
     dispatch(habitCreationFailed(error.message));
   }

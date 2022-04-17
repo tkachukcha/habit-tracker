@@ -8,10 +8,7 @@ const habitService = {
     return data;
   },
   create: async (payload) => {
-    const { data } = await httpService.put(
-      habitEndPoint + payload._id,
-      payload
-    );
+    const { data } = await httpService.post(habitEndPoint, payload);
     return data;
   },
   update: async (payload) => {
