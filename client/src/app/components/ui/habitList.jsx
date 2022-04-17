@@ -9,73 +9,86 @@ const HabitList = () => {
   const habits = useSelector(getHabits());
   return (
     <>
-      <Box sx={{ width: { lg: '30%' } }}>
-        <Typography variant="h6" gutterBottom={true}>
-          Morning
+      {habits && habits.length > 0 ? (
+        <Box sx={{ width: { lg: '30%' } }}>
+          {habits.filter((h) => h.time === 'morning').length > 0 && (
+            <Typography variant="h6" gutterBottom={true}>
+              Morning
+            </Typography>
+          )}
+          {habits
+            .filter((h) => h.time === 'morning')
+            .map((habit) => (
+              <Habit
+                key={`${habit._id}-${habit.name}`}
+                id={habit._id}
+                title={habit.name}
+                icon={habit.icon}
+                color={habit.color}
+                // streak={h.streak}
+                daytime={habit.time}
+              />
+            ))}
+          {habits.filter((h) => h.time === 'afternoon').length > 0 && (
+            <Typography variant="h6" gutterBottom={true}>
+              Afternoon
+            </Typography>
+          )}
+          {habits
+            .filter((h) => h.time === 'afternoon')
+            .map((habit) => (
+              <Habit
+                key={`${habit._id}-${habit.name}`}
+                id={habit._id}
+                title={habit.name}
+                icon={habit.icon}
+                color={habit.color}
+                // streak={h.streak}
+                daytime={habit.time}
+              />
+            ))}
+          {habits.filter((h) => h.time === 'evening').length > 0 && (
+            <Typography variant="h6" gutterBottom={true}>
+              Evening
+            </Typography>
+          )}
+          {habits
+            .filter((h) => h.time === 'evening')
+            .map((habit) => (
+              <Habit
+                key={`${habit._id}-${habit.name}`}
+                id={habit._id}
+                title={habit.name}
+                icon={habit.icon}
+                color={habit.color}
+                // streak={h.streak}
+                daytime={habit.time}
+              />
+            ))}
+          {habits.filter((h) => h.time === 'anytime').length > 0 && (
+            <Typography variant="h6" gutterBottom={true}>
+              Anytime
+            </Typography>
+          )}
+          {habits
+            .filter((h) => h.time === 'anytime')
+            .map((habit) => (
+              <Habit
+                key={`${habit._id}-${habit.name}`}
+                id={habit._id}
+                title={habit.name}
+                icon={habit.icon}
+                color={habit.color}
+                // streak={h.streak}
+                daytime={habit.time}
+              />
+            ))}
+        </Box>
+      ) : (
+        <Typography variant="h4" gutterBottom={true}>
+          You don&apos;t have any habits yet!
         </Typography>
-        {habits
-          .filter((h) => h.time === 'morning')
-          .map((habit) => (
-            <Habit
-              key={`${habit._id}-${habit.name}`}
-              id={habit._id}
-              title={habit.name}
-              icon={habit.icon}
-              color={habit.color}
-              // streak={h.streak}
-              daytime={habit.time}
-            />
-          ))}
-        <Typography variant="h6" gutterBottom={true}>
-          {habits.filter((h) => h.time === 'afternoon').length > 0 &&
-            'Afternoon'}
-        </Typography>
-        {habits
-          .filter((h) => h.time === 'afternoon')
-          .map((habit) => (
-            <Habit
-              key={`${habit._id}-${habit.name}`}
-              id={habit._id}
-              title={habit.name}
-              icon={habit.icon}
-              color={habit.color}
-              // streak={h.streak}
-              daytime={habit.time}
-            />
-          ))}
-        <Typography variant="h6" gutterBottom={true}>
-          Evening
-        </Typography>
-        {habits
-          .filter((h) => h.time === 'evening')
-          .map((habit) => (
-            <Habit
-              key={`${habit._id}-${habit.name}`}
-              id={habit._id}
-              title={habit.name}
-              icon={habit.icon}
-              color={habit.color}
-              // streak={h.streak}
-              daytime={habit.time}
-            />
-          ))}
-        <Typography variant="h6" gutterBottom={true}>
-          Anytime
-        </Typography>
-        {habits
-          .filter((h) => h.time === 'anytime')
-          .map((habit) => (
-            <Habit
-              key={`${habit._id}-${habit.name}`}
-              id={habit._id}
-              title={habit.name}
-              icon={habit.icon}
-              color={habit.color}
-              // streak={h.streak}
-              daytime={habit.time}
-            />
-          ))}
-      </Box>
+      )}
     </>
   );
 };
