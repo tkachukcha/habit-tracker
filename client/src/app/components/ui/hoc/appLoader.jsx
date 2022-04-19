@@ -4,7 +4,8 @@ import { useSelector, useDispatch } from 'react-redux';
 import {
   getIsLoggedIn,
   getUserDataStatus,
-  getUserData
+  getUserData,
+  getError
 } from '../../../store/users';
 import CircularProgress from '@mui/material/CircularProgress';
 import Box from '@mui/material/Box';
@@ -14,13 +15,16 @@ const AppLoader = ({ children }) => {
   const isLoggedIn = useSelector(getIsLoggedIn());
   const userDataStatus = useSelector(getUserDataStatus());
   const habitDataStatus = useSelector(getHabitDataStatus());
+  const error = useSelector(getError());
 
   const dispatch = useDispatch();
+
   useEffect(() => {
-    if (isLoggedIn) {
+    if (isLoggedIn && !error) {
       dispatch(getUserData());
     }
   }, []);
+
   if (!isLoggedIn) {
     return children;
   } else {

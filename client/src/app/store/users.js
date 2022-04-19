@@ -55,11 +55,6 @@ const usersSlice = createSlice({
     userRequestFailed: (state, action) => {
       state.error = action.payload;
       state.isLoading = false;
-    },
-    userCreationSuccess: (state, action) => {
-      state.entities = action.payload;
-      state.isLoading = false;
-      state.dataLoaded = true;
     }
   }
 });
@@ -72,8 +67,7 @@ const {
   userLoggedOut,
   userRequested,
   userRequestSuccess,
-  userRequestFailed,
-  userCreationSuccess
+  userRequestFailed
 } = actions;
 
 export const getUserData = () => async (dispatch) => {
@@ -84,6 +78,7 @@ export const getUserData = () => async (dispatch) => {
     dispatch(getUserHabits());
   } catch (error) {
     dispatch(userRequestFailed(error.message));
+    history.push('/logout');
   }
 };
 
@@ -102,7 +97,7 @@ export const register = (payload) => async (dispatch) => {
 };
 
 export const login =
-  ({ payload, redirect }) =>
+  ({ payload }) =>
   async (dispatch) => {
     dispatch(authRequested());
     try {
@@ -129,5 +124,7 @@ export const getUser = () => (state) => state.users.entities;
 export const getIsLoading = () => (state) => state.users.isLoading;
 
 export const getUserDataStatus = () => (state) => state.users.dataLoaded;
+
+export const getError = () => (state) => state.users.error;
 
 export default usersReducer;
