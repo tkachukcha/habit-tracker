@@ -1,6 +1,7 @@
 import { createAction, createSlice, nanoid } from '@reduxjs/toolkit';
 import dayService from '../services/day.service';
 import localStorageService from '../services/localStorage.service';
+import dayjs from 'dayjs';
 
 const daysSlice = createSlice({
   name: 'days',
@@ -45,15 +46,6 @@ const daysSlice = createSlice({
     },
     dayUpdateFailed: (state, action) => {
       state.error = action.payload;
-    },
-    dayDeleteSuccess: (state, action) => {
-      const newEntities = state.entities.filter(
-        (day) => day._id !== action.payload
-      );
-      state.entities = [...newEntities];
-    },
-    dayDeleteFailed: (state, action) => {
-      state.error = action.payload;
     }
   }
 });
@@ -73,11 +65,14 @@ const {
   dayUpdateFailed
 } = actions;
 
-export const createDay = (payload) => async (dispatch) => {
+export const createDay = () => async (dispatch) => {
   dispatch(dayCreationRequested());
   try {
-    const data = await dayService.create(payload);
-    dispatch(dayCreationSuccess(data));
+    const payload = {
+      date: dayjs().format('DD/MM/YYYY')
+    };
+    const { day, statuses } = await dayService.create(payload);
+    dispatch(dayCreationSuccess(day));
   } catch (error) {
     dispatch(dayCreationFailed(error.message));
   }
