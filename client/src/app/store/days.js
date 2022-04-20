@@ -25,12 +25,12 @@ const daysSlice = createSlice({
       state.error = action.payload;
       state.isLoading = false;
     },
-    dayCreationSuccess: (state, action) => {
+    dayCheckSuccess: (state, action) => {
       const newEntities = [...state.entities];
       newEntities.push(action.payload);
       state.entities = [...newEntities];
     },
-    dayCreationFailed: (state, action) => {
+    dayCheckFailed: (state, action) => {
       state.error = action.payload;
     },
     dayUpdateSuccess: (state, action) => {
@@ -52,29 +52,29 @@ const daysSlice = createSlice({
 
 const { reducer: daysReducer, actions } = daysSlice;
 
-const dayCreationRequested = createAction('days/dayCreationRequested');
+const dayCheckRequested = createAction('days/dayCreationRequested');
 const dayUpdateRequested = createAction('days/dayUpdateRequested');
 
 const {
   daysRequested,
   daysRequestSuccess,
   daysRequestFailed,
-  dayCreationSuccess,
-  dayCreationFailed,
+  dayCheckSuccess,
+  dayCheckFailed,
   dayUpdateSuccess,
   dayUpdateFailed
 } = actions;
 
-export const createDay = () => async (dispatch) => {
-  dispatch(dayCreationRequested());
+export const checkDay = () => async (dispatch) => {
+  dispatch(dayCheckRequested());
   try {
     const payload = {
       date: dayjs().format('DD/MM/YYYY')
     };
-    const { day, statuses } = await dayService.create(payload);
-    dispatch(dayCreationSuccess(day));
+    const data = await dayService.create(payload);
+    dispatch(dayCheckSuccess(data));
   } catch (error) {
-    dispatch(dayCreationFailed(error.message));
+    dispatch(dayCheckFailed(error.message));
   }
 };
 

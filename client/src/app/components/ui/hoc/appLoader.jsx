@@ -10,7 +10,7 @@ import {
 import CircularProgress from '@mui/material/CircularProgress';
 import Box from '@mui/material/Box';
 import { getHabitDataStatus } from '../../../store/habits';
-import { createDay } from '../../../store/days';
+import { checkDay } from '../../../store/days';
 
 const AppLoader = ({ children }) => {
   const isLoggedIn = useSelector(getIsLoggedIn());
@@ -23,7 +23,7 @@ const AppLoader = ({ children }) => {
   useEffect(() => {
     if (isLoggedIn && !error) {
       dispatch(getUserData());
-      dispatch(createDay());
+      dispatch(checkDay());
     }
   }, []);
 

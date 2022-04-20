@@ -63,6 +63,7 @@ const { reducer: habitsReducer, actions } = habitsSlice;
 const habitCreationRequested = createAction('habits/habitCreationRequested');
 const habitUpdateRequested = createAction('habits/habitUpdateRequested');
 const habitDeleteRequested = createAction('habits/habitDeleteRequested');
+const habitStatusRequested = createAction('habits/habitStatusRequested');
 
 const {
   habitsRequested,
