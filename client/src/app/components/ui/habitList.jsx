@@ -1,11 +1,12 @@
 import React, { useState } from 'react';
+import PropTypes from 'prop-types';
 import Habit from '../common/habit';
 import Box from '@mui/material/Box';
 import { useSelector } from 'react-redux';
 import { getHabits } from '../../store/habits';
 import Typography from '@mui/material/Typography';
 
-const HabitList = () => {
+const HabitList = ({ date }) => {
   const habits = useSelector(getHabits());
 
   return (
@@ -22,6 +23,7 @@ const HabitList = () => {
             .map((habit) => (
               <Habit
                 key={`${habit._id}-${habit.name}`}
+                date={date}
                 id={habit._id}
                 title={habit.name}
                 icon={habit.icon}
@@ -41,6 +43,7 @@ const HabitList = () => {
             .map((habit) => (
               <Habit
                 key={`${habit._id}-${habit.name}`}
+                date={date}
                 id={habit._id}
                 title={habit.name}
                 icon={habit.icon}
@@ -60,6 +63,7 @@ const HabitList = () => {
             .map((habit) => (
               <Habit
                 key={`${habit._id}-${habit.name}`}
+                date={date}
                 id={habit._id}
                 title={habit.name}
                 icon={habit.icon}
@@ -79,6 +83,7 @@ const HabitList = () => {
             .map((habit) => (
               <Habit
                 key={`${habit._id}-${habit.name}`}
+                date={date}
                 id={habit._id}
                 title={habit.name}
                 icon={habit.icon}
@@ -96,6 +101,9 @@ const HabitList = () => {
       )}
     </>
   );
+};
+HabitList.propTypes = {
+  date: PropTypes.string
 };
 
 export default HabitList;

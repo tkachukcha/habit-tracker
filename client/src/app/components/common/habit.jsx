@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import HabitName from './habitName';
 import PropTypes from 'prop-types';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
 import Card from '@mui/material/Card';
 import Box from '@mui/material/Box';
@@ -28,6 +28,7 @@ import withIcon from './withIcon';
 import icons from '../../utils/icons';
 import { deleteHabit } from '../../store/habits';
 import DeleteModal from '../ui/deleteModal';
+import { getHabitStatus } from '../../store/days';
 
 const paperProps = {
   elevation: 0,
@@ -56,10 +57,19 @@ const paperProps = {
   }
 };
 
-const Habit = ({ id, title, icon, streak, isCompleted, color, daytime }) => {
+const Habit = ({
+  date,
+  id,
+  title,
+  icon,
+  streak,
+  // isCompleted,
+  color,
+  daytime
+}) => {
   // Status
+  const isCompleted = useSelector(getHabitStatus(id, date));
   const [status, setStatus] = useState(isCompleted);
-
   const handleCompletion = () => {
     setStatus((prevState) => !prevState);
   };
@@ -116,7 +126,6 @@ const Habit = ({ id, title, icon, streak, isCompleted, color, daytime }) => {
         <div>
           <HabitName title={title} />
           {/* <Box>{streak}-day streak</Box> */}
-          <div>{`${status}`}</div>
         </div>
       </Box>
       <div>
@@ -180,7 +189,8 @@ Habit.propTypes = {
   icon: PropTypes.string,
   daytime: PropTypes.string,
   streak: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-  isCompleted: PropTypes.bool
+  isCompleted: PropTypes.bool,
+  date: PropTypes.string
 };
 
 export default Habit;

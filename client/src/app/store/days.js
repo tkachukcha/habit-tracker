@@ -104,4 +104,15 @@ export const getDayDataStatus = () => (state) => state.days.dataLoaded;
 
 export const getDays = () => (state) => state.days.entities;
 
+export const getHabitStatus = (habitId, date) => (state) => {
+  const day = state.days.entities.filter((day) => day.date === date)[0];
+  const status = day.habitStatuses.find(
+    (habit) => habit.habitId === habitId
+  ).isCompleted;
+
+  return status;
+};
+
+export const changeHabitStatus = (habitId, date) => (dispatch) => {};
+
 export default daysReducer;
