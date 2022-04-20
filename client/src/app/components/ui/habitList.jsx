@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Habit from '../common/habit';
 import Box from '@mui/material/Box';
 import { useSelector } from 'react-redux';
@@ -7,6 +7,7 @@ import Typography from '@mui/material/Typography';
 
 const HabitList = () => {
   const habits = useSelector(getHabits());
+
   return (
     <>
       {habits && habits.length > 0 ? (
@@ -26,6 +27,7 @@ const HabitList = () => {
                 icon={habit.icon}
                 color={habit.color}
                 // streak={h.streak}
+                isCompleted={false}
                 daytime={habit.time}
               />
             ))}
@@ -44,6 +46,7 @@ const HabitList = () => {
                 icon={habit.icon}
                 color={habit.color}
                 // streak={h.streak}
+                isCompleted={false}
                 daytime={habit.time}
               />
             ))}
@@ -62,6 +65,7 @@ const HabitList = () => {
                 icon={habit.icon}
                 color={habit.color}
                 // streak={h.streak}
+                isCompleted={false}
                 daytime={habit.time}
               />
             ))}
@@ -80,6 +84,7 @@ const HabitList = () => {
                 icon={habit.icon}
                 color={habit.color}
                 // streak={h.streak}
+                isCompleted={false}
                 daytime={habit.time}
               />
             ))}

@@ -14,12 +14,20 @@ import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from '@mui/icons-material/Delete';
 import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
+import Checkbox from '@mui/material/Checkbox';
+import FavoriteBorder from '@mui/icons-material/FavoriteBorder';
+import Favorite from '@mui/icons-material/Favorite';
+import CheckBoxOutlineBlankIcon from '@mui/icons-material/CheckBoxOutlineBlank';
+import CheckBoxIcon from '@mui/icons-material/CheckBox';
+import RadioButtonUncheckedIcon from '@mui/icons-material/RadioButtonUnchecked';
+import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 
 import HabitModal from '../ui/addEditHabit/habitModal';
 import ModalWindow from '../common/modalWindow';
 import withIcon from './withIcon';
 import icons from '../../utils/icons';
 import { deleteHabit } from '../../store/habits';
+import DeleteModal from '../ui/deleteModal';
 
 const paperProps = {
   elevation: 0,
@@ -48,7 +56,14 @@ const paperProps = {
   }
 };
 
-const Habit = ({ id, title, icon, streak, finished, color, daytime }) => {
+const Habit = ({ id, title, icon, streak, isCompleted, color, daytime }) => {
+  // Status
+  const [status, setStatus] = useState(isCompleted);
+
+  const handleCompletion = () => {
+    setStatus((prevState) => !prevState);
+  };
+
   // Dropdown menu
   const [anchorEl, setAnchorEl] = useState(null);
   const open = Boolean(anchorEl);
@@ -101,13 +116,21 @@ const Habit = ({ id, title, icon, streak, finished, color, daytime }) => {
         <div>
           <HabitName title={title} />
           {/* <Box>{streak}-day streak</Box> */}
-          <div>10-day streak</div>
+          <div>{`${status}`}</div>
         </div>
       </Box>
-
-      <IconButton onClick={handleClick}>
-        <MoreVertIcon />
-      </IconButton>
+      <div>
+        <Checkbox
+          inputProps={{ 'aria-label': 'Checkbox demo' }}
+          icon={<RadioButtonUncheckedIcon fontSize="large" />}
+          checkedIcon={<CheckCircleIcon fontSize="large" color="success" />}
+          checked={status}
+          onChange={handleCompletion}
+        />
+        <IconButton onClick={handleClick}>
+          <MoreVertIcon />
+        </IconButton>
+      </div>
       <Menu
         anchorEl={anchorEl}
         id="account-menu"
@@ -145,24 +168,7 @@ const Habit = ({ id, title, icon, streak, finished, color, daytime }) => {
         }}
       />
       <ModalWindow onClose={handleDeleteToggle} open={deleteOpen} width="350px">
-        <Typography
-          variant="h6"
-          gutterBottom
-          sx={{ textAlign: 'center', marginBottom: 2 }}
-        >
-          {`Delete habit "${title}"?`}
-        </Typography>
-        <Box sx={{ textAlign: 'center' }}>
-          <Button
-            size="larger"
-            variant="outlined"
-            startIcon={<DeleteIcon />}
-            color="error"
-            onClick={handleDelete}
-          >
-            Delete
-          </Button>
-        </Box>
+        <DeleteModal title={title} onDelete={handleDelete} />
       </ModalWindow>
     </Card>
   );
@@ -174,7 +180,7 @@ Habit.propTypes = {
   icon: PropTypes.string,
   daytime: PropTypes.string,
   streak: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-  finished: PropTypes.bool
+  isCompleted: PropTypes.bool
 };
 
 export default Habit;
