@@ -6,7 +6,7 @@ const HabitStatusService = {
   update: async (payload) => {
     const { data } = await httpService.patch(
       statusEndPoint + payload._id,
-      payload.body
+      payload.values
     );
     return data;
   }

@@ -1,6 +1,7 @@
 import { createAction, createSlice, nanoid } from '@reduxjs/toolkit';
 import dayService from '../services/day.service';
 import localStorageService from '../services/localStorage.service';
+import habitStatusService from '../services/habitStatus.service';
 import dayjs from 'dayjs';
 
 const daysSlice = createSlice({
@@ -46,6 +47,18 @@ const daysSlice = createSlice({
     },
     dayUpdateFailed: (state, action) => {
       state.error = action.payload;
+    },
+    habitStatusUpdateSuccess: (state, action) => {
+      const newEntities = [...state.entities];
+      const day = newEntities.find((day) => day.date === action.payload.date);
+      const status = day.habitStatuses.find(
+        (status) => status._id === action.payload._id
+      );
+      status.isCompleted = action.payload.isCompleted;
+      console.log(newEntities);
+    },
+    habitStatusUpdateFailed: (state, action) => {
+      state.error = action.payload;
     }
   }
 });
@@ -62,7 +75,9 @@ const {
   dayCheckSuccess,
   dayCheckFailed,
   dayUpdateSuccess,
-  dayUpdateFailed
+  dayUpdateFailed,
+  habitStatusUpdateSuccess,
+  habitStatusUpdateFailed
 } = actions;
 
 export const checkDay = () => async (dispatch) => {
@@ -90,6 +105,21 @@ export const updateDay = (payload) => async (dispatch) => {
   }
 };
 
+export const updateHabitStatus =
+  ({ date, _id, values }) =>
+  async (dispatch) => {
+    dispatch(dayUpdateRequested());
+    try {
+      const { isCompleted } = await habitStatusService.update({
+        _id,
+        values
+      });
+      dispatch(habitStatusUpdateSuccess({ date, _id, isCompleted }));
+    } catch (error) {
+      dispatch(habitStatusUpdateFailed(error.message));
+    }
+  };
+
 export const getDaysData = () => async (dispatch) => {
   dispatch(daysRequested());
   try {
@@ -105,14 +135,12 @@ export const getDayDataStatus = () => (state) => state.days.dataLoaded;
 export const getDays = () => (state) => state.days.entities;
 
 export const getHabitStatus = (habitId, date) => (state) => {
-  const day = state.days.entities.filter((day) => day.date === date)[0];
-  const status = day.habitStatuses.find(
+  const days = state.days.entities.filter((day) => day.date === date);
+  const habitStatus = days[0].habitStatuses.find(
     (habit) => habit.habitId === habitId
-  ).isCompleted;
+  );
 
-  return status;
+  return habitStatus;
 };
-
-export const changeHabitStatus = (habitId, date) => (dispatch) => {};
 
 export default daysReducer;

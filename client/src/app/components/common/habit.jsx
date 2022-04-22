@@ -28,7 +28,7 @@ import withIcon from './withIcon';
 import icons from '../../utils/icons';
 import { deleteHabit } from '../../store/habits';
 import DeleteModal from '../ui/deleteModal';
-import { getHabitStatus } from '../../store/days';
+import { getHabitStatus, updateHabitStatus } from '../../store/days';
 
 const paperProps = {
   elevation: 0,
@@ -58,7 +58,7 @@ const paperProps = {
 };
 
 const Habit = ({
-  date,
+  habitDate,
   id,
   title,
   icon,
@@ -67,10 +67,15 @@ const Habit = ({
   color,
   daytime
 }) => {
+  const dispatch = useDispatch();
   // Status
-  const isCompleted = useSelector(getHabitStatus(id, date));
+  const { isCompleted, _id, date } = useSelector(getHabitStatus(id, habitDate));
   const [status, setStatus] = useState(isCompleted);
+
   const handleCompletion = () => {
+    dispatch(
+      updateHabitStatus({ date, _id, values: { isCompleted: !status } })
+    );
     setStatus((prevState) => !prevState);
   };
 
@@ -96,7 +101,6 @@ const Habit = ({
   const IconWithProps = withIcon(iconObj.component);
 
   // Handle delete
-  const dispatch = useDispatch();
   const handleDelete = () => {
     dispatch(deleteHabit(id));
     handleDeleteToggle();
@@ -193,7 +197,7 @@ Habit.propTypes = {
   daytime: PropTypes.string,
   streak: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   isCompleted: PropTypes.bool,
-  date: PropTypes.string
+  habitDate: PropTypes.string
 };
 
 export default Habit;

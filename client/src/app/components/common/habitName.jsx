@@ -18,7 +18,7 @@ const HabitName = ({ title, isCompleted }) => {
 };
 HabitName.propTypes = {
   title: PropTypes.string,
-  isCompleted: PropTypes.boolean
+  isCompleted: PropTypes.bool
 };
 
 export default HabitName;

@@ -23,7 +23,7 @@ const HabitList = ({ date }) => {
             .map((habit) => (
               <Habit
                 key={`${habit._id}-${habit.name}`}
-                date={date}
+                habitDate={date}
                 id={habit._id}
                 title={habit.name}
                 icon={habit.icon}
@@ -43,7 +43,7 @@ const HabitList = ({ date }) => {
             .map((habit) => (
               <Habit
                 key={`${habit._id}-${habit.name}`}
-                date={date}
+                habitDate={date}
                 id={habit._id}
                 title={habit.name}
                 icon={habit.icon}
@@ -63,7 +63,7 @@ const HabitList = ({ date }) => {
             .map((habit) => (
               <Habit
                 key={`${habit._id}-${habit.name}`}
-                date={date}
+                habitDate={date}
                 id={habit._id}
                 title={habit.name}
                 icon={habit.icon}
@@ -83,7 +83,7 @@ const HabitList = ({ date }) => {
             .map((habit) => (
               <Habit
                 key={`${habit._id}-${habit.name}`}
-                date={date}
+                habitDate={date}
                 id={habit._id}
                 title={habit.name}
                 icon={habit.icon}
