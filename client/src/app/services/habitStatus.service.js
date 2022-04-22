@@ -9,7 +9,7 @@ const HabitStatusService = {
       payload.body
     );
     return data;
-  },
+  }
 };
 
 export default HabitStatusService;
