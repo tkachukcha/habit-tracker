@@ -124,7 +124,7 @@ const Habit = ({
           <IconWithProps sx={{ color, fontSize: '40px' }} />
         </Box>
         <div>
-          <HabitName title={title} />
+          <HabitName title={title} isCompleted={status} />
           {/* <Box>{streak}-day streak</Box> */}
         </div>
       </Box>
