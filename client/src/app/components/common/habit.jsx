@@ -103,43 +103,46 @@ const Habit = ({
   };
 
   return (
-    <Card
-      sx={{
-        display: 'flex',
-        justifyContent: 'space-between',
-        alignItems: 'center',
-        mb: 2,
-        pr: 1.5
-      }}
-    >
-      <Box
+    <>
+      <Card
         sx={{
           display: 'flex',
-          justifyContent: 'flex-start',
+          justifyContent: 'space-between',
           alignItems: 'center',
-          p: 1
+          mb: 2,
+          pr: 1.5
         }}
       >
-        <Box sx={{ mr: 1, p: 1, display: 'grid', placeItems: 'center' }}>
-          <IconWithProps sx={{ color, fontSize: '40px' }} />
+        <Box
+          sx={{
+            display: 'flex',
+            justifyContent: 'flex-start',
+            alignItems: 'center',
+            p: 1
+          }}
+        >
+          <Box sx={{ mr: 1, p: 1, display: 'grid', placeItems: 'center' }}>
+            <IconWithProps sx={{ color, fontSize: '40px' }} />
+          </Box>
+          <div>
+            <HabitName title={title} isCompleted={status} />
+            {/* <Box>{streak}-day streak</Box> */}
+          </div>
         </Box>
         <div>
-          <HabitName title={title} isCompleted={status} />
-          {/* <Box>{streak}-day streak</Box> */}
+          <Checkbox
+            inputProps={{ 'aria-label': 'Checkbox demo' }}
+            icon={<RadioButtonUncheckedIcon fontSize="large" />}
+            checkedIcon={<CheckCircleIcon fontSize="large" color="success" />}
+            checked={status}
+            onChange={handleCompletion}
+          />
+          <IconButton onClick={handleClick}>
+            <MoreVertIcon />
+          </IconButton>
         </div>
-      </Box>
-      <div>
-        <Checkbox
-          inputProps={{ 'aria-label': 'Checkbox demo' }}
-          icon={<RadioButtonUncheckedIcon fontSize="large" />}
-          checkedIcon={<CheckCircleIcon fontSize="large" color="success" />}
-          checked={status}
-          onChange={handleCompletion}
-        />
-        <IconButton onClick={handleClick}>
-          <MoreVertIcon />
-        </IconButton>
-      </div>
+      </Card>
+
       <Menu
         anchorEl={anchorEl}
         id="account-menu"
@@ -179,7 +182,7 @@ const Habit = ({
       <ModalWindow onClose={handleDeleteToggle} open={deleteOpen} width="350px">
         <DeleteModal title={title} onDelete={handleDelete} />
       </ModalWindow>
-    </Card>
+    </>
   );
 };
 Habit.propTypes = {
