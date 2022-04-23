@@ -87,12 +87,8 @@ export const createHabit = (payload) => async (dispatch) => {
       ...payload
     };
     const { habit, habitStatus } = await habitService.create(newHabit);
+    dispatch(addHabitStatus(habitStatus));
     dispatch(habitCreationSuccess(habit));
-    try {
-      dispatch(addHabitStatus(habitStatus));
-    } catch (error) {
-      console.log(error);
-    }
   } catch (error) {
     dispatch(habitCreationFailed(error.message));
   }

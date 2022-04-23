@@ -3,6 +3,7 @@ import dayService from '../services/day.service';
 import localStorageService from '../services/localStorage.service';
 import habitStatusService from '../services/habitStatus.service';
 import dayjs from 'dayjs';
+import { getUserData } from './users';
 
 const daysSlice = createSlice({
   name: 'days',
@@ -99,8 +100,8 @@ export const checkDay = () => async (dispatch) => {
       date: dayjs().format('DD/MM/YYYY')
     };
     const data = await dayService.create(payload);
-    console.log(data);
-    dispatch(dayCheckSuccess(data));
+    await dispatch(dayCheckSuccess(data));
+    dispatch(getUserData());
   } catch (error) {
     dispatch(dayCheckFailed(error.message));
   }

@@ -21,12 +21,6 @@ const Menu = ({ onHide }) => {
       exact: true,
       title: 'Habits',
       icon: <FormatListBulletedIcon />
-    },
-    {
-      path: '/profile',
-      exact: true,
-      title: 'Profile',
-      icon: <AccountCircleIcon />
     }
   ];
 

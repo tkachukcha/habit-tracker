@@ -4,6 +4,7 @@ import authService from '../services/auth.service';
 import history from '../utils/history';
 import usersService from '../services/users.service';
 import { getUserHabits } from './habits';
+import { checkDay } from './days';
 
 const initialState = localStorageService.getAccessToken()
   ? {
@@ -89,27 +90,25 @@ export const register = (payload) => async (dispatch) => {
     const data = await authService.register(payload);
     dispatch(authRequestSuccess({ userId: data.userId }));
     localStorageService.setTokens(data);
-    dispatch(getUserData());
+    dispatch(checkDay());
     history.push('/');
   } catch (error) {
     dispatch(authRequestFail(error.message));
   }
 };
 
-export const login =
-  ({ payload }) =>
-  async (dispatch) => {
-    dispatch(authRequested());
-    try {
-      const data = await authService.login(payload);
-      dispatch(authRequestSuccess({ userId: data.localId }));
-      localStorageService.setTokens(data);
-      dispatch(getUserData());
-      history.push('/');
-    } catch (error) {
-      dispatch(authRequestFail(error.message));
-    }
-  };
+export const login = (payload) => async (dispatch) => {
+  dispatch(authRequested());
+  try {
+    const data = await authService.login(payload);
+    dispatch(authRequestSuccess({ userId: data.localId }));
+    localStorageService.setTokens(data);
+    dispatch(checkDay());
+    history.push('/');
+  } catch (error) {
+    dispatch(authRequestFail(error.message));
+  }
+};
 
 export const logout = () => (dispatch) => {
   dispatch(userLoggedOut());

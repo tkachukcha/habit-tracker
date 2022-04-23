@@ -14,8 +14,6 @@ import { checkDay } from '../../../store/days';
 
 const AppLoader = ({ children }) => {
   const isLoggedIn = useSelector(getIsLoggedIn());
-  const userDataStatus = useSelector(getUserDataStatus());
-  const habitDataStatus = useSelector(getHabitDataStatus());
   const error = useSelector(getError());
 
   const dispatch = useDispatch();
@@ -23,9 +21,10 @@ const AppLoader = ({ children }) => {
   useEffect(() => {
     if (isLoggedIn && !error) {
       dispatch(checkDay());
-      dispatch(getUserData());
     }
   }, []);
+  const userDataStatus = useSelector(getUserDataStatus());
+  const habitDataStatus = useSelector(getHabitDataStatus());
 
   if (!isLoggedIn) {
     return children;

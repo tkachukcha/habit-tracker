@@ -28,7 +28,7 @@ export default function SignIn() {
       password: yup.string().required('Required')
     }),
     onSubmit: (values) => {
-      dispatch(login({ payload: values, redirect }));
+      dispatch(login(values));
     }
   });
 
