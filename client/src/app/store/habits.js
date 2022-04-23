@@ -1,6 +1,7 @@
-import { createAction, createSlice, nanoid } from '@reduxjs/toolkit';
+import { createAction, createSlice } from '@reduxjs/toolkit';
 import habitService from '../services/habit.service';
 import localStorageService from '../services/localStorage.service';
+import { addHabitStatus } from './days';
 
 const habitsSlice = createSlice({
   name: 'habits',
@@ -80,13 +81,18 @@ const {
 export const createHabit = (payload) => async (dispatch) => {
   dispatch(habitCreationRequested());
   try {
-    const habit = {
+    const newHabit = {
       userId: localStorageService.getUserIdToken(),
       isActive: true,
       ...payload
     };
-    const data = await habitService.create(habit);
-    dispatch(habitCreationSuccess(data));
+    const { habit, habitStatus } = await habitService.create(newHabit);
+    dispatch(habitCreationSuccess(habit));
+    try {
+      dispatch(addHabitStatus(habitStatus));
+    } catch (error) {
+      console.log(error);
+    }
   } catch (error) {
     dispatch(habitCreationFailed(error.message));
   }
