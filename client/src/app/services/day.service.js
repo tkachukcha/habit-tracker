@@ -12,10 +12,7 @@ const DayService = {
     return data;
   },
   update: async (payload) => {
-    const { data } = await httpService.patch(
-      dayEndPoint + payload._id,
-      payload
-    );
+    const { data } = await httpService.patch(dayEndPoint, payload);
     return data;
   },
   delete: async (payload) => {

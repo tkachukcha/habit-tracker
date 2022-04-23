@@ -12,7 +12,7 @@ const HabitList = ({ date }) => {
   return (
     <>
       {habits && habits.length > 0 ? (
-        <Box sx={{ width: { lg: '30%' } }}>
+        <Box sx={{ width: { lg: '50%' } }}>
           {habits.filter((h) => h.time === 'morning').length > 0 && (
             <Typography variant="h6" gutterBottom={true}>
               Morning

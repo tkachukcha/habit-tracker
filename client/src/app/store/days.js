@@ -37,14 +37,9 @@ const daysSlice = createSlice({
     },
     dayUpdateSuccess: (state, action) => {
       const index = state.entities.findIndex(
-        (i) => i._id === action.payload._id
+        (day) => day.date === action.payload.date
       );
-      const newEntities = [...state.entities];
-      newEntities[index] = {
-        ...state.entities[index],
-        ...action.payload.values
-      };
-      state.entities = [...newEntities];
+      state.entities[index].isPerfect = action.payload.isPerfect;
     },
     dayUpdateFailed: (state, action) => {
       state.error = action.payload;
@@ -79,6 +74,9 @@ const dayUpdateRequested = createAction('days/dayUpdateRequested');
 const habitStatusAddedRequested = createAction(
   'days/habitStatusAddedRequested'
 );
+const habitStatusUpdateRequested = createAction(
+  'days/habitStatusUpdateRequested'
+);
 
 const {
   daysRequested,
@@ -92,6 +90,8 @@ const {
   habitStatusUpdateFailed,
   habitStatusAdded
 } = actions;
+
+// Days
 
 export const checkDay = () => async (dispatch) => {
   dispatch(dayCheckRequested());
@@ -108,10 +108,8 @@ export const checkDay = () => async (dispatch) => {
 };
 
 export const updateDay = (payload) => async (dispatch) => {
-  console.log(payload);
   dispatch(dayUpdateRequested());
   try {
-    payload.userId = localStorageService.getUserIdToken();
     await dayService.update(payload);
     dispatch(dayUpdateSuccess(payload));
   } catch (error) {
@@ -119,24 +117,15 @@ export const updateDay = (payload) => async (dispatch) => {
   }
 };
 
-export const updateHabitStatus =
-  ({ date, _id, values }) =>
-  async (dispatch) => {
-    dispatch(dayUpdateRequested());
-    try {
-      const { isCompleted } = await habitStatusService.update({
-        _id,
-        values
-      });
-      dispatch(habitStatusUpdateSuccess({ date, _id, isCompleted }));
-    } catch (error) {
-      dispatch(habitStatusUpdateFailed(error.message));
-    }
-  };
-
-export const addHabitStatus = (payload) => (dispatch) => {
-  dispatch(habitStatusAddedRequested());
-  dispatch(habitStatusAdded(payload));
+export const checkIfPerfect = (payload) => async (dispatch, getState) => {
+  const state = getState();
+  const day = state.days.entities.find((day) => day.date === payload);
+  const isPerfect = day.habitStatuses.every(
+    (status) => status.isCompleted === true
+  );
+  if (day.isPerfect || isPerfect) {
+    dispatch(updateDay({ date: payload, isPerfect }));
+  }
 };
 
 export const getDaysData = () => async (dispatch) => {
@@ -152,6 +141,29 @@ export const getDaysData = () => async (dispatch) => {
 export const getDayDataStatus = () => (state) => state.days.dataLoaded;
 
 export const getDays = () => (state) => state.days.entities;
+
+// Habit status
+
+export const addHabitStatus = (payload) => (dispatch) => {
+  dispatch(habitStatusAddedRequested());
+  dispatch(habitStatusAdded(payload));
+};
+
+export const updateHabitStatus =
+  ({ date, _id, values }) =>
+  async (dispatch) => {
+    dispatch(habitStatusUpdateRequested());
+    try {
+      const { isCompleted } = await habitStatusService.update({
+        _id,
+        values
+      });
+      dispatch(habitStatusUpdateSuccess({ date, _id, isCompleted }));
+      dispatch(checkIfPerfect(date));
+    } catch (error) {
+      dispatch(habitStatusUpdateFailed(error.message));
+    }
+  };
 
 export const getHabitStatus = (habitId, date) => (state) => {
   const days = state.days.entities.filter((day) => day.date === date);

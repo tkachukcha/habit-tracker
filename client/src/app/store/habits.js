@@ -64,7 +64,6 @@ const { reducer: habitsReducer, actions } = habitsSlice;
 const habitCreationRequested = createAction('habits/habitCreationRequested');
 const habitUpdateRequested = createAction('habits/habitUpdateRequested');
 const habitDeleteRequested = createAction('habits/habitDeleteRequested');
-const habitStatusRequested = createAction('habits/habitStatusRequested');
 
 const {
   habitsRequested,
@@ -95,7 +94,6 @@ export const createHabit = (payload) => async (dispatch) => {
 };
 
 export const updateHabit = (payload) => async (dispatch) => {
-  console.log(payload);
   dispatch(habitUpdateRequested());
   try {
     payload.userId = localStorageService.getUserIdToken();
