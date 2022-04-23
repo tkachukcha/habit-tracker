@@ -22,8 +22,8 @@ const AppLoader = ({ children }) => {
 
   useEffect(() => {
     if (isLoggedIn && !error) {
-      dispatch(getUserData());
       dispatch(checkDay());
+      dispatch(getUserData());
     }
   }, []);
 
