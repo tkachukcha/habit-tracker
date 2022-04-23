@@ -64,7 +64,7 @@ const daysSlice = createSlice({
 
 const { reducer: daysReducer, actions } = daysSlice;
 
-const dayCheckRequested = createAction('days/dayCreationRequested');
+const dayCheckRequested = createAction('days/dayCheckRequested');
 const dayUpdateRequested = createAction('days/dayUpdateRequested');
 
 const {
