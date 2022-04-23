@@ -55,7 +55,6 @@ const daysSlice = createSlice({
         (status) => status._id === action.payload._id
       );
       status.isCompleted = action.payload.isCompleted;
-      console.log(newEntities);
     },
     habitStatusUpdateFailed: (state, action) => {
       state.error = action.payload;
