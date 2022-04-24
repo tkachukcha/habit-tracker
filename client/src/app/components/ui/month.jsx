@@ -5,10 +5,28 @@ import { useDispatch, useSelector } from 'react-redux';
 import { getDays, getDaysData } from '../../store/days';
 import Box from '@mui/material/Box';
 import Day from '../common/day';
+import Typography from '@mui/material/Typography';
 
 const Month = ({ date }) => {
   const dispatch = useDispatch();
   const days = useSelector(getDays());
+  const monthsNames = [
+    'January',
+    'February',
+    'March',
+    'April',
+    'May',
+    'June',
+    'July',
+    'August',
+    'September',
+    'October',
+    'November',
+    'December'
+  ];
+
+  const monthIndex = dayjs(date).month();
+  const monthName = monthsNames[monthIndex];
 
   const month = date.substring(0, 7);
   const filteredDays = days.filter((day) => day.date.includes(month));
@@ -34,14 +52,13 @@ const Month = ({ date }) => {
     monthDays.push({ id, date, isPerfect });
   }
 
-  console.log(monthDays);
-
   // const firstDay = dayjs(date).date(1);
   // const weekDay = firstDay.format('d');
   // const weekDayNames = ['Su', 'Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa'];
 
   return (
     <>
+      <Typography variant="h4">{monthName}</Typography>
       <Box sx={{ width: '460px' }}>
         {monthDays.map((day) => (
           <Day key={day.date} {...day} />

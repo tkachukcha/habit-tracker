@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import dayjs from 'dayjs';
 import Button from '@mui/material/Button';
+import { NavLink } from 'react-router-dom';
 
 const Day = ({ date, id, isPerfect }) => {
   const day = dayjs(date).date();
@@ -14,6 +15,8 @@ const Day = ({ date, id, isPerfect }) => {
   return (
     <>
       <Button
+        component={NavLink}
+        to={`/stats/${id}`}
         sx={{
           borderRadius: '9999px',
           minWidth: '30px',
