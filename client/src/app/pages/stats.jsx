@@ -7,7 +7,7 @@ import Date from './date';
 const Stats = () => {
   const { id } = useParams();
   if (id) {
-    return <Date id={id} date={'2022-04-24'} />;
+    return <Date id={id} />;
   }
 
   return <Calendar />;

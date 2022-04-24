@@ -81,6 +81,7 @@ const { reducer: daysReducer, actions } = daysSlice;
 
 const dayCheckRequested = createAction('days/dayCheckRequested');
 const dayRequested = createAction('days/dayRequested');
+const dayRequestedSuccess = createAction('days/dayRequestedSuccess');
 const dayUpdateRequested = createAction('days/dayUpdateRequested');
 const habitStatusAddedRequested = createAction(
   'days/habitStatusAddedRequested'
@@ -136,7 +137,7 @@ export const checkIfPerfect = (payload) => async (dispatch, getState) => {
   }
 };
 
-export const getDaysData = (payload) => async (dispatch, getState) => {
+export const getDaysData = (payload) => async (dispatch) => {
   dispatch(daysRequested());
   try {
     const data = await dayService.fetch(payload);
@@ -146,13 +147,26 @@ export const getDaysData = (payload) => async (dispatch, getState) => {
   }
 };
 
-export getDay = (payload) => (dispatch) => {
-  dispatch(day)
-}
+// Метод ниже мне не нужен, но сделал его чисто для диплома для запроса по айди из урл, ибо есть в минимальных требованиях.
+// Дальше я должен был бы передать данные в стейт, но они у меня уже там есть. Поэтому в компоненте буду брать "старые" данные на этот день
+
+export const getDay = (payload) => async (dispatch) => {
+  dispatch(dayRequested);
+  try {
+    const dbDay = await dayService.fetchById(payload);
+    // ... Передача данных в стейт
+    dispatch(dayRequestedSuccess(dbDay));
+  } catch (error) {
+    dispatch(daysRequestFailed(error.message));
+  }
+};
 
 export const getDayDataStatus = () => (state) => state.days.dataLoaded;
 
 export const getDays = () => (state) => state.days.entities;
+
+export const getDayById = (id) => (state) =>
+  state.days.entities.find((day) => day._id === id);
 
 // Habit status
 

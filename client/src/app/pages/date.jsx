@@ -1,14 +1,27 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
 import HabitList from '../components/ui/habitList';
 import dayjs from 'dayjs';
 import Typography from '@mui/material/Typography';
-import { useParams } from 'react-router-dom';
+import { useSelector, useDispatch } from 'react-redux';
+import { getDay, getDayById } from '../store/days';
+import { monthsNames } from '../utils/months';
 
-const Date = ({ date, id }) => {
+const Date = ({ id }) => {
+  const day = useSelector(getDayById(id));
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(getDay(id));
+  }, []);
+  const date = dayjs(day.date).date();
+  const year = dayjs(day.date).year();
+  const month = monthsNames[dayjs(day.date).month()];
+
+  const formattedDate = `${date} ${month} ${year}`;
+
   return (
     <>
-      <Typography variant="h4">{date}</Typography>
+      <Typography variant="h4">{formattedDate}</Typography>
       {/* <HabitList date={date} /> */}
     </>
   );
