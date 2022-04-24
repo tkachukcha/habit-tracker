@@ -4,6 +4,7 @@ import dayjs from 'dayjs';
 import { useDispatch, useSelector } from 'react-redux';
 import { getDays, getDaysData } from '../../store/days';
 import Box from '@mui/material/Box';
+import Day from '../common/day';
 
 const Month = ({ date }) => {
   const dispatch = useDispatch();
@@ -41,10 +42,10 @@ const Month = ({ date }) => {
 
   return (
     <>
-      <Box>
-        {/* {monthDays.map((day) => (
-          <li key={day}>{day.slice(-2)}</li>
-        ))} */}
+      <Box sx={{ width: '460px' }}>
+        {monthDays.map((day) => (
+          <Day key={day.date} {...day} />
+        ))}
       </Box>
     </>
   );
