@@ -28,9 +28,10 @@ const daysSlice = createSlice({
       state.isLoading = false;
     },
     dayCheckSuccess: (state, action) => {
-      const newEntities = [...state.entities];
-      newEntities.push(action.payload);
-      state.entities = [...newEntities];
+      const day = state.entities.find((day) => day._id === action.payload._id);
+      if (!day) {
+        state.entities.push(action.payload);
+      }
     },
     dayCheckFailed: (state, action) => {
       state.error = action.payload;
@@ -93,13 +94,10 @@ const {
 
 // Days
 
-export const checkDay = () => async (dispatch) => {
+export const checkDay = (payload) => async (dispatch) => {
   dispatch(dayCheckRequested());
   try {
-    const payload = {
-      date: dayjs().format('DD/MM/YYYY')
-    };
-    const data = await dayService.create(payload);
+    const data = await dayService.create({ date: payload });
     await dispatch(dayCheckSuccess(data));
     dispatch(getUserData());
   } catch (error) {
@@ -165,9 +163,10 @@ export const updateHabitStatus =
     }
   };
 
-export const getHabitStatus = (habitId, date) => (state) => {
-  const days = state.days.entities.filter((day) => day.date === date);
-  const habitStatus = days[0].habitStatuses.find(
+export const getHabitStatus = (habitId, date) => (state, dispatch) => {
+  const day = state.days.entities.find((day) => day.date === date);
+
+  const habitStatus = day.habitStatuses.find(
     (habit) => habit.habitId === habitId
   );
   return habitStatus;

@@ -5,6 +5,7 @@ import history from '../utils/history';
 import usersService from '../services/users.service';
 import { getUserHabits } from './habits';
 import { checkDay } from './days';
+import dayjs from 'dayjs';
 
 const initialState = localStorageService.getAccessToken()
   ? {
@@ -90,7 +91,7 @@ export const register = (payload) => async (dispatch) => {
     const data = await authService.register(payload);
     dispatch(authRequestSuccess({ userId: data.userId }));
     localStorageService.setTokens(data);
-    dispatch(checkDay());
+    dispatch(checkDay(dayjs().format('DD/MM/YYYY')));
     history.push('/');
   } catch (error) {
     dispatch(authRequestFail(error.message));
@@ -103,7 +104,7 @@ export const login = (payload) => async (dispatch) => {
     const data = await authService.login(payload);
     dispatch(authRequestSuccess({ userId: data.localId }));
     localStorageService.setTokens(data);
-    dispatch(checkDay());
+    dispatch(checkDay(dayjs().format('DD/MM/YYYY')));
     history.push('/');
   } catch (error) {
     dispatch(authRequestFail(error.message));

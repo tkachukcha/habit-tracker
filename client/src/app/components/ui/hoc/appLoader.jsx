@@ -11,6 +11,7 @@ import CircularProgress from '@mui/material/CircularProgress';
 import Box from '@mui/material/Box';
 import { getHabitDataStatus } from '../../../store/habits';
 import { checkDay } from '../../../store/days';
+import dayjs from 'dayjs';
 
 const AppLoader = ({ children }) => {
   const isLoggedIn = useSelector(getIsLoggedIn());
@@ -20,7 +21,7 @@ const AppLoader = ({ children }) => {
 
   useEffect(() => {
     if (isLoggedIn && !error) {
-      dispatch(checkDay());
+      dispatch(checkDay(dayjs().format('DD/MM/YYYY')));
     }
   }, []);
   const userDataStatus = useSelector(getUserDataStatus());

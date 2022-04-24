@@ -8,7 +8,6 @@ import Typography from '@mui/material/Typography';
 
 const HabitList = ({ date }) => {
   const habits = useSelector(getHabits());
-
   return (
     <>
       {habits && habits.length > 0 ? (

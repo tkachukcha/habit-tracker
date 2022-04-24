@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import HabitName from './habitName';
 import PropTypes from 'prop-types';
 import { useDispatch, useSelector } from 'react-redux';
+import dayjs from 'dayjs';
 
 import Card from '@mui/material/Card';
 import Box from '@mui/material/Box';
@@ -68,13 +69,23 @@ const Habit = ({
   daytime
 }) => {
   const dispatch = useDispatch();
+
   // Status
-  const { isCompleted, _id, date } = useSelector(getHabitStatus(id, habitDate));
-  const [status, setStatus] = useState(isCompleted);
+
+  const today = dayjs().format('DD/MM/YYYY');
+  const yesterday = dayjs().subtract(1, 'day').format('DD/MM/YYYY');
+
+  const habitStatusData = useSelector(getHabitStatus(id, habitDate));
+
+  const [status, setStatus] = useState(habitStatusData.isCompleted);
 
   const handleCompletion = () => {
     dispatch(
-      updateHabitStatus({ date, _id, values: { isCompleted: !status } })
+      updateHabitStatus({
+        date: habitStatusData.date,
+        _id: habitStatusData._id,
+        values: { isCompleted: !status }
+      })
     );
     setStatus((prevState) => !prevState);
   };

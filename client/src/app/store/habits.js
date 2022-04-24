@@ -1,7 +1,7 @@
 import { createAction, createSlice } from '@reduxjs/toolkit';
 import habitService from '../services/habit.service';
 import localStorageService from '../services/localStorage.service';
-import { addHabitStatus } from './days';
+import { addHabitStatus, checkIfPerfect } from './days';
 
 const habitsSlice = createSlice({
   name: 'habits',
@@ -88,6 +88,7 @@ export const createHabit = (payload) => async (dispatch) => {
     const { habit, habitStatus } = await habitService.create(newHabit);
     dispatch(addHabitStatus(habitStatus));
     dispatch(habitCreationSuccess(habit));
+    dispatch(checkIfPerfect(habitStatus.date));
   } catch (error) {
     dispatch(habitCreationFailed(error.message));
   }
