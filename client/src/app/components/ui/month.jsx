@@ -6,12 +6,17 @@ import { getDays, getDaysData } from '../../store/days';
 
 const Month = ({ date }) => {
   const firstDay = dayjs(date).date(1);
-  const month = [];
+  const monthDays = [];
   const dispatch = useDispatch();
   const days = useSelector(getDays());
 
+  const month = date.substring(0, 7);
+  const filteredDays = days.filter((day) => day.date.includes(month));
+
   useEffect(() => {
-    dispatch(getDaysData(date));
+    if (filteredDays.length === 1) {
+      dispatch(getDaysData(date));
+    }
   }, []);
 
   // const month = firstDay.format('YYYY-MM-');

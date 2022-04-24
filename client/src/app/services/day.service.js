@@ -4,7 +4,8 @@ const dayEndPoint = 'day/';
 
 const DayService = {
   fetch: async (payload) => {
-    const params = payload ? { date: payload } : null;
+    const params = payload ? { params: { date: payload } } : null;
+
     const { data } = await httpService.get(dayEndPoint, params);
     return data;
   },

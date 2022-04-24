@@ -19,7 +19,16 @@ const daysSlice = createSlice({
       state.error = null;
     },
     daysRequestSuccess: (state, action) => {
-      state.entities = action.payload;
+      const newState = state.entities;
+
+      newState.forEach((currDay) => {
+        action.payload.forEach((day) => {
+          if (day.date !== currDay) {
+            newState.push(day);
+          }
+        });
+      });
+      state.entities = [...newState];
       state.isLoading = false;
       state.dataLoaded = true;
     },
@@ -126,7 +135,7 @@ export const checkIfPerfect = (payload) => async (dispatch, getState) => {
   }
 };
 
-export const getDaysData = (payload) => async (dispatch) => {
+export const getDaysData = (payload) => async (dispatch, getState) => {
   dispatch(daysRequested());
   try {
     const data = await dayService.fetch(payload);
