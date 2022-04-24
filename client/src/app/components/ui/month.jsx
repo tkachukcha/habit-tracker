@@ -24,13 +24,13 @@ const Month = ({ date }) => {
   for (let i = 1; i <= monthLength; i++) {
     const date = `${month}-${i < 10 ? `0${i}` : i}`;
     const index = days.findIndex((day) => day.date === date);
-    let isActive = false;
     let isPerfect = false;
+    let id = null;
     if (index !== -1) {
-      isActive = true;
       isPerfect = days[index].isPerfect;
+      id = days[index]._id;
     }
-    monthDays.push({ date, isActive, isPerfect });
+    monthDays.push({ id, date, isPerfect });
   }
 
   console.log(monthDays);
