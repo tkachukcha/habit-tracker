@@ -1,29 +1,17 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import dayjs from 'dayjs';
 import { useDispatch, useSelector } from 'react-redux';
-import { getDays, getDaysData } from '../../store/days';
+import { getDays, getDaysData, getDayDataStatus } from '../../store/days';
 import Box from '@mui/material/Box';
 import Day from '../common/day';
 import Typography from '@mui/material/Typography';
+import { monthsNames } from '../../utils/months';
+import CircularProgress from '@mui/material/CircularProgress';
 
 const Month = ({ date }) => {
   const dispatch = useDispatch();
   const days = useSelector(getDays());
-  const monthsNames = [
-    'January',
-    'February',
-    'March',
-    'April',
-    'May',
-    'June',
-    'July',
-    'August',
-    'September',
-    'October',
-    'November',
-    'December'
-  ];
 
   const monthIndex = dayjs(date).month();
   const monthName = monthsNames[monthIndex];
@@ -31,11 +19,20 @@ const Month = ({ date }) => {
   const month = date.substring(0, 7);
   const filteredDays = days.filter((day) => day.date.includes(month));
 
+  const [isLoading, setLoading] = useState(true);
+  const dataIsLoaded = useSelector(getDayDataStatus());
+
   useEffect(() => {
     if (filteredDays.length === 1) {
       dispatch(getDaysData(date));
     }
   }, []);
+
+  useEffect(() => {
+    if (dataIsLoaded) {
+      setLoading(false);
+    }
+  }, [dataIsLoaded]);
 
   const monthLength = dayjs(date).daysInMonth();
   const monthDays = [];
@@ -59,10 +56,19 @@ const Month = ({ date }) => {
   return (
     <>
       <Typography variant="h4">{monthName}</Typography>
-      <Box sx={{ width: '460px' }}>
-        {monthDays.map((day) => (
-          <Day key={day.date} {...day} />
-        ))}
+      <Box sx={{ width: { xs: '320px', sm: '400px' } }}>
+        {isLoading ? (
+          <CircularProgress
+            color="primary"
+            sx={{ display: 'block', margin: 'auto auto' }}
+          />
+        ) : (
+          <>
+            {monthDays.map((day) => (
+              <Day key={day.date} {...day} />
+            ))}
+          </>
+        )}
       </Box>
     </>
   );

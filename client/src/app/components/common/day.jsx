@@ -19,18 +19,19 @@ const Day = ({ date, id, isPerfect }) => {
         to={`/stats/${id}`}
         sx={{
           borderRadius: '9999px',
-          minWidth: '30px',
-          width: '30px',
-          height: '30px',
+          minWidth: '40px',
+          width: '40px',
+          height: '40px',
           display: 'inline-flex',
           justifyContent: 'center',
           alignItems: 'center',
-          m: 1,
-          color: '#fff'
+          m: { xs: '2px', sm: '8px' },
+          color: '#fff',
+          fontSize: '1.2rem'
         }}
         variant={variant}
         disabled={disabled}
-        size="small"
+        size="medium"
       >
         {day}
       </Button>
