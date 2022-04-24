@@ -3,8 +3,9 @@ import httpService from './http.service';
 const dayEndPoint = 'day/';
 
 const DayService = {
-  fetchAll: async () => {
-    const { data } = await httpService.get(dayEndPoint);
+  fetch: async (payload) => {
+    const params = payload ? { date: payload } : null;
+    const { data } = await httpService.get(dayEndPoint, params);
     return data;
   },
   create: async (payload) => {

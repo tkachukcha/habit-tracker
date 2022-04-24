@@ -126,10 +126,10 @@ export const checkIfPerfect = (payload) => async (dispatch, getState) => {
   }
 };
 
-export const getDaysData = () => async (dispatch) => {
+export const getDaysData = (payload) => async (dispatch) => {
   dispatch(daysRequested());
   try {
-    const data = await dayService.fetchAll();
+    const data = await dayService.fetch(payload);
     dispatch(daysRequestSuccess(data));
   } catch (error) {
     dispatch(daysRequestFailed(error.message));

@@ -72,7 +72,7 @@ const Habit = ({
 
   // Status
 
-  const today = dayjs().format('DD/MM/YYYY');
+  const today = dayjs().format('YYYY-MM-DD');
   const yesterday = dayjs().subtract(1, 'day').format('DD/MM/YYYY');
 
   const habitStatusData = useSelector(getHabitStatus(id, habitDate));

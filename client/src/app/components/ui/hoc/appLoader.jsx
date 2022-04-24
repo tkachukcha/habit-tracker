@@ -12,16 +12,21 @@ import Box from '@mui/material/Box';
 import { getHabitDataStatus } from '../../../store/habits';
 import { checkDay } from '../../../store/days';
 import dayjs from 'dayjs';
+import { NavLink, useHistory } from 'react-router-dom';
 
 const AppLoader = ({ children }) => {
+  const history = useHistory();
   const isLoggedIn = useSelector(getIsLoggedIn());
   const error = useSelector(getError());
 
   const dispatch = useDispatch();
 
   useEffect(() => {
+    if (error) {
+      history.push('/logout');
+    }
     if (isLoggedIn && !error) {
-      dispatch(checkDay(dayjs().format('DD/MM/YYYY')));
+      dispatch(checkDay(dayjs().format('YYYY-MM-DD')));
     }
   }, []);
   const userDataStatus = useSelector(getUserDataStatus());

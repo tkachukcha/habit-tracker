@@ -10,7 +10,7 @@ const Today = () => {
   const handleClose = () => setOpen(false);
   return (
     <>
-      <HabitList date={dayjs().format('DD/MM/YYYY')} />
+      <HabitList date={dayjs().format('YYYY-MM-DD')} />
       <AddButton onOpen={handleOpen} />
       <HabitModal
         type="add"
