@@ -1,7 +1,5 @@
 import React from 'react';
-import AddButton from '../components/common/addButton';
 import HabitList from '../components/ui/habitList';
-import HabitModal from '../components/ui/addEditHabit/habitModal';
 import dayjs from 'dayjs';
 import Typography from '@mui/material/Typography';
 
