@@ -80,6 +80,7 @@ const daysSlice = createSlice({
 const { reducer: daysReducer, actions } = daysSlice;
 
 const dayCheckRequested = createAction('days/dayCheckRequested');
+const dayRequested = createAction('days/dayRequested');
 const dayUpdateRequested = createAction('days/dayUpdateRequested');
 const habitStatusAddedRequested = createAction(
   'days/habitStatusAddedRequested'
@@ -144,6 +145,10 @@ export const getDaysData = (payload) => async (dispatch, getState) => {
     dispatch(daysRequestFailed(error.message));
   }
 };
+
+export getDay = (payload) => (dispatch) => {
+  dispatch(day)
+}
 
 export const getDayDataStatus = () => (state) => state.days.dataLoaded;
 

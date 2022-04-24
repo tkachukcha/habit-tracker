@@ -9,6 +9,10 @@ const DayService = {
     const { data } = await httpService.get(dayEndPoint, params);
     return data;
   },
+  fetchById: async (payload) => {
+    const { data } = await httpService.get(dayEndPoint + payload);
+    return data;
+  },
   create: async (payload) => {
     const { data } = await httpService.post(dayEndPoint, payload);
     return data;

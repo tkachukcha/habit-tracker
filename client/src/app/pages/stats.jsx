@@ -2,11 +2,12 @@ import React from 'react';
 import { useParams } from 'react-router-dom';
 import PageTitle from '../components/common/pageTitle';
 import Calendar from '../components/ui/calendar';
+import Date from './date';
 
 const Stats = () => {
   const { id } = useParams();
   if (id) {
-    return <h1>Day</h1>;
+    return <Date id={id} date={'2022-04-24'} />;
   }
 
   return <Calendar />;
