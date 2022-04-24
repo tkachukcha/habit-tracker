@@ -13,6 +13,7 @@ const Date = ({ id }) => {
   useEffect(() => {
     dispatch(getDay(id));
   }, []);
+
   const date = dayjs(day.date).date();
   const year = dayjs(day.date).year();
   const month = monthsNames[dayjs(day.date).month()];

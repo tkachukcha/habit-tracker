@@ -89,6 +89,7 @@ const habitStatusAddedRequested = createAction(
 const habitStatusUpdateRequested = createAction(
   'days/habitStatusUpdateRequested'
 );
+const habitStatusRequested = createAction('days/habitStatusRequested');
 
 const {
   daysRequested,
@@ -190,6 +191,8 @@ export const updateHabitStatus =
       dispatch(habitStatusUpdateFailed(error.message));
     }
   };
+
+export const getHabitStatusForDay = (payload) => {};
 
 export const getHabitStatus = (habitId, date) => (state, dispatch) => {
   const day = state.days.entities.find((day) => day.date === date);
