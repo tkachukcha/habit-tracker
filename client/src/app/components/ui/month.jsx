@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import dayjs from 'dayjs';
 import { useDispatch, useSelector } from 'react-redux';
 import { getDays, getDaysData } from '../../store/days';
+import Box from '@mui/material/Box';
 
 const Month = ({ date }) => {
   const dispatch = useDispatch();
@@ -21,8 +22,18 @@ const Month = ({ date }) => {
   const monthDays = [];
 
   for (let i = 1; i <= monthLength; i++) {
-    monthDays.push(`${month}-${i < 10 ? `0${i}` : i}`);
+    const date = `${month}-${i < 10 ? `0${i}` : i}`;
+    const index = days.findIndex((day) => day.date === date);
+    let isActive = false;
+    let isPerfect = false;
+    if (index !== -1) {
+      isActive = true;
+      isPerfect = days[index].isPerfect;
+    }
+    monthDays.push({ date, isActive, isPerfect });
   }
+
+  console.log(monthDays);
 
   // const firstDay = dayjs(date).date(1);
   // const weekDay = firstDay.format('d');
@@ -30,11 +41,11 @@ const Month = ({ date }) => {
 
   return (
     <>
-      <ul>
-        {monthDays.map((day) => (
+      <Box>
+        {/* {monthDays.map((day) => (
           <li key={day}>{day.slice(-2)}</li>
-        ))}
-      </ul>
+        ))} */}
+      </Box>
     </>
   );
 };

@@ -5,12 +5,12 @@ import dayjs from 'dayjs';
 const Day = ({ date }) => {
   return (
     <>
-      <h1>Day</h1>
+      <div>{date.day}</div>
     </>
   );
 };
 Day.propTypes = {
   date: PropTypes.object
-}
+};
 
 export default Day;
