@@ -8,6 +8,7 @@ import Habits from '../pages/habits';
 import Profile from '../pages/profile';
 import Sidebar from '../components/ui/sideBar';
 import TopBar from '../components/ui/topBar';
+import Stats from '../pages/stats';
 
 const drawerWidth = 280;
 
@@ -44,6 +45,7 @@ const Main = () => {
           <Route path="/logout" component={Logout} />
           <Route path="/profile" component={Profile} />
           <Route path="/habits/:habitID?/:edit?" component={Habits} />
+          <Route path="/stats/:id?" component={Stats} />
           <Route path="/" component={Today} />
         </Switch>
       </Box>

@@ -5,7 +5,7 @@ import HabitModal from '../components/ui/addEditHabit/habitModal';
 import dayjs from 'dayjs';
 import Typography from '@mui/material/Typography';
 
-const Day = (date) => {
+const Date = (date) => {
 
   return (
     <>
@@ -15,4 +15,4 @@ const Day = (date) => {
   );
 };
 
-export default Today;
+export default Date;

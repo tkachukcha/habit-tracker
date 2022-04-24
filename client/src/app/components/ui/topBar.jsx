@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useHistory, NavLink } from 'react-router-dom';
+import { useHistory, useParams } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import AppBar from '@mui/material/AppBar';
 import IconButton from '@mui/material/IconButton';
@@ -12,14 +12,16 @@ import TopBarProfile from './topBarProfile';
 
 const TopBar = ({ height, drawerWidth, onOpen }) => {
   const location = useHistory().location.pathname;
+  const { id } = useParams();
+
   let title = '';
 
   switch (location) {
     case '/':
-      title = 'Today';
-      break;
-    case '/habits':
       title = 'Habits';
+      break;
+    case '/stats':
+      title = 'Stats';
       break;
     case '/profile':
       title = 'Profile';
@@ -27,6 +29,7 @@ const TopBar = ({ height, drawerWidth, onOpen }) => {
     default:
       break;
   }
+
   return (
     <AppBar
       position="fixed"

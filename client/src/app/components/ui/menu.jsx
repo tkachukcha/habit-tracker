@@ -8,19 +8,29 @@ import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
 import TodayIcon from '@mui/icons-material/Today';
 import FormatListBulletedIcon from '@mui/icons-material/FormatListBulleted';
-import LoginIcon from '@mui/icons-material/Login';
-import AccountCircleIcon from '@mui/icons-material/AccountCircle';
+import CalendarViewMonthIcon from '@mui/icons-material/CalendarViewMonth';
 
 const Menu = ({ onHide }) => {
   const location = useHistory().location.pathname;
 
   const links = [
-    { path: '/', exact: true, title: 'Today', icon: <TodayIcon /> },
+    {
+      path: '/',
+      exact: true,
+      title: 'Today',
+      icon: <TodayIcon />
+    },
     {
       path: '/habits',
       exact: true,
-      title: 'Habits',
+      title: 'All habits',
       icon: <FormatListBulletedIcon />
+    },
+    {
+      path: '/stats',
+      exact: true,
+      title: 'Stats',
+      icon: <CalendarViewMonthIcon />
     }
   ];
 
