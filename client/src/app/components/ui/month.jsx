@@ -23,7 +23,7 @@ const Month = ({ date }) => {
   const dataIsLoaded = useSelector(getDayDataStatus());
 
   useEffect(() => {
-    if (filteredDays.length === 1) {
+    if (filteredDays.length < 2) {
       dispatch(getDaysData(date));
     }
   }, []);
